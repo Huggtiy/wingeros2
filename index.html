@@ -1,0 +1,1379 @@
+<style id="wingeros-css">
+:root {
+	--wo-bg:         #ffffff;
+	--wo-bg-card:    #f9f9fb;
+	--wo-border:     #e2e4ea;
+	--wo-text:       #1a1d23;
+	--wo-text-muted: #6b7280;
+	--wo-accent:     #e63946;
+	--wo-accent-bg:  #fff1f2;
+	--wo-amber:      #f59e0b;
+	--wo-amber-bg:   #fffbeb;
+	--wo-blue:       #3b82f6;
+	--wo-blue-bg:    #eff6ff;
+	--wo-green:      #10b981;
+	--wo-green-bg:   #ecfdf5;
+	--wo-purple:     #8b5cf6;
+	--wo-purple-bg:  #f5f3ff;
+	--wo-red:        #ef4444;
+	--wo-red-bg:     #fef2f2;
+	--wo-grey:       #6b7280;
+	--wo-grey-bg:    #f3f4f6;
+	--wo-tab-active: #e63946;
+	--wo-radius:     12px;
+	--wo-radius-sm:  8px;
+	--wo-shadow:     0 1px 3px rgba(0,0,0,.08);
+	--wo-font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--wo-bg:         #111318;
+		--wo-bg-card:    #1c1f27;
+		--wo-border:     #2e3240;
+		--wo-text:       #f0f1f5;
+		--wo-text-muted: #9ca3af;
+		--wo-accent-bg:  #2d1215;
+		--wo-amber-bg:   #292009;
+		--wo-blue-bg:    #0d1f3c;
+		--wo-green-bg:   #0a2318;
+		--wo-purple-bg:  #1e1535;
+		--wo-red-bg:     #2d1010;
+		--wo-grey-bg:    #1e2028;
+	}
+}
+.wingeros-app *, .wingeros-app *::before, .wingeros-app *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.wingeros-app {
+	font-family: var(--wo-font);
+	background: var(--wo-bg);
+	color: var(--wo-text);
+	max-width: 800px;
+	margin: 0 auto;
+	border-radius: var(--wo-radius);
+	overflow: hidden;
+	border: 1px solid var(--wo-border);
+	box-shadow: 0 4px 24px rgba(0,0,0,.07);
+}
+
+/* ── Header ── */
+.wo-header { background: var(--wo-bg-card); border-bottom: 1px solid var(--wo-border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.wo-logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; color: var(--wo-accent); }
+.wo-logo span { color: var(--wo-text); font-weight: 400; }
+.wo-badge { background: var(--wo-accent-bg); color: var(--wo-accent); font-size: .72rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--wo-accent); white-space: nowrap; }
+
+/* ── Tabs ── */
+.wo-tabs { display: flex; background: var(--wo-bg-card); border-bottom: 1px solid var(--wo-border); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.wo-tabs::-webkit-scrollbar { display: none; }
+.wo-tab-btn { flex: 0 0 auto; background: none; border: none; border-bottom: 3px solid transparent; color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .78rem; font-weight: 600; padding: 12px 14px 10px; white-space: nowrap; transition: color .15s, border-color .15s; outline: none; }
+.wo-tab-btn:hover { color: var(--wo-text); }
+.wo-tab-btn.active { color: var(--wo-tab-active); border-bottom-color: var(--wo-tab-active); }
+
+/* ── Panels ── */
+.wo-panel { display: none; padding: 20px; }
+.wo-panel.active { display: block; }
+
+/* ── Hero ── */
+.wo-hero { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius); padding: 20px; margin-bottom: 20px; }
+.wo-hero-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; line-height: 1.2; }
+.wo-hero-desc { color: var(--wo-text-muted); font-size: .88rem; line-height: 1.55; }
+.wo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.wo-tag { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; border: 1px solid currentColor; }
+.wo-tag-gym    { color: var(--wo-blue);   background: var(--wo-blue-bg);   }
+.wo-tag-run    { color: var(--wo-green);  background: var(--wo-green-bg);  }
+.wo-tag-field  { color: var(--wo-purple); background: var(--wo-purple-bg); }
+.wo-tag-rest   { color: var(--wo-grey);   background: var(--wo-grey-bg);   }
+.wo-tag-power  { color: var(--wo-accent); background: var(--wo-accent-bg); }
+
+/* ── Exercise cards ── */
+.wo-exercise-list { display: flex; flex-direction: column; gap: 10px; }
+.wo-exercise { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); overflow: hidden; transition: box-shadow .15s; }
+.wo-exercise:hover { box-shadow: var(--wo-shadow); }
+.wo-exercise-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; user-select: none; gap: 12px; }
+.wo-exercise-header:focus-visible { outline: 2px solid var(--wo-accent); outline-offset: -2px; }
+.wo-exercise-name { font-size: .92rem; font-weight: 700; flex: 1; line-height: 1.3; }
+.wo-exercise-meta { font-size: .78rem; color: var(--wo-text-muted); white-space: nowrap; }
+.wo-chevron { width: 20px; height: 20px; fill: none; stroke: var(--wo-text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; flex-shrink: 0; }
+.wo-exercise.open .wo-chevron { transform: rotate(180deg); }
+.wo-exercise-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--wo-border); }
+.wo-exercise.open .wo-exercise-body { display: block; }
+.wo-exercise-howto { font-size: .85rem; line-height: 1.6; color: var(--wo-text); margin-top: 12px; white-space: pre-line; }
+.wo-beginner-note { background: var(--wo-amber-bg); border-left: 3px solid var(--wo-amber); border-radius: 0 var(--wo-radius-sm) var(--wo-radius-sm) 0; padding: 10px 14px; margin-top: 12px; font-size: .82rem; line-height: 1.5; color: var(--wo-text); }
+.wo-beginner-note strong { color: var(--wo-amber); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
+
+/* ── Week / Next Week list ── */
+.wo-week-list { display: flex; flex-direction: column; gap: 8px; }
+.wo-day-row { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); overflow: hidden; }
+.wo-day-row.today { border-color: var(--wo-accent); box-shadow: 0 0 0 1px var(--wo-accent); }
+.wo-day-header { display: flex; align-items: center; gap: 10px; padding: 13px 16px; cursor: pointer; user-select: none; flex-wrap: wrap; }
+.wo-day-label { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; min-width: 28px; color: var(--wo-text-muted); }
+.wo-day-row.today .wo-day-label { color: var(--wo-accent); }
+.wo-day-date { font-size: .72rem; color: var(--wo-text-muted); white-space: nowrap; }
+.wo-day-session { flex: 1; font-size: .85rem; font-weight: 600; }
+.wo-day-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--wo-border); }
+.wo-day-row.open .wo-day-body { display: block; }
+.wo-day-row.open .wo-chevron { transform: rotate(180deg); }
+
+/* ── Month view ── */
+.wo-month-list { display: flex; flex-direction: column; gap: 8px; }
+.wo-month-card { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); overflow: hidden; }
+.wo-month-card.current { border-color: var(--wo-accent); box-shadow: 0 0 0 1px var(--wo-accent); }
+.wo-month-card.past { opacity: .55; }
+.wo-month-hdr { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; user-select: none; }
+.wo-month-wk-num { font-size: .85rem; font-weight: 800; margin-right: 10px; }
+.wo-month-card.current .wo-month-wk-num { color: var(--wo-accent); }
+.wo-month-daterange { font-size: .72rem; color: var(--wo-text-muted); }
+.wo-month-body { display: none; border-top: 1px solid var(--wo-border); }
+.wo-month-card.open .wo-month-body { display: block; }
+.wo-month-card.open .wo-chevron { transform: rotate(180deg); }
+.wo-month-day { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--wo-border); }
+.wo-month-day:last-child { border-bottom: none; }
+.wo-mday-name { font-size: .7rem; font-weight: 800; text-transform: uppercase; min-width: 26px; color: var(--wo-text-muted); }
+.wo-mday-num { font-size: .7rem; color: var(--wo-text-muted); min-width: 22px; }
+.wo-mday-session { flex: 1; font-size: .8rem; font-weight: 600; }
+.wo-today-row .wo-mday-name,
+.wo-today-row .wo-mday-num,
+.wo-today-row .wo-mday-session { color: var(--wo-accent); }
+.wo-now-pill { background: var(--wo-accent); color: #fff; font-size: .65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+
+/* ── Food tab ── */
+.wo-meal-group { margin-bottom: 22px; }
+.wo-meal-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.wo-meal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.wo-meal-group-name { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.wo-meal-protein { font-size: .72rem; color: var(--wo-text-muted); font-weight: 600; white-space: nowrap; }
+.wo-meal-divider-line { flex: 1; height: 1px; background: var(--wo-border); }
+.wo-meal-card { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); padding: 13px 16px; margin-bottom: 7px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.wo-meal-card.clickable { cursor: pointer; transition: box-shadow .15s, border-color .15s; }
+.wo-meal-card.clickable:hover { box-shadow: var(--wo-shadow); border-color: var(--wo-accent); }
+.wo-meal-name { font-size: .87rem; font-weight: 600; }
+.wo-meal-arrow { color: var(--wo-text-muted); font-size: 1rem; flex-shrink: 0; }
+
+/* ── Recipe view ── */
+.wo-recipe-view { display: none; }
+.wo-recipe-view.active { display: block; }
+.wo-food-main.hidden { display: none; }
+.wo-recipe-back { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .82rem; font-weight: 600; padding: 8px 14px; margin-bottom: 20px; transition: color .15s, border-color .15s; }
+.wo-recipe-back:hover { color: var(--wo-text); border-color: var(--wo-text-muted); }
+.wo-recipe-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+.wo-recipe-desc { font-size: .85rem; color: var(--wo-text-muted); margin-bottom: 16px; line-height: 1.5; }
+.wo-recipe-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.wo-stat-pill { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: 999px; padding: 4px 12px; font-size: .75rem; font-weight: 700; }
+.wo-stat-pill span { color: var(--wo-text-muted); font-weight: 400; }
+.wo-recipe-section-title { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--wo-text-muted); margin-bottom: 10px; margin-top: 20px; }
+.wo-ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.wo-ingredient-list li { display: flex; justify-content: space-between; align-items: center; font-size: .86rem; padding: 8px 12px; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); }
+.wo-ingredient-list li span { color: var(--wo-text-muted); font-size: .8rem; }
+.wo-method-steps { display: flex; flex-direction: column; gap: 12px; }
+.wo-method-step { display: flex; gap: 14px; align-items: flex-start; }
+.wo-step-num { background: var(--wo-accent); color: #fff; font-size: .72rem; font-weight: 800; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.wo-step-content { flex: 1; }
+.wo-step-text { font-size: .86rem; line-height: 1.55; margin-bottom: 6px; }
+.wo-step-note { background: var(--wo-amber-bg); border-left: 3px solid var(--wo-amber); border-radius: 0 6px 6px 0; padding: 7px 12px; font-size: .78rem; line-height: 1.45; color: var(--wo-text); }
+.wo-step-note strong { color: var(--wo-amber); font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 2px; }
+
+/* ── Shopping tab ── */
+.wo-shop-section-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--wo-text-muted); margin-bottom: 8px; margin-top: 18px; }
+.wo-shop-section-label:first-child { margin-top: 0; }
+.wo-choice-row { display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.wo-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 6px; }
+.wo-choice-btn { flex: 1; min-width: 120px; background: var(--wo-bg-card); border: 2px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text); cursor: pointer; font-family: var(--wo-font); font-size: .8rem; font-weight: 600; padding: 10px 12px; text-align: left; transition: border-color .15s, background .15s; line-height: 1.3; }
+.wo-choice-btn.active { border-color: var(--wo-accent); background: var(--wo-accent-bg); color: var(--wo-accent); }
+.wo-choice-btn small { display: block; font-size: .68rem; font-weight: 400; color: var(--wo-text-muted); margin-top: 2px; }
+.wo-choice-btn.active small { color: var(--wo-accent); opacity: .8; }
+.wo-shop-progress-wrap { margin: 18px 0; }
+.wo-shop-progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: .8rem; color: var(--wo-text-muted); }
+.wo-clear-btn { background: none; border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .75rem; font-weight: 600; padding: 4px 10px; transition: color .15s, border-color .15s; }
+.wo-clear-btn:hover { color: var(--wo-accent); border-color: var(--wo-accent); }
+.wo-progress-track { background: var(--wo-border); border-radius: 999px; height: 6px; overflow: hidden; }
+.wo-progress-fill { background: var(--wo-green); height: 100%; border-radius: 999px; transition: width .3s; }
+.wo-aisle-title { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--wo-text-muted); margin: 18px 0 6px; }
+.wo-aisle-title:first-child { margin-top: 0; }
+.wo-shop-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 14px; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); margin-bottom: 6px; cursor: pointer; transition: opacity .15s; user-select: none; }
+.wo-shop-item.ticked { opacity: .42; }
+.wo-shop-check { width: 20px; height: 20px; border: 2px solid var(--wo-border); border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: background .15s, border-color .15s; }
+.wo-shop-item.ticked .wo-shop-check { background: var(--wo-green); border-color: var(--wo-green); }
+.wo-check-icon { display: none; fill: #fff; width: 12px; height: 12px; }
+.wo-shop-item.ticked .wo-check-icon { display: block; }
+.wo-shop-item-content { flex: 1; }
+.wo-shop-item-name { font-size: .87rem; font-weight: 600; }
+.wo-shop-item.ticked .wo-shop-item-name { text-decoration: line-through; }
+.wo-shop-item-qty { font-size: .77rem; color: var(--wo-text-muted); margin-top: 2px; }
+.wo-meal-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.wo-meal-tag { font-size: .64rem; font-weight: 700; padding: 2px 6px; border-radius: 999px; border: 1px solid currentColor; }
+.wo-mt-breakfast  { color: var(--wo-amber);  background: var(--wo-amber-bg);  }
+.wo-mt-lunch      { color: var(--wo-green);  background: var(--wo-green-bg);  }
+.wo-mt-dinner     { color: var(--wo-accent); background: var(--wo-accent-bg); }
+.wo-mt-pre        { color: var(--wo-purple); background: var(--wo-purple-bg); }
+.wo-mt-post       { color: var(--wo-blue);   background: var(--wo-blue-bg);   }
+.wo-mt-bed        { color: var(--wo-grey);   background: var(--wo-grey-bg);   }
+.wo-mt-supplement { color: var(--wo-green);  background: var(--wo-green-bg);  }
+
+/* ── Targets tab ── */
+.wo-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.wo-stat-box { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); padding: 16px 14px; }
+.wo-stat-box-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--wo-text-muted); margin-bottom: 6px; }
+.wo-stat-box-value { font-size: 1.5rem; font-weight: 800; color: var(--wo-accent); line-height: 1; }
+.wo-stat-box-sub { font-size: .72rem; color: var(--wo-text-muted); margin-top: 4px; }
+.wo-progress-section { margin-bottom: 20px; }
+.wo-progress-label { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; font-weight: 600; margin-bottom: 6px; }
+.wo-progress-pct { color: var(--wo-accent); font-weight: 800; }
+.wo-progress-track-2 { background: var(--wo-border); border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 4px; }
+.wo-progress-fill-2 { background: var(--wo-accent); height: 100%; border-radius: 999px; transition: width .4s; }
+.wo-progress-range { display: flex; justify-content: space-between; font-size: .72rem; color: var(--wo-text-muted); }
+.wo-lift-control { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.wo-lift-adj { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text); cursor: pointer; font-family: var(--wo-font); font-size: 1rem; font-weight: 700; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.wo-lift-adj:hover { background: var(--wo-border); }
+.wo-lift-current { font-size: .85rem; color: var(--wo-text-muted); }
+.wo-lift-current strong { color: var(--wo-text); font-size: 1rem; }
+.wo-shoulder-ladder { margin-top: 24px; }
+.wo-ladder-title { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--wo-text-muted); margin-bottom: 12px; }
+.wo-ladder-list { display: flex; flex-direction: column; gap: 8px; }
+.wo-ladder-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); }
+.wo-ladder-week { font-size: .72rem; font-weight: 800; text-transform: uppercase; color: var(--wo-text-muted); min-width: 50px; }
+.wo-ladder-weight { font-size: 1rem; font-weight: 800; color: var(--wo-accent); min-width: 40px; }
+.wo-ladder-note { font-size: .78rem; color: var(--wo-text-muted); line-height: 1.4; }
+.wo-ladder-item.current { border-color: var(--wo-accent); background: var(--wo-accent-bg); }
+.wo-ladder-item.current .wo-ladder-week { color: var(--wo-accent); }
+
+/* ── Rules tab ── */
+.wo-rule-list { display: flex; flex-direction: column; gap: 10px; }
+.wo-rule-card { display: flex; align-items: flex-start; gap: 16px; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); padding: 16px; transition: box-shadow .15s; }
+.wo-rule-card:hover { box-shadow: var(--wo-shadow); }
+.wo-rule-num { font-size: 2rem; font-weight: 900; color: var(--wo-accent); line-height: 1; min-width: 36px; }
+.wo-rule-text { font-size: .88rem; line-height: 1.6; }
+
+/* ── Misc ── */
+.wo-section-title { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--wo-text-muted); margin-bottom: 14px; }
+
+@media (max-width: 420px) {
+	.wo-panel { padding: 14px; }
+	.wo-header { padding: 12px 14px; }
+	.wo-tab-btn { font-size: .72rem; padding: 10px 11px 8px; }
+	.wo-choice-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Holiday styling ── */
+.wo-tag-holiday { color: var(--wo-amber); background: var(--wo-amber-bg); }
+.wo-day-row.holiday { border-color: var(--wo-amber); }
+.wo-day-row.holiday .wo-day-label { color: var(--wo-amber); }
+
+/* ── Warning box ── */
+.wo-warning-box { background: var(--wo-amber-bg); border-left: 3px solid var(--wo-amber); border-radius: 0 var(--wo-radius-sm) var(--wo-radius-sm) 0; padding: 10px 14px; font-size: .84rem; line-height: 1.55; color: var(--wo-text); }
+.wo-warning-box strong { color: var(--wo-amber); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
+
+/* ── Badges ── */
+.wo-updated-badge { background: var(--wo-green); color: #fff; font-size: .64rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px; }
+.wo-amber-badge { background: var(--wo-amber); color: #fff; font-size: .64rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; vertical-align: middle; margin-left: 6px; }
+
+/* ── Session log ── */
+.wo-session-log { margin-top: 4px; }
+.wo-log-entry { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); margin-bottom: 10px; overflow: hidden; }
+.wo-log-entry-hdr { padding: 10px 14px; border-bottom: 1px solid var(--wo-border); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.wo-log-entry-date { font-size: .78rem; font-weight: 700; }
+.wo-log-entry-name { font-size: .72rem; color: var(--wo-text-muted); }
+.wo-log-entry-badge { font-size: .64rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.wo-badge-next { background: var(--wo-blue-bg); color: var(--wo-blue); border: 1px solid var(--wo-blue); }
+.wo-log-item { display: flex; align-items: flex-start; justify-content: space-between; padding: 7px 14px; border-bottom: 1px solid var(--wo-border); font-size: .82rem; gap: 10px; }
+.wo-log-item:last-child { border-bottom: none; }
+.wo-log-item-name { font-weight: 600; flex: 1; }
+.wo-log-item-val { color: var(--wo-text-muted); font-size: .78rem; text-align: right; }
+.wo-log-item-warn { color: var(--wo-accent); font-size: .72rem; font-weight: 600; margin-top: 2px; }
+.wo-log-item-up { color: var(--wo-green); font-weight: 700; }
+
+/* ── Holiday adjustment box ── */
+.wo-holiday-adj-box { background: var(--wo-amber-bg); border: 1px solid var(--wo-amber); border-radius: var(--wo-radius-sm); padding: 14px 16px; margin-top: 8px; font-size: .84rem; line-height: 1.6; color: var(--wo-text); }
+.wo-holiday-adj-box strong { color: var(--wo-amber); }
+</style>
+
+<div class="wingeros-app" id="wingeros-app" role="main">
+
+	<header class="wo-header">
+		<div class="wo-logo">Winger<span>OS</span></div>
+		<div class="wo-badge" id="wo-week-badge">Week — / —</div>
+	</header>
+
+	<nav class="wo-tabs" role="tablist">
+		<button class="wo-tab-btn active" role="tab" data-tab="today"    aria-selected="true">Today</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="week"     aria-selected="false">This Week</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="nextweek" aria-selected="false">Next Week</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="month"    aria-selected="false">Month</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="food"     aria-selected="false">Food</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="shopping" aria-selected="false">Shopping</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="targets"  aria-selected="false">Targets</button>
+		<button class="wo-tab-btn"        role="tab" data-tab="rules"    aria-selected="false">Rules</button>
+	</nav>
+
+	<!-- TODAY -->
+	<section class="wo-panel active" id="tab-today" role="tabpanel">
+		<div id="wo-today-content"></div>
+	</section>
+
+	<!-- THIS WEEK -->
+	<section class="wo-panel" id="tab-week" role="tabpanel">
+		<div class="wo-week-list" id="wo-week-list"></div>
+	</section>
+
+	<!-- NEXT WEEK -->
+	<section class="wo-panel" id="tab-nextweek" role="tabpanel">
+		<div class="wo-hero">
+			<div class="wo-hero-title">Next Week</div>
+			<div class="wo-hero-desc" id="wo-nextweek-daterange">—</div>
+		</div>
+		<div class="wo-week-list" id="wo-nextweek-list"></div>
+	</section>
+
+	<!-- MONTH -->
+	<section class="wo-panel" id="tab-month" role="tabpanel">
+		<div class="wo-hero">
+			<div class="wo-hero-title">14-Week Programme</div>
+			<div class="wo-hero-desc">Full schedule from Week 1 to pre-season. Current week highlighted. Tap any week to expand the daily sessions.</div>
+		</div>
+		<div class="wo-month-list" id="wo-month-list"></div>
+	</section>
+
+	<!-- FOOD -->
+	<section class="wo-panel" id="tab-food" role="tabpanel">
+		<div class="wo-food-main" id="wo-food-main"></div>
+		<div class="wo-recipe-view" id="wo-recipe-view"></div>
+	</section>
+
+	<!-- SHOPPING -->
+	<section class="wo-panel" id="tab-shopping" role="tabpanel">
+		<div class="wo-hero">
+			<div class="wo-hero-title">Weekly Shop</div>
+			<div class="wo-hero-desc">Choose your lunch and dinner options for the week. The list updates to show only what you need. Tap items to tick them off.</div>
+		</div>
+
+		<div class="wo-shop-section-label">Lunch this week</div>
+		<div class="wo-choice-row">
+			<button class="wo-choice-btn active" id="wo-lunch-chilli"  onclick="woSelectLunch('chilli')">Beef mince chilli + rice<small>Batch cook — 5 portions</small></button>
+			<button class="wo-choice-btn"        id="wo-lunch-chicken" onclick="woSelectLunch('chicken_bowls')">Chicken &amp; rice bowls<small>Batch cook — 5 portions</small></button>
+		</div>
+
+		<div class="wo-shop-section-label">Dinner this week</div>
+		<div class="wo-choice-grid">
+			<button class="wo-choice-btn active" id="wo-dinner-salmon"    onclick="woSelectDinner('salmon')">Salmon + sweet potato<small>Recommended</small></button>
+			<button class="wo-choice-btn"        id="wo-dinner-bolognese" onclick="woSelectDinner('bolognese')">Mince bolognese + pasta<small>Cheaper option</small></button>
+			<button class="wo-choice-btn"        id="wo-dinner-chkthigh"  onclick="woSelectDinner('chicken_thighs')">Chicken thighs + wedges<small>Budget friendly</small></button>
+			<button class="wo-choice-btn"        id="wo-dinner-cod"       onclick="woSelectDinner('cod')">Cod + sweet potato<small>Lighter option</small></button>
+		</div>
+
+		<div class="wo-shop-progress-wrap">
+			<div class="wo-shop-progress-meta">
+				<span id="wo-shop-count">0 / 0 items ticked</span>
+				<button class="wo-clear-btn" onclick="woClearShop()">Clear all</button>
+			</div>
+			<div class="wo-progress-track"><div class="wo-progress-fill" id="wo-shop-fill" style="width:0%"></div></div>
+		</div>
+		<div id="wo-shop-list"></div>
+	</section>
+
+	<!-- TARGETS -->
+	<section class="wo-panel" id="tab-targets" role="tabpanel">
+		<div class="wo-hero">
+			<div class="wo-hero-title">Pre-season Targets</div>
+			<div class="wo-hero-desc">Pre-season starts first week of August. 14-week programme from 30 April. Bench and deadlift update manually.</div>
+		</div>
+		<div class="wo-stat-grid">
+			<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Press Target</div><div class="wo-stat-box-value">80kg</div><div class="wo-stat-box-sub">from 60kg start</div></div>
+			<div class="wo-stat-box"><div class="wo-stat-box-label">Trap-Bar DL Target</div><div class="wo-stat-box-value">170kg</div><div class="wo-stat-box-sub">from 150kg start</div></div>
+			<div class="wo-stat-box"><div class="wo-stat-box-label">Protein Daily</div><div class="wo-stat-box-value">145g</div><div class="wo-stat-box-sub">every day inc. rest</div></div>
+			<div class="wo-stat-box"><div class="wo-stat-box-label">Bronco Test Target</div><div class="wo-stat-box-value">4:30</div><div class="wo-stat-box-sub">sub 5:00 is good</div></div>
+		</div>
+		<div class="wo-progress-section">
+			<div class="wo-progress-label"><span>Weeks completed</span><span class="wo-progress-pct" id="wo-weeks-pct">0%</span></div>
+			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-weeks-fill" style="width:0%"></div></div>
+			<div class="wo-progress-range"><span>Week 0</span><span id="wo-weeks-label">— / 14 weeks</span><span>Week 14</span></div>
+		</div>
+		<div class="wo-progress-section">
+			<div class="wo-progress-label"><span>Bench press</span><span class="wo-progress-pct" id="wo-bench-pct">0%</span></div>
+			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-bench-fill" style="width:0%"></div></div>
+			<div class="wo-progress-range"><span>60kg</span><span>target 80kg</span></div>
+			<div class="wo-lift-control">
+				<button class="wo-lift-adj" onclick="woAdjLift('bench',-2.5)">−</button>
+				<div class="wo-lift-current">Current: <strong id="wo-bench-val">60kg</strong></div>
+				<button class="wo-lift-adj" onclick="woAdjLift('bench',2.5)">+</button>
+			</div>
+		</div>
+		<div class="wo-progress-section">
+			<div class="wo-progress-label"><span>Trap-bar deadlift</span><span class="wo-progress-pct" id="wo-dl-pct">0%</span></div>
+			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-dl-fill" style="width:0%"></div></div>
+			<div class="wo-progress-range"><span>150kg</span><span>target 170kg</span></div>
+			<div class="wo-lift-control">
+				<button class="wo-lift-adj" onclick="woAdjLift('dl',-2.5)">−</button>
+				<div class="wo-lift-current">Current: <strong id="wo-dl-val">150kg</strong></div>
+				<button class="wo-lift-adj" onclick="woAdjLift('dl',2.5)">+</button>
+			</div>
+		</div>
+		<div class="wo-shoulder-ladder">
+			<div class="wo-ladder-title">Shoulder Press Progression Ladder</div>
+			<div class="wo-ladder-list" id="wo-shoulder-ladder"></div>
+		</div>
+		<div id="wo-targets-extras"></div>
+	</section>
+
+	<!-- RULES -->
+	<section class="wo-panel" id="tab-rules" role="tabpanel">
+		<div class="wo-hero">
+			<div class="wo-hero-title">Non-Negotiables</div>
+			<div class="wo-hero-desc">Eight rules that apply every week, no exceptions. The programme only works if these are in place.</div>
+		</div>
+		<div class="wo-rule-list" id="wo-rule-list"></div>
+	</section>
+
+</div>
+
+<script>
+(function() {
+'use strict';
+
+const CHEVRON = `<svg class="wo-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+const CHECK   = `<svg class="wo-check-icon" viewBox="0 0 12 12"><polyline points="1.5 6 4.5 9 10.5 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
+
+// ─── WORKOUT DATA ─────────────────────────────────────────────────────────────
+
+const WORKOUTS = {
+	monday: {
+		name: 'Lower strength + speed', tags: ['gym'],
+		desc: 'Compound leg work, posterior chain, and single-leg stability. The foundation of your speed on the pitch.',
+		exercises: [
+			{ name: 'Trap-bar deadlift', sets: '4 sets × 5 reps', weight: '~105kg',
+			  howTo: `Stand inside the trap bar with your feet hip-width apart. Hinge down, grip the handles firmly. Take a big breath in and brace your core like you're about to take a punch. Drive your feet into the floor as if you're trying to push the earth away from you — the bar follows. Keep your back flat the entire time. Hinge back down under control.`,
+			  note: `The most common mistake is letting the lower back round at the start. Before you pull, think "chest up, hips down" — this cue sets a strong position automatically.` },
+			{ name: 'Bulgarian split squat', sets: '3 sets × 8 reps each leg', weight: 'bodyweight or light dumbbells',
+			  howTo: `Stand about 2 feet in front of a bench. Place your rear foot on top of the bench, laces down. Lower your back knee toward the floor over 3 slow seconds. Your front knee tracks over your toes — it should not cave inward. Drive through your front heel to stand back up. All 8 reps on one leg before switching.`,
+			  note: `Most beginners place their front foot too close to the bench, which forces the front knee to shoot far past the toes. Step further out than feels natural.` },
+			{ name: 'Nordic hamstring curl', sets: '3 sets × 5 reps', weight: 'bodyweight',
+			  howTo: `Kneel on a mat with your ankles held down by a partner, a bar, or anchored under a bench. Keeping your body in a straight line from knees to head, lower yourself toward the floor as slowly as possible. When you can no longer hold the descent, catch yourself with your hands and use them to push back up to the start. The lowering phase is the training stimulus.`,
+			  note: `Most people let themselves drop too quickly. The entire set should feel slow and painful. If you can lower in under 3 seconds, you need to slow down.` },
+			{ name: 'Single-leg hip thrust', sets: '3 sets × 10 reps each leg', weight: 'bodyweight',
+			  howTo: `Sit with your upper back against a bench, one knee bent with foot flat on the floor. The other leg is extended straight. Drive through your planted heel, extending your hips up until your body forms a straight line from shoulder to knee. Squeeze your glute hard at the top and hold for 2 seconds. Lower slowly. All 10 reps on one side before switching.`,
+			  note: `The common error is using momentum and rushing through reps. The 2-second hold at the top is not optional — that's where the glute activation happens.` },
+			{ name: 'Single-leg calf raise', sets: '3 sets × 12 reps each leg', weight: 'bodyweight (add weight when easy)',
+			  howTo: `Stand on one foot on the edge of a step so your heel can drop below the step level. Lower your heel down slowly over 3 seconds until you feel a stretch in your calf. Rise up onto the ball of your foot as high as you can. Hold briefly at the top. Lower back down over 3 seconds.`,
+			  note: `Rushing the lowering phase defeats the purpose. The slow eccentric (lowering) is what builds tendon resilience and prevents Achilles issues in sprinters.` },
+			{ name: 'Pallof press', sets: '3 sets × 10 reps each side', weight: 'cable machine or resistance band',
+			  howTo: `Set a cable machine or resistance band at chest height. Stand side-on to the anchor point. Hold the handle or band at your chest with both hands. Press straight out in front of you — arms fully extended. Hold 2 seconds. Bring it back to your chest. The resistance wants to rotate your torso — your core fights that rotation. Do all 10 reps on one side, then turn around and do the other side.`,
+			  note: `Keep your hips and shoulders square throughout. If you are rotating toward or away from the anchor point, the weight or band resistance is too heavy. This is a core stability exercise, not a strength exercise — control is everything.` }
+		]
+	},
+	tuesday: {
+		name: 'Skills + conditioning', tags: ['field','run'],
+		desc: 'Aerobic base, tackle technique, and positioning. Build the engine and the fundamentals that underpin everything else.',
+		exercises: [
+			{ name: 'Warm-up jog', sets: '10 minutes', weight: '',
+			  howTo: `Start at a very easy jog — you should be able to hold a full conversation. After 5 minutes, do 3-4 build-up runs over 30m: one at 60%, one at 70%, one at 80% of your max speed. Between each, walk back. Finish with dynamic stretches: leg swings front-to-back, side-to-side, hip circles, high knees, butt kicks.`,
+			  note: `Do not skip the build-ups. Going from a jog straight into drills without progressively increasing intensity is how hamstrings get pulled.` },
+			{ name: 'Aerobic intervals', sets: '6 × 4 minutes', weight: 'conversational pace',
+			  howTo: `Run for 4 minutes at a pace where you could hold a conversation — genuinely slow. This is Zone 2 work. After each 4-minute block, walk for 90 seconds. Repeat 6 times. Total: about 34 minutes of work. If you have a heart rate monitor, aim for 60–70% of max HR.`,
+			  note: `Most athletes run these intervals too fast. If you can't speak in short sentences while running, you're going too hard. The aerobic base built here directly improves recovery between sprints in a match.` },
+			{ name: 'Tackle technique drill', sets: '15–20 minutes', weight: 'tackle bag',
+			  howTo: `Set up a tackle bag. Start walking pace: approach on an angle, drive your shoulder into the bag just above waist height, wrapping both arms, cheek to the side of the bag. Drive your legs through the contact. Gradually increase to jogging pace over the session. Focus on low body position — the power comes from leg drive, not upper body.`,
+			  note: `The most dangerous habit is going in high because you feel more in control. A high tackle is dangerous to both players and won't stop a big carrier. Get used to going low when the contact is comfortable and controlled.` },
+			{ name: 'Positioning walk-through', sets: '10 minutes', weight: '',
+			  howTo: `Walk through both attacking and defensive line scenarios at zero intensity. For defence: start on the try line, walk forward as a flat defensive line, call "up" together, check that you're in your channel. For attack: practise positioning yourself deep in the backfield when your team has the ball, finding space on the outside shoulder of the ball carrier.`,
+			  note: `This feels pointless at no intensity but positioning habits must be built when you're not fatigued. The decisions you make on the field are reflections of this slow practice.` }
+		]
+	},
+	wednesday: {
+		name: 'Upper strength + contact', tags: ['gym'],
+		desc: 'Horizontal push and pull, shoulder stability, and grip endurance. Build the upper body strength to hold off defenders and stay on the ball in contact.',
+		exercises: [
+			{ name: 'Bench press', sets: '5 sets × 5 reps — 3 min rest', weight: '47.5kg',
+			  howTo: `Lie on the bench with your feet flat on the floor. Squeeze your shoulder blades together and hold them there the entire set. Unrack the bar and lower it to your mid-chest over 2 seconds. Pause for a full second — the bar touching your chest, no bouncing. Press straight up to lockout. That pause is the most important part of this programme's bench work.`,
+			  note: `3 minutes rest between sets is intentional — not a suggestion. At 47.5kg you will notice the difference between 90 seconds and 3 minutes on sets 4 and 5. Bouncing the bar off the chest defeats most of the training effect. The pause also protects your shoulders.` },
+			{ name: 'Lat pulldown', sets: '4 sets × 6 reps — 90 sec rest', weight: '55–60kg',
+			  howTo: `Sit at the machine, knees under the pad, wide overhand grip (hands facing away). Lean back slightly — 10 to 15 degrees only. Pull the bar down to your upper chest. Think about pulling your shoulder blades together and down — like putting them in your back pockets. Hold 1 second at the bottom. Let the bar rise back up slowly — 3 seconds on the way up.`,
+			  note: `Do not swing your torso to help the bar down. Body stays still, only arms and shoulder blades move. If you are rocking back and forth, the weight is too heavy.` },
+			{ name: 'Dumbbell shoulder press', sets: '4 sets × 6 reps — 90 sec rest', weight: '12.5kg dumbbells',
+			  howTo: `Sit on a bench with back support. Hold the dumbbells at shoulder height, palms forward. Brace your core before every rep — no leg drive. Press both dumbbells up until your arms are nearly straight, then lower back to shoulder height over 2 seconds. Keep your wrists stacked directly over your elbows throughout.`,
+			  note: `The most common error is arching the lower back excessively and using leg drive to bounce the dumbbells up. This defeats the purpose and can injure your lower back. If you're arching, the weight is too heavy.` },
+			{ name: 'Single-arm dumbbell row', sets: '4 sets × 8 reps each side — 90 sec rest', weight: '17.5kg dumbbell',
+			  howTo: `Place one knee and one hand on a bench for support. Hold the dumbbell in your free hand, letting it hang straight down. Pull the dumbbell up toward your hip — not your shoulder. Your elbow passes your torso at the top. Your torso must stay still throughout. Lower the weight slowly over 2 seconds. All 8 reps one side, then switch.`,
+			  note: `Weight reduced from 20kg — 20kg was 9/10 difficulty and form was breaking down. Strict 17.5kg is more valuable than sloppy 20kg. If your shoulder is rising significantly or your torso is rotating, the weight is still too heavy.` },
+			{ name: 'Ski erg', sets: '3 × 45 seconds — 90 sec rest', weight: 'moderate resistance',
+			  howTo: `Stand in front of the ski erg with handles at shoulder height. Hinge forward at the hips, push both handles down and back in a sweeping arc. The power comes from your hip hinge — think of it like a kettlebell swing, not an arm pull. As the handles come up, stand tall and hinge again for the next rep. Maintain rhythm rather than blasting individual reps.`,
+			  note: `Leading with the arms and ignoring the hip hinge dramatically reduces the output and makes it feel like a shoulder exercise. The hips drive the movement; the arms just connect you to the machine.` },
+			{ name: "Farmer's carry", sets: '3 × 30m — 2 min rest', weight: '24kg each hand',
+			  howTo: `Pick up the dumbbells or farmer's handles, stand tall. Walk 30 metres at a controlled pace. Keep your shoulders level — do not let them drop or rotate. Breathe normally. Your grip will be the limiting factor at first; that's intentional.`,
+			  note: `The moment your shoulders start to droop or your posture collapses, put the weights down. Carrying with collapsed posture trains bad movement patterns and can irritate the shoulder joint under load.` }
+		]
+	},
+	thursday: {
+		name: 'Active recovery', tags: ['rest'],
+		desc: 'The body adapts when you rest, not when you train. Today is productive rest — movement without load.',
+		exercises: [
+			{ name: 'Brisk walk', sets: '20–30 minutes', weight: '',
+			  howTo: `Walk at a pace that feels genuinely brisk — you could talk but wouldn't want to. Outside is better than a treadmill. No headphones if possible; use it as decompression time. This is not a workout; it's active recovery that promotes blood flow to yesterday's trained muscles.`,
+			  note: `Resist the urge to jog. The walk is deliberately low-intensity. Turning it into cardio defeats the purpose of the day.` },
+			{ name: 'Upper back mobility', sets: '10 minutes', weight: '',
+			  howTo: `Foam roll your thoracic spine: sit on the floor with the roller across your upper back at shoulder blade level, hands behind your head. Slowly extend over the roller, moving it up one segment at a time. Finish with book opens: lie on your side, both arms out in front stacked. Take your top arm and slowly open it across your body until it reaches the floor behind you, following it with your eyes. Hold 2 seconds. Repeat 8 times each side.`,
+			  note: `Book opens are often rushed. The stretch happens in the last 10% of the rotation — the movement should be slow and deliberate, with a genuine pause at the end range.` },
+			{ name: 'Shoulder hang', sets: '3 × 30 seconds', weight: 'bodyweight',
+			  howTo: `Find a pull-up bar or a doorframe bar. Grip and let your entire bodyweight hang — do not pull up or support yourself with your feet. Relax your shoulders and let gravity decompress the joint. If 30 seconds is too much, build up from 15 seconds. Rest 60 seconds between hangs.`,
+			  note: `Many people grip the bar and keep their shoulders raised toward their ears. The whole point is to let the shoulder girdle drop and spread — actively think about letting your shoulders pull away from your ears.` }
+		]
+	},
+	friday: {
+		name: 'Speed + power + skills', tags: ['power','run','field'],
+		desc: 'Explosive output day. Maximum intent on every rep. The intensity here is what translates directly to match speed.',
+		exercises: [
+			{ name: 'Thorough warm-up', sets: '10 minutes', weight: '',
+			  howTo: `Easy jog 3 minutes. Then build-up runs progressively: 30m at 60%, 40m at 70%, 40m at 80%, 40m at 90%. Walk back fully between each. Finish with high knees, butt kicks, and 3-4 quick side shuffles. Your central nervous system needs to be primed before maximum effort sprints.`,
+			  note: `Skipping even part of this warm-up before sprinting at 90%+ is asking for a hamstring strain. The build-ups are not optional on speed days.` },
+			{ name: 'Broad jumps', sets: '4 sets × 3 reps', weight: 'bodyweight',
+			  howTo: `Jump for maximum horizontal distance. Land soft — absorb through hips and knees. Stick the landing before resetting. Full reset between every rep.`,
+			  note: `Builds the explosive first step that gets you away from defenders in the first 10 metres.` },
+			{ name: 'Tuck jumps', sets: '4 sets × 3 reps', weight: 'bodyweight',
+			  howTo: `Jump straight up and pull your knees to your chest at the top. Land softly, absorb through hips and knees. Full reset between every rep.`,
+			  note: `Bodyweight replacement for trap-bar jumps. Same explosive hip drive — no equipment needed.` },
+			{ name: '40m sprints at 90% effort', sets: '6 reps', weight: '',
+			  howTo: `Mark out 40 metres. Sprint at 90% — fast but not absolutely maxing out. Think of it as running fast with control, not panicked running. Drive your knees and pump your arms. After each sprint, walk the full distance back — approximately 45–60 seconds. Do not jog back. Full recovery between every single rep is what makes this session useful.`,
+			  note: `Jogging back and starting the next sprint before you've recovered turns speed work into cardio work. You'll be slower on every rep and get less adaptation. Walk back. Every time.` },
+			{ name: 'Skills under fatigue', sets: '15 minutes', weight: '',
+			  howTo: `Practise your weakest area from the week. Options: hand-offs, footwork over cones, receiving and running with high balls, passing accuracy over 15m from both hands. The point is that match situations arise when you're tired, so practising skills at the end of a session trains you to execute under fatigue.`,
+			  note: `Practising skills when you're completely fresh is of limited value for match preparation. The discomfort of fatigue during drills is the whole point.` }
+		]
+	},
+	saturday: {
+		name: 'Optional skills session', tags: ['field'],
+		desc: 'Free session — no structure, no targets. Work on whatever felt weakest this week. 45–60 minutes max.',
+		exercises: [
+			{ name: 'Free skills practice', sets: '45–60 minutes', weight: '',
+			  howTo: `There is no prescribed structure today. Review the week: what skill felt least comfortable? Was it your left-hand pass? Catching under pressure? Kick-chase angles? Spend the entire session working on that one thing. Low intensity, high repetition. Finish before you feel fatigued — this is skill work, not conditioning.`,
+			  note: `The temptation is to use this session to catch up on missed gym work. Don't. Stacking two hard sessions close together disrupts the programme's recovery structure. Skills only today.` }
+		]
+	},
+	sunday: {
+		name: 'Full rest', tags: ['rest'],
+		desc: 'No gym. No running. Walk, eat, sleep. The programme only works if Sunday is treated as sacred.',
+		exercises: [
+			{ name: 'Rest, eat, and sleep', sets: 'all day', weight: '',
+			  howTo: `Today is a full rest day. Eat your full protein target (145g). Aim for 8+ hours sleep tonight. A short walk is fine — even encouraged for blood flow. Do not train. Do not do "just a quick gym session." The adaptation from this week's training happens today.`,
+			  note: `Skipping rest days because you "feel fine" is how overtraining starts. Your muscles recover during sleep. Cutting rest short to train more actually slows progress.` }
+		]
+	}
+};
+
+const DAY_KEYS  = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+// ─── RECIPE DATA ──────────────────────────────────────────────────────────────
+
+const RECIPES = {
+	overnight_oats: {
+		title: 'Overnight oat & yogurt tupperware',
+		desc: 'Make it the night before, eat half at 7am and the other half at 11am. Zero morning prep time.',
+		protein: '~40g', kcal: '~650 kcal', time: '5 min prep', servings: '1 serving (2 meals)',
+		ingredients: [
+			{ name: 'Rolled oats', qty: '100g' }, { name: 'Full fat Greek yogurt', qty: '300g' },
+			{ name: 'Whey protein powder', qty: '30g' }, { name: 'Granola', qty: '50g' },
+			{ name: 'Frozen blueberries', qty: '80g' }, { name: 'Honey', qty: '2 tbsp' }, { name: 'Milk', qty: '60ml' }
+		],
+		steps: [
+			{ text: 'Mix yogurt and whey protein in the container — stir until there are no lumps.', note: '30 seconds of proper stirring is what it takes. Lumps = uneven taste.' },
+			{ text: 'Add the rolled oats and milk and give it a gentle stir to combine.', note: 'Reduce milk to 30ml for a thicker consistency if you prefer it less runny.' },
+			{ text: 'Add the toppings: granola, frozen blueberries, and drizzle honey over the top.', note: 'The blueberries go in frozen — they defrost overnight and keep the yogurt cold.' },
+			{ text: 'Seal the container and put it in the fridge. Leave for a minimum of 6 hours.', note: "The soak is not optional. Un-soaked oats have an unpleasant chalky texture and don't digest as well." },
+			{ text: 'In the morning, take it out, give it a quick stir, eat half. Leave the rest for mid-morning.', note: "No need to measure — just eyeball the halfway point. One level scoop from the top half is a portion." }
+		]
+	},
+	beef_chilli: {
+		title: 'Beef mince chilli + white rice',
+		desc: 'Batch cooked on Sunday or Monday, makes 5 portions. This is your daily lunch for the week — the most important meal for recovery.',
+		protein: '~40g per portion', kcal: '~550 kcal per portion', time: '35–40 min', servings: '5 portions',
+		ingredients: [
+			{ name: 'Lean beef mince (5% fat)', qty: '750g' }, { name: 'Tinned chopped tomatoes', qty: '2 × 400g tins' },
+			{ name: 'Beef stock cube in water', qty: '200ml' }, { name: 'Tomato purée', qty: '2 tbsp' },
+			{ name: 'Onion, finely diced', qty: '1 large' }, { name: 'Red peppers, diced', qty: '2' },
+			{ name: 'Smoked paprika', qty: '2 tsp' }, { name: 'Cumin', qty: '1 tsp' },
+			{ name: 'Chilli powder', qty: '½–1 tsp to taste' }, { name: 'Dried oregano', qty: '1 tsp' },
+			{ name: 'White rice (dry weight)', qty: '300g' }
+		],
+		steps: [
+			{ text: 'Sweat the onion and pepper in a large pan on the lowest heat setting for 15 minutes. Do not turn the heat up.', note: 'This step removes all the sharpness from the onion and sweetens the peppers. If the onion starts going brown or golden, your heat is too high.' },
+			{ text: 'Turn to medium heat and add the mince. Break it into small crumbles with a spatula and cook for 6–8 minutes until no pink remains.', note: 'If liquid pools in the pan, turn the heat up slightly. Watery mince that steams rather than browns will have much less flavour. Browning = flavour.' },
+			{ text: 'Add all the spices, stir to coat the meat, then add the tomato purée and cook for 2 minutes.', note: "This step is called 'blooming' — it makes the spices taste noticeably richer and deeper. Do not skip it." },
+			{ text: 'Add the chopped tomatoes and stock. Stir, bring to a gentle boil, then reduce to the lowest heat.', note: 'You want small, lazy bubbles — not a rolling boil. A rolling boil toughens the mince.' },
+			{ text: 'Simmer uncovered for 20 minutes, stirring every 5 minutes. The sauce should thicken.', note: '40 minutes is better if you have time. The longer it simmers, the richer it gets.' },
+			{ text: 'Cook the rice: rinse until water runs clear, add 600ml cold water, bring to a boil, put lid on, lowest heat for 12 min, then off heat with lid on for 5 min.', note: 'Never lift the lid while the rice is cooking. The steam inside is what cooks the top layer.' },
+			{ text: 'Divide into 5 containers — one chilli portion plus one rice portion each. Leave to cool with lids off before sealing.', note: 'Sealing hot food traps steam and makes the rice go soggy. Wait until barely warm to touch.' }
+		]
+	},
+	chicken_bowls: {
+		title: 'Chicken breast & rice meal prep bowls',
+		desc: 'Batch cooked on Sunday or Monday, makes 5 portions. Simple and clean — works cold straight from the fridge.',
+		protein: '~38g per portion', kcal: '~470 kcal per portion', time: '35 min', servings: '5 portions',
+		ingredients: [
+			{ name: 'Chicken breast', qty: '600g' }, { name: 'White rice (dry weight)', qty: '300g' },
+			{ name: 'Red peppers, diced', qty: '2' }, { name: 'Frozen sweetcorn', qty: '200g' },
+			{ name: 'Olive oil', qty: '2 tbsp' }, { name: 'Smoked paprika', qty: '2 tsp' },
+			{ name: 'Cumin', qty: '1 tsp' }, { name: 'Dried oregano', qty: '1 tsp' },
+			{ name: 'Salt and pepper', qty: 'to taste' }
+		],
+		steps: [
+			{ text: 'Preheat oven to 200°C. Pat chicken breasts dry, coat in 1 tbsp olive oil, paprika, cumin, oregano, salt and pepper. Place on a lined baking tray.', note: 'Pat the chicken dry first — wet chicken steams instead of roasting and won\'t get any colour or flavour on the outside.' },
+			{ text: 'Roast chicken for 22–25 minutes until cooked through (juices run clear when pierced at the thickest part). Remove and rest for 5 minutes before slicing.', note: 'Resting is not optional. Cut it immediately and the moisture pours out onto the chopping board instead of staying in the meat.' },
+			{ text: 'While chicken rests, cook rice: rinse until water runs clear, add 600ml cold water, bring to a boil, lid on lowest heat 12 min, off heat 5 min lid on.', note: 'Never lift the lid while the rice is cooking.' },
+			{ text: 'Toss diced pepper in the remaining olive oil and a pinch of paprika. Spread on a tray alongside frozen sweetcorn. Roast 15 min at 200°C. The veg can go in the same oven as the chicken.', note: 'Sweetcorn goes in frozen — it defrosts and roasts in 15 minutes. Do not thaw first or it goes soggy.' },
+			{ text: 'Slice chicken and divide evenly across 5 containers with equal portions of rice and veg. Leave lids off until completely cool, then seal and refrigerate.', note: 'Cool completely before sealing. Hot food sealed in a container creates condensation that makes the rice go mushy.' }
+		]
+	},
+	salmon: {
+		title: 'Pan-fried salmon + sweet potato + roasted veg',
+		desc: 'Quick weeknight dinner. The salmon takes 8 minutes total. Start the veg first.',
+		protein: '~46g', kcal: '~580 kcal', time: '~20 min', servings: '1 serving',
+		ingredients: [
+			{ name: 'Salmon fillet', qty: '200g' }, { name: 'Sweet potato', qty: '200g' },
+			{ name: 'Courgette', qty: '150g' }, { name: 'Red pepper', qty: '100g' },
+			{ name: 'Olive oil', qty: '1 tbsp' }, { name: 'Smoked paprika', qty: '½ tsp' },
+			{ name: 'Salt and pepper', qty: 'to taste' }, { name: 'Lemon (optional)', qty: '½' }
+		],
+		steps: [
+			{ text: 'Preheat oven to 200°C. Cut sweet potato into 2cm cubes. Slice courgette and red pepper. Toss all veg in olive oil, smoked paprika, salt and pepper. Roast for 20 minutes.', note: 'Cut everything to a similar size so it all cooks in the same time. Bigger pieces take longer; smaller pieces burn.' },
+			{ text: 'When veg has 10 minutes left, heat a non-stick pan on medium-high. Pat salmon dry with kitchen paper, season. Place skin-side down, do not move it. Cook 4 minutes. Flip and cook 3 minutes on the other side.', note: 'The salmon is cooked when it has turned from translucent pink to opaque all the way through the thickest part. A little underdone is better than overdone — it keeps cooking off the heat.' },
+			{ text: 'Take salmon off the heat and leave it in the pan for 1 minute before plating. Squeeze lemon over everything.', note: 'Resting the salmon for even 1 minute lets the juices redistribute so the flesh stays moist when you eat it.' }
+		]
+	},
+	bolognese: {
+		title: 'Lean beef mince bolognese + pasta',
+		desc: 'A leaner, faster bolognese. Ready in 25 minutes. Makes 1–2 portions depending on hunger.',
+		protein: '~45g', kcal: '~620 kcal', time: '~25 min', servings: '1–2 servings',
+		ingredients: [
+			{ name: 'Lean beef mince (5% fat)', qty: '200g' }, { name: 'Pasta (penne or spaghetti)', qty: '100g dry' },
+			{ name: 'Tinned chopped tomatoes', qty: '1 × 400g tin' }, { name: 'Tomato purée', qty: '1 tbsp' },
+			{ name: 'Onion, finely diced', qty: '½ small' }, { name: 'Olive oil', qty: '1 tsp' },
+			{ name: 'Smoked paprika', qty: '½ tsp' }, { name: 'Dried oregano', qty: '½ tsp' },
+			{ name: 'Parmesan or cheddar', qty: '20g optional' }
+		],
+		steps: [
+			{ text: 'Sweat the onion on the lowest heat for 12–15 minutes until completely soft and translucent.', note: 'For this smaller quantity, consider grating the onion instead of dicing it — it dissolves completely into the sauce and adds sweetness without texture.' },
+			{ text: 'Turn to medium heat and brown the mince for 5–6 minutes, breaking it apart constantly.', note: 'If liquid pools and the mince steams, turn up the heat. Browned mince tastes dramatically better than grey steamed mince.' },
+			{ text: 'Add smoked paprika and oregano, stir for 1 minute. Add tomato purée for 1 minute. Add tinned tomatoes and simmer for 15 minutes.', note: "Add a splash of pasta water if the sauce looks too dry or thick — it's starchy and helps the sauce cling to the pasta." },
+			{ text: 'Cook pasta in generously salted boiling water according to the packet, tasting 1 minute before the suggested time.', note: "The water should taste noticeably salty before you add the pasta. Under-salted pasta water produces flat-tasting pasta no matter how good the sauce is." },
+			{ text: 'Drain pasta and add it to the sauce pan, not the other way round. Toss together. Add a splash of pasta water if it looks too thick. Serve with cheese if using.', note: 'Adding pasta to the sauce means the pasta absorbs the sauce rather than the sauce sitting on top. Better texture, better flavour.' }
+		]
+	},
+	chicken_thighs: {
+		title: 'Baked chicken thighs + potato wedges + broccoli',
+		desc: 'One-tray dinner. Cheaper than salmon, high protein, practically impossible to overcook. Everything goes in the oven.',
+		protein: '~46g', kcal: '~540 kcal', time: '~35 min', servings: '1 serving',
+		ingredients: [
+			{ name: 'Skinless chicken thighs', qty: '250g (~2–3 thighs)' }, { name: 'Potato', qty: '250g' },
+			{ name: 'Broccoli', qty: '150g' }, { name: 'Olive oil', qty: '1 tbsp' },
+			{ name: 'Smoked paprika', qty: '½ tsp' }, { name: 'Dried oregano', qty: '½ tsp' },
+			{ name: 'Salt and pepper', qty: 'to taste' }
+		],
+		steps: [
+			{ text: 'Preheat oven to 200°C. Cut potatoes into wedges, toss in half the oil, paprika, salt. Spread on a baking tray. Roast for 15 minutes.', note: 'All wedges the same thickness = even cooking. If uneven, the thin ones burn before the thick ones cook through.' },
+			{ text: 'Season chicken thighs with remaining oil, oregano, paprika, salt and pepper. Add to the tray alongside the wedges after the 15 minutes. Roast for a further 22–25 minutes.', note: 'Chicken thighs are far more forgiving than breast — they stay moist even if slightly overcooked. They\'re done when the juices run clear and the skin is golden.' },
+			{ text: 'In the last 8 minutes, add the broccoli to the tray (toss it in any leftover oil from the tray first). Roast until the tips are starting to crisp.', note: 'Overcooked broccoli goes grey and bitter. 8 minutes at 200°C is enough — it should still have a little bite.' }
+		]
+	},
+	cod: {
+		title: 'Baked cod + sweet potato wedges + tenderstem broccoli',
+		desc: 'The lightest dinner option. White fish is very low fat and high protein. Quick to cook, nothing to watch.',
+		protein: '~44g', kcal: '~480 kcal', time: '~25 min', servings: '1 serving',
+		ingredients: [
+			{ name: 'Cod fillet (or other white fish)', qty: '220g' }, { name: 'Sweet potato', qty: '200g' },
+			{ name: 'Tenderstem broccoli', qty: '150g' }, { name: 'Olive oil', qty: '1 tbsp' },
+			{ name: 'Smoked paprika', qty: '½ tsp' }, { name: 'Salt and pepper', qty: 'to taste' },
+			{ name: 'Lemon (optional)', qty: '½' }
+		],
+		steps: [
+			{ text: 'Preheat oven to 200°C. Cut sweet potato into 2cm wedges, toss in half the oil, paprika, salt. Roast for 10 minutes before anything else goes in.', note: 'Sweet potato needs more time than the fish. If you put them in together the fish will be overcooked by the time the potato is done.' },
+			{ text: 'After 10 minutes, add tenderstem broccoli to the tray, tossed in a little oil and salt. Roast for another 5 minutes.', note: 'Tenderstem broccoli cooks fast. Don\'t overcrowd the tray or it steams instead of roasting.' },
+			{ text: 'Pat cod dry, season with paprika, salt and pepper. Place on the tray skin-side down. Bake for 12–14 minutes until the flesh is opaque all the way through and flakes easily when pressed.', note: 'Cod overcooks very quickly. Check at 12 minutes — the flesh should be white all the way through with no translucent centre. If in doubt, pull it out; it keeps cooking off the heat.' },
+			{ text: 'Squeeze lemon over the fish and veg before serving.', note: 'The lemon is worth using — it cuts through the sweetness of the potato and lifts the whole dish.' }
+		]
+	}
+};
+
+// ─── FOOD GROUPS ──────────────────────────────────────────────────────────────
+
+const FOOD_GROUPS = [
+	{ label: 'Breakfast',    color: 'var(--wo-amber)',  protein: '~40g protein',
+	  items: [{ name: 'Overnight oat & yogurt tupperware', recipe: 'overnight_oats' }] },
+	{ label: 'Mid-Morning',  color: 'var(--wo-blue)',   protein: '~20g protein',
+	  items: [{ name: 'Second half of the same tupperware', recipe: null }] },
+	{ label: 'Lunch',        color: 'var(--wo-green)',  protein: '~38–40g protein each',
+	  items: [
+		{ name: 'Option 1 — Beef mince chilli + white rice', recipe: 'beef_chilli' },
+		{ name: 'Option 2 — Chicken breast & rice bowls', recipe: 'chicken_bowls' }
+	  ] },
+	{ label: 'Training Fuel', color: 'var(--wo-purple)', protein: '~33g combined',
+	  items: [
+		{ name: 'Pre-training: banana + rice cakes with honey', recipe: null },
+		{ name: 'Post-training: whey shake + banana', recipe: null }
+	  ] },
+	{ label: 'Dinner',       color: 'var(--wo-red)',    protein: '~44–46g protein each',
+	  items: [
+		{ name: 'Option 1 — Pan-fried salmon + sweet potato + roasted veg', recipe: 'salmon' },
+		{ name: 'Option 2 — Lean beef mince bolognese + pasta', recipe: 'bolognese' },
+		{ name: 'Option 3 — Baked chicken thighs + potato wedges + broccoli', recipe: 'chicken_thighs' },
+		{ name: 'Option 4 — Baked cod + sweet potato wedges + tenderstem broccoli', recipe: 'cod' }
+	  ] },
+	{ label: 'Before Bed',   color: 'var(--wo-grey)',   protein: '~20g protein',
+	  items: [{ name: 'Cottage cheese or Greek yogurt', recipe: null }] }
+];
+
+// ─── SHOPPING DATA ────────────────────────────────────────────────────────────
+
+const SHOP_BASE = [
+	{ aisle: 'Dairy & eggs', items: [
+		{ id:'b1', name:'Greek yogurt full fat', qty:'2 × 500g tubs', tags:['breakfast','bed'] },
+		{ id:'b2', name:'Cottage cheese', qty:'1 × 300g tub', tags:['bed'] },
+		{ id:'b3', name:'Milk', qty:'1 × 2L', tags:['breakfast'] },
+		{ id:'b4', name:'Whey protein powder', qty:'1 tub if needed', tags:['breakfast','post'] }
+	]},
+	{ aisle: 'Bakery & cereals', items: [
+		{ id:'b5', name:'Rolled oats', qty:'500g bag', tags:['breakfast'] },
+		{ id:'b6', name:'Granola', qty:'500g bag', tags:['breakfast'] },
+		{ id:'b7', name:'Rice cakes', qty:'1 pack', tags:['pre'] }
+	]},
+	{ aisle: 'Fresh fruit & veg', items: [
+		{ id:'b8', name:'Bananas', qty:'1 bunch of 7', tags:['pre','post'] }
+	]},
+	{ aisle: 'Frozen', items: [
+		{ id:'b9', name:'Frozen blueberries', qty:'500g bag', tags:['breakfast'] }
+	]},
+	{ aisle: 'Rice, pasta & grains', items: [
+		{ id:'b10', name:'White rice', qty:'1kg bag', tags:['lunch'] }
+	]},
+	{ aisle: 'Condiments & sweet', items: [
+		{ id:'b11', name:'Honey', qty:'1 squeezy bottle', tags:['breakfast','pre'] }
+	]},
+	{ aisle: 'Supplements', items: [
+		{ id:'b12', name:'Creatine monohydrate', qty:'5g daily, buy if needed', tags:['supplement'] },
+		{ id:'b13', name:'Vitamin D3', qty:'1000–2000 IU, buy if needed', tags:['supplement'] }
+	]}
+];
+
+const SHOP_LUNCH = {
+	chilli: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'l1a', name:'Lean beef mince 5% fat', qty:'750g', tags:['lunch'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [
+			{ id:'l1b', name:'Red peppers', qty:'2 peppers', tags:['lunch'] },
+			{ id:'l1c', name:'Onion', qty:'1 large', tags:['lunch'] }
+		]},
+		{ aisle: 'Tins & jars', items: [{ id:'l1d', name:'Tinned chopped tomatoes', qty:'2 × 400g tins', tags:['lunch'] }] }
+	],
+	chicken_bowls: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'l2a', name:'Chicken breast', qty:'600g', tags:['lunch'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [{ id:'l2b', name:'Red peppers', qty:'2 peppers', tags:['lunch'] }] },
+		{ aisle: 'Frozen', items: [{ id:'l2c', name:'Frozen sweetcorn', qty:'200g', tags:['lunch'] }] }
+	]
+};
+
+const SHOP_DINNER = {
+	salmon: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'d1a', name:'Salmon fillets', qty:'2 × 200g', tags:['dinner'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [
+			{ id:'d1b', name:'Sweet potato', qty:'4 medium ~800g', tags:['dinner'] },
+			{ id:'d1c', name:'Courgette', qty:'2 medium ~300g', tags:['dinner'] },
+			{ id:'d1d', name:'Red pepper', qty:'1 pepper', tags:['dinner'] },
+			{ id:'d1e', name:'Lemon', qty:'1', tags:['dinner'] }
+		]}
+	],
+	bolognese: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'d2a', name:'Lean beef mince 5% fat', qty:'200g', tags:['dinner'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [{ id:'d2b', name:'Onion', qty:'1 small', tags:['dinner'] }] },
+		{ aisle: 'Tins & jars', items: [{ id:'d2c', name:'Tinned chopped tomatoes', qty:'1 × 400g tin', tags:['dinner'] }] },
+		{ aisle: 'Rice, pasta & grains', items: [{ id:'d2d', name:'Pasta penne or spaghetti', qty:'500g bag', tags:['dinner'] }] },
+		{ aisle: 'Dairy & eggs', items: [{ id:'d2e', name:'Parmesan or cheddar optional', qty:'small block', tags:['dinner'] }] }
+	],
+	chicken_thighs: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'d3a', name:'Skinless chicken thighs', qty:'~500g (2 portions)', tags:['dinner'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [
+			{ id:'d3b', name:'Potatoes', qty:'~500g', tags:['dinner'] },
+			{ id:'d3c', name:'Broccoli', qty:'~300g', tags:['dinner'] }
+		]}
+	],
+	cod: [
+		{ aisle: 'Fresh meat & fish', items: [{ id:'d4a', name:'Cod fillets (or other white fish)', qty:'~440g (2 portions)', tags:['dinner'] }] },
+		{ aisle: 'Fresh fruit & veg', items: [
+			{ id:'d4b', name:'Sweet potato', qty:'~400g', tags:['dinner'] },
+			{ id:'d4c', name:'Tenderstem broccoli', qty:'~300g', tags:['dinner'] },
+			{ id:'d4d', name:'Lemon', qty:'1', tags:['dinner'] }
+		]}
+	]
+};
+
+const AISLE_ORDER = ['Fresh meat & fish','Dairy & eggs','Bakery & cereals','Fresh fruit & veg','Frozen','Tins & jars','Rice, pasta & grains','Condiments & sweet','Supplements'];
+const TAG_LABELS  = { breakfast:'Breakfast', lunch:'Lunch', dinner:'Dinner', pre:'Pre-training', post:'Post-training', bed:'Before bed', supplement:'Supplement' };
+const TAG_CLASSES = { breakfast:'wo-mt-breakfast', lunch:'wo-mt-lunch', dinner:'wo-mt-dinner', pre:'wo-mt-pre', post:'wo-mt-post', bed:'wo-mt-bed', supplement:'wo-mt-supplement' };
+
+// ─── OTHER DATA ───────────────────────────────────────────────────────────────
+
+const RULES = [
+	'8 hours sleep minimum. Below this everything else does less for you.',
+	'3L water daily, 4L+ on training days. 2% dehydration cuts sprint performance 5–10%.',
+	'145g protein every day. Including rest days.',
+	'Warm up every session. 10 minutes minimum. Cold sprints = hamstring tears.',
+	'One full rest day per week. Sunday. Recovery is when adaptation happens.',
+	'No alcohol weeks 1–10. Blunts protein synthesis 24h and wrecks REM sleep.',
+	'Never grind reps. Leave 1–2 in the tank on every main lift.',
+	"Don't double up missed sessions. Pick up where the plan says."
+];
+
+const SHOULDER_LADDER = [
+	{ week: 'Week 1', weight: '12.5kg', note: 'Current weight, slightly above planned 12kg.', updated: true },
+	{ week: 'Week 3', weight: '14kg', note: 'Move up when all sets feel controlled with reps in reserve.' },
+	{ week: 'Week 5', weight: '16kg', note: 'Spend 2–3 weeks at each weight before progressing.' },
+	{ week: 'Week 8', weight: '18kg', note: 'Pre-season target.' }
+];
+
+// ─── DATE OVERRIDE HELPERS ────────────────────────────────────────────────────
+
+function isHolidayDate(d) {
+	// Inclusive: Wed 20 May – Sun 24 May 2025
+	const start = new Date(2025, 4, 20); // month is 0-indexed
+	const end   = new Date(2025, 4, 24);
+	const check = new Date(d); check.setHours(0, 0, 0, 0);
+	return check >= start && check <= end;
+}
+function isPreHolidayDate(d) {
+	// Mon 19 May 2025 only
+	const target = new Date(2025, 4, 19);
+	const check  = new Date(d); check.setHours(0, 0, 0, 0);
+	return check.getTime() === target.getTime();
+}
+function isPostHolidayDate(d) {
+	// Mon 26 May 2025 only
+	const target = new Date(2025, 4, 26);
+	const check  = new Date(d); check.setHours(0, 0, 0, 0);
+	return check.getTime() === target.getTime();
+}
+
+// ─── REDUCED INTENSITY SESSION (26 MAY ONLY) ─────────────────────────────────
+
+const REDUCED_MONDAY_EXERCISES = [
+	{ name: 'Trap-bar deadlift', sets: '4 sets × 5 reps', weight: '95kg',
+	  howTo: `Stand inside the trap bar with your feet hip-width apart. Hinge down, grip the handles firmly. Take a big breath in and brace your core like you're about to take a punch. Drive your feet into the floor — the bar follows. Keep your back flat the entire time. Hinge back down under control.`,
+	  note: `Coming back too heavy after disrupted sleep is how injuries happen. One lighter session protects the rest of the week. Do not go heavier today regardless of how you feel.` },
+	{ name: 'Bulgarian split squat', sets: '3 sets × 8 reps each leg', weight: 'lighter than normal',
+	  howTo: `Stand about 2 feet in front of a bench. Place your rear foot on top of the bench, laces down. Lower your back knee toward the floor over 3 slow seconds. Drive through your front heel to stand back up.`,
+	  note: `Use lighter dumbbells than usual today. Focus on movement quality, not load.` },
+	{ name: 'Nordic hamstring curl', sets: '3 sets × 5 reps', weight: 'bodyweight',
+	  howTo: `Kneel on a mat with your ankles held down. Keeping your body in a straight line from knees to head, lower yourself toward the floor as slowly as possible. Catch yourself with your hands and use them to push back up to the start.`,
+	  note: `Always do these regardless of intensity level. The slow lowering phase is the training stimulus.` },
+	{ name: 'Single-leg hip thrust', sets: '3 sets × 10 reps each leg', weight: 'bodyweight or light load only',
+	  howTo: `Sit with your upper back against a bench, one knee bent with foot flat on the floor. Drive through your planted heel, extending your hips up. Squeeze your glute hard at the top and hold for 2 seconds. Lower slowly.`,
+	  note: `Bodyweight is fine today. Movement quality matters more than load.` },
+	{ name: 'Single-leg calf raise', sets: '3 sets × 12 reps each leg', weight: 'bodyweight',
+	  howTo: `Stand on one foot on the edge of a step so your heel can drop below the step level. Lower your heel down slowly over 3 seconds. Rise up onto the ball of your foot as high as you can. Lower back down over 3 seconds.`,
+	  note: `Bodyweight is fine today.` }
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+
+const START_DATE      = new Date('2025-04-30');
+const PROG_MON_START  = new Date('2025-04-28'); // Monday of week 1
+const TOTAL_WEEKS     = 14;
+let currentLunch  = 'chilli';
+let currentDinner = 'salmon';
+let shopTicked    = {};
+let benchKg       = 60;
+let dlKg          = 150;
+
+function loadStorage() {
+	try {
+		const l = localStorage.getItem('wo_lunch');  if (l) currentLunch  = l;
+		const d = localStorage.getItem('wo_dinner'); if (d) currentDinner = d;
+		const t = localStorage.getItem('wo_ticked'); if (t) shopTicked = JSON.parse(t);
+		const b = parseFloat(localStorage.getItem('wo_bench')); if (!isNaN(b)) benchKg = b;
+		const k = parseFloat(localStorage.getItem('wo_dl'));    if (!isNaN(k)) dlKg = k;
+	} catch(e){}
+}
+function saveStorage() {
+	try {
+		localStorage.setItem('wo_lunch',  currentLunch);
+		localStorage.setItem('wo_dinner', currentDinner);
+		localStorage.setItem('wo_ticked', JSON.stringify(shopTicked));
+		localStorage.setItem('wo_bench',  benchKg);
+		localStorage.setItem('wo_dl',     dlKg);
+	} catch(e){}
+}
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+
+function weeksElapsed() {
+	const diff = new Date() - START_DATE;
+	return Math.min(Math.max(Math.floor(diff / (7*24*3600*1000)), 0), TOTAL_WEEKS);
+}
+function todayDayKey() { return DAY_KEYS[new Date().getDay()]; }
+
+function getMondayOfCurrentWeek() {
+	const now = new Date(), day = now.getDay();
+	const diff = day === 0 ? -6 : 1 - day;
+	const mon = new Date(now); mon.setDate(now.getDate() + diff); mon.setHours(0,0,0,0); return mon;
+}
+function dateForWeekday(jsDay, mondayRef) {
+	const offset = jsDay === 0 ? 6 : jsDay - 1;
+	const d = new Date(mondayRef); d.setDate(mondayRef.getDate() + offset); return d;
+}
+function fmtDate(d) { return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' }); }
+function renderTags(tags) { return tags.map(t => `<span class="wo-tag wo-tag-${t}">${t}</span>`).join(''); }
+
+function renderExercises(exercises, prefix) {
+	return exercises.map((ex, i) => {
+		const id = `${prefix}-ex-${i}`;
+		return `<div class="wo-exercise" id="${id}">
+			<div class="wo-exercise-header" tabindex="0" role="button" aria-expanded="false" onclick="woToggleExercise('${id}')">
+				<div><div class="wo-exercise-name">${ex.name}</div><div class="wo-exercise-meta">${ex.sets}${ex.weight ? ' · ' + ex.weight : ''}</div></div>
+				${CHEVRON}
+			</div>
+			<div class="wo-exercise-body">
+				<div class="wo-exercise-howto">${ex.howTo}</div>
+				<div class="wo-beginner-note"><strong>Beginner note</strong>${ex.note}</div>
+			</div>
+		</div>`;
+	}).join('');
+}
+
+function buildWeekDayRows(mondayRef, prefix, containerSuffix, todayJS) {
+	return [1,2,3,4,5,6,0].map(jsDay => {
+		const key = DAY_KEYS[jsDay], w = WORKOUTS[key], d = dateForWeekday(jsDay, mondayRef);
+		const id = `${prefix}-${key}`;
+		const isToday   = todayJS !== null && jsDay === todayJS;
+		const isHol     = isHolidayDate(d);
+		const isPreHol  = isPreHolidayDate(d);
+		const isPostHol = isPostHolidayDate(d);
+
+		let sessionName  = w.name;
+		let tags         = w.tags;
+		let extraClass   = '';
+		let bodyInner    = '';
+
+		if (isHol) {
+			sessionName = 'Lads trip — no training';
+			tags        = ['holiday'];
+			extraClass  = ' holiday';
+			bodyInner   = `<div class="wo-warning-box" style="margin-top:14px"><strong>Holiday — no sessions</strong>No sessions 20–24 May. Training on poor sleep with late nights doesn't recover properly and increases injury risk. Enjoy the trip. Back to training Monday 26th at reduced intensity.</div>`;
+		} else if (isPostHol) {
+			sessionName = 'Lower strength — reduced intensity';
+			bodyInner   = `<div style="margin-top:14px"><div class="wo-warning-box" style="margin-bottom:14px"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div><div class="wo-exercise-list">${renderExercises(REDUCED_MONDAY_EXERCISES, `${prefix}-${key}`)}</div></div>`;
+		} else {
+			const preNote = isPreHol ? `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>` : '';
+			bodyInner = `<div style="margin-top:14px">${preNote}<div class="wo-exercise-list">${renderExercises(w.exercises, `${prefix}-${key}`)}</div></div>`;
+		}
+
+		return `<div class="wo-day-row${isToday ? ' today' : ''}${extraClass}" id="${id}">
+			<div class="wo-day-header" tabindex="0" role="button" aria-expanded="false" onclick="woToggleDay('${id}','wo-${containerSuffix}-list')">
+				<span class="wo-day-label">${DAY_NAMES[jsDay]}</span>
+				<span class="wo-day-date">${fmtDate(d)}</span>
+				<span class="wo-day-session">${sessionName}</span>
+				<div class="wo-tags" style="margin:0">${renderTags(tags)}</div>
+				${CHEVRON}
+			</div>
+			<div class="wo-day-body">${bodyInner}</div>
+		</div>`;
+	}).join('');
+}
+
+// ─── TODAY TAB ────────────────────────────────────────────────────────────────
+
+function renderToday() {
+	const today   = new Date(); today.setHours(0, 0, 0, 0);
+	const dateStr = today.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
+
+	if (isHolidayDate(today)) {
+		document.getElementById('wo-today-content').innerHTML = `
+			<div class="wo-hero" style="border-color:var(--wo-amber)">
+				<div class="wo-hero-title">Lads trip — rest day</div>
+				<div class="wo-hero-desc">${dateStr}</div>
+				<div class="wo-tags"><span class="wo-tag wo-tag-holiday">holiday</span></div>
+			</div>
+			<div class="wo-warning-box"><strong>No training 20–24 May</strong>No sessions during the lads trip. Training on poor sleep with late nights doesn't recover properly and increases injury risk. Walk when you can, eat protein where possible, drink water. Back to training Monday 26th at reduced intensity.</div>`;
+		return;
+	}
+
+	const w           = WORKOUTS[todayDayKey()];
+	let sessionName   = w.name;
+	let exercises     = w.exercises;
+	let preHtml       = '';
+
+	if (isPostHolidayDate(today)) {
+		sessionName = 'Lower strength — reduced intensity';
+		exercises   = REDUCED_MONDAY_EXERCISES;
+		preHtml     = `<div class="wo-warning-box"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div>`;
+	} else if (isPreHolidayDate(today)) {
+		preHtml = `<div class="wo-warning-box"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
+	}
+
+	document.getElementById('wo-today-content').innerHTML = `
+		<div class="wo-hero"><div class="wo-hero-title">${sessionName}</div><div class="wo-hero-desc">${dateStr}</div><div class="wo-tags">${renderTags(w.tags)}</div></div>
+		${preHtml}
+		<div class="wo-section-title">Exercises</div>
+		<div class="wo-exercise-list">${renderExercises(exercises, 'today')}</div>`;
+}
+
+// ─── THIS WEEK TAB ────────────────────────────────────────────────────────────
+
+function renderWeek() {
+	const mon = getMondayOfCurrentWeek();
+	document.getElementById('wo-week-list').innerHTML = buildWeekDayRows(mon, 'week-day', 'week', new Date().getDay());
+}
+
+// ─── NEXT WEEK TAB ────────────────────────────────────────────────────────────
+
+function renderNextWeek() {
+	const mon = getMondayOfCurrentWeek();
+	const nextMon = new Date(mon); nextMon.setDate(mon.getDate() + 7);
+	const nextSun = new Date(nextMon); nextSun.setDate(nextMon.getDate() + 6);
+	document.getElementById('wo-nextweek-daterange').textContent = `${fmtDate(nextMon)} – ${fmtDate(nextSun)}`;
+	document.getElementById('wo-nextweek-list').innerHTML = buildWeekDayRows(nextMon, 'nw-day', 'nextweek', null);
+}
+
+// ─── MONTH TAB ────────────────────────────────────────────────────────────────
+
+function renderMonth() {
+	const now = new Date(); now.setHours(0,0,0,0);
+	const todayStr = now.toDateString();
+	let html = '';
+
+	for (let wk = 1; wk <= TOTAL_WEEKS; wk++) {
+		const wkStart = new Date(PROG_MON_START);
+		wkStart.setDate(PROG_MON_START.getDate() + (wk - 1) * 7);
+		const wkEnd = new Date(wkStart); wkEnd.setDate(wkStart.getDate() + 6);
+
+		const isCurrent = now >= wkStart && now <= wkEnd;
+		const isPast    = now > wkEnd;
+		const id = `month-wk-${wk}`;
+
+		const startStr = wkStart.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+		const endStr   = wkEnd.toLocaleDateString('en-GB',   { day:'numeric', month:'short' });
+
+		const daysHtml = [1,2,3,4,5,6,0].map(jsDay => {
+			const dayD = new Date(wkStart);
+			dayD.setDate(wkStart.getDate() + (jsDay === 0 ? 6 : jsDay - 1));
+			const isToday = dayD.toDateString() === todayStr;
+			const key = DAY_KEYS[jsDay]; const w = WORKOUTS[key];
+			return `<div class="wo-month-day${isToday ? ' wo-today-row' : ''}">
+				<span class="wo-mday-name">${DAY_NAMES[jsDay]}</span>
+				<span class="wo-mday-num">${dayD.getDate()}</span>
+				<span class="wo-mday-session">${w.name}</span>
+				<div class="wo-tags" style="margin:0;gap:3px">${renderTags(w.tags)}</div>
+			</div>`;
+		}).join('');
+
+		let cls = 'wo-month-card';
+		if (isCurrent) cls += ' current';
+		if (isPast)    cls += ' past';
+
+		html += `<div class="${cls}" id="${id}">
+			<div class="wo-month-hdr" onclick="woToggleMonth('${id}')">
+				<div><span class="wo-month-wk-num">Week ${wk}</span><span class="wo-month-daterange">${startStr} – ${endStr}</span></div>
+				<div style="display:flex;align-items:center;gap:8px">${isCurrent ? '<span class="wo-now-pill">Now</span>' : ''}${CHEVRON}</div>
+			</div>
+			<div class="wo-month-body">${daysHtml}</div>
+		</div>`;
+	}
+
+	document.getElementById('wo-month-list').innerHTML = html;
+	// Open current week by default
+	const cur = document.querySelector('.wo-month-card.current');
+	if (cur) cur.classList.add('open');
+}
+
+function woToggleMonth(id) {
+	const el = document.getElementById(id); if (el) el.classList.toggle('open');
+}
+window.woToggleMonth = woToggleMonth;
+
+// ─── FOOD TAB ─────────────────────────────────────────────────────────────────
+
+function renderFood() {
+	document.getElementById('wo-food-main').innerHTML = `
+		<div class="wo-hero"><div class="wo-hero-title">Daily Nutrition Plan</div>
+		<div class="wo-hero-desc">~170g protein target. No beans, no cauliflower, no garlic, no peanut butter. Tap any meal with an arrow to see the full recipe.</div></div>
+		${FOOD_GROUPS.map(g => `<div class="wo-meal-group">
+			<div class="wo-meal-divider">
+				<div class="wo-meal-dot" style="background:${g.color}"></div>
+				<span class="wo-meal-group-name" style="color:${g.color}">${g.label}</span>
+				<div class="wo-meal-divider-line"></div>
+				<span class="wo-meal-protein">${g.protein}</span>
+			</div>
+			${g.items.map(item => `<div class="wo-meal-card${item.recipe ? ' clickable' : ''}" ${item.recipe ? `onclick="woOpenRecipe('${item.recipe}')" tabindex="0" role="button"` : ''}>
+				<span class="wo-meal-name">${item.name}</span>${item.recipe ? '<span class="wo-meal-arrow">→</span>' : ''}
+			</div>`).join('')}
+		</div>`).join('')}`;
+}
+
+function woOpenRecipe(id) {
+	const r = RECIPES[id];
+	document.getElementById('wo-recipe-view').innerHTML = `
+		<button class="wo-recipe-back" onclick="woCloseRecipe()">← Back to food</button>
+		<div class="wo-recipe-title">${r.title}</div>
+		<div class="wo-recipe-desc">${r.desc}</div>
+		<div class="wo-recipe-stats">
+			<div class="wo-stat-pill"><span>Protein: </span>${r.protein}</div>
+			<div class="wo-stat-pill"><span>Calories: </span>${r.kcal}</div>
+			<div class="wo-stat-pill"><span>Time: </span>${r.time}</div>
+			<div class="wo-stat-pill"><span>Serves: </span>${r.servings}</div>
+		</div>
+		<div class="wo-recipe-section-title">Ingredients</div>
+		<ul class="wo-ingredient-list">${r.ingredients.map(i => `<li>${i.name}<span>${i.qty}</span></li>`).join('')}</ul>
+		<div class="wo-recipe-section-title">Method</div>
+		<div class="wo-method-steps">${r.steps.map((s,idx) => `
+			<div class="wo-method-step"><div class="wo-step-num">${idx+1}</div>
+			<div class="wo-step-content"><div class="wo-step-text">${s.text}</div>
+			<div class="wo-step-note"><strong>Note</strong>${s.note}</div></div></div>`).join('')}
+		</div>`;
+	document.getElementById('wo-food-main').classList.add('hidden');
+	document.getElementById('wo-recipe-view').classList.add('active');
+}
+window.woOpenRecipe = woOpenRecipe;
+
+function woCloseRecipe() {
+	document.getElementById('wo-recipe-view').classList.remove('active');
+	document.getElementById('wo-food-main').classList.remove('hidden');
+}
+window.woCloseRecipe = woCloseRecipe;
+
+// ─── SHOPPING TAB ─────────────────────────────────────────────────────────────
+
+function getShopItems() {
+	const allSections = [
+		...SHOP_BASE,
+		...(SHOP_LUNCH[currentLunch]   || []),
+		...(SHOP_DINNER[currentDinner] || [])
+	];
+	const aisleMap = {};
+	allSections.forEach(sec => {
+		if (!aisleMap[sec.aisle]) aisleMap[sec.aisle] = [];
+		aisleMap[sec.aisle].push(...sec.items);
+	});
+	const result = [];
+	AISLE_ORDER.forEach(a => { if (aisleMap[a]) { result.push({ aisle: a, items: aisleMap[a] }); delete aisleMap[a]; } });
+	Object.entries(aisleMap).forEach(([a, items]) => result.push({ aisle: a, items }));
+	return result;
+}
+
+function getAllCurrentItems() { return getShopItems().flatMap(a => a.items); }
+
+function woSelectLunch(choice) {
+	currentLunch = choice;
+	saveStorage();
+	document.getElementById('wo-lunch-chilli').classList.toggle('active',  choice === 'chilli');
+	document.getElementById('wo-lunch-chicken').classList.toggle('active', choice === 'chicken_bowls');
+	renderShopList();
+}
+window.woSelectLunch = woSelectLunch;
+
+function woSelectDinner(choice) {
+	currentDinner = choice;
+	saveStorage();
+	['wo-dinner-salmon','wo-dinner-bolognese','wo-dinner-chkthigh','wo-dinner-cod'].forEach(id => {
+		document.getElementById(id).classList.remove('active');
+	});
+	const map = { salmon:'wo-dinner-salmon', bolognese:'wo-dinner-bolognese', chicken_thighs:'wo-dinner-chkthigh', cod:'wo-dinner-cod' };
+	if (map[choice]) document.getElementById(map[choice]).classList.add('active');
+	renderShopList();
+}
+window.woSelectDinner = woSelectDinner;
+
+function woClearShop() {
+	getAllCurrentItems().forEach(i => { shopTicked[i.id] = false; });
+	saveStorage(); renderShopList();
+}
+window.woClearShop = woClearShop;
+
+function woTickItem(id) {
+	shopTicked[id] = !shopTicked[id];
+	saveStorage();
+	const el = document.getElementById('shop-item-' + id);
+	if (el) el.classList.toggle('ticked', shopTicked[id]);
+	updateShopProgress();
+}
+window.woTickItem = woTickItem;
+
+function updateShopProgress() {
+	const all    = getAllCurrentItems();
+	const ticked = all.filter(i => shopTicked[i.id]).length;
+	const pct    = all.length ? Math.round((ticked / all.length) * 100) : 0;
+	document.getElementById('wo-shop-count').textContent = `${ticked} / ${all.length} items ticked`;
+	document.getElementById('wo-shop-fill').style.width  = pct + '%';
+}
+
+function renderShopList() {
+	let html = '';
+	getShopItems().forEach(({ aisle, items }) => {
+		html += `<div class="wo-aisle-title">${aisle}</div>`;
+		items.forEach(item => {
+			const tagHtml = item.tags.map(t => `<span class="wo-meal-tag ${TAG_CLASSES[t]}">${TAG_LABELS[t]}</span>`).join('');
+			html += `<div class="wo-shop-item${shopTicked[item.id] ? ' ticked' : ''}" id="shop-item-${item.id}" onclick="woTickItem('${item.id}')">
+				<div class="wo-shop-check">${CHECK}</div>
+				<div class="wo-shop-item-content">
+					<div class="wo-shop-item-name">${item.name}</div>
+					<div class="wo-shop-item-qty">${item.qty}</div>
+					<div class="wo-meal-tags">${tagHtml}</div>
+				</div>
+			</div>`;
+		});
+	});
+	document.getElementById('wo-shop-list').innerHTML = html;
+	updateShopProgress();
+}
+
+// ─── TARGETS TAB ──────────────────────────────────────────────────────────────
+
+function renderTargets() {
+	const elapsed = weeksElapsed();
+	const pct = Math.round((elapsed / TOTAL_WEEKS) * 100);
+	document.getElementById('wo-weeks-fill').style.width  = pct + '%';
+	document.getElementById('wo-weeks-pct').textContent   = pct + '%';
+	document.getElementById('wo-weeks-label').textContent = `${elapsed} / ${TOTAL_WEEKS} weeks`;
+	updateLiftBar('bench', benchKg, 60, 80);
+	updateLiftBar('dl',    dlKg,   150, 170);
+	const wk = elapsed + 1;
+	let a = 0; if (wk >= 8) a = 3; else if (wk >= 5) a = 2; else if (wk >= 3) a = 1;
+	document.getElementById('wo-shoulder-ladder').innerHTML = SHOULDER_LADDER.map((item, i) =>
+		`<div class="wo-ladder-item${i === a ? ' current' : ''}">
+			<span class="wo-ladder-week">${item.week}</span>
+			<span class="wo-ladder-weight">${item.weight}${item.updated ? ' <span class="wo-updated-badge">Updated</span>' : ''}</span>
+			<span class="wo-ladder-note">${item.note}</span>
+		</div>`).join('');
+
+	document.getElementById('wo-targets-extras').innerHTML = `
+		<div class="wo-session-log">
+			<div class="wo-ladder-title" style="margin-top:24px">Session log <span class="wo-amber-badge">Updated 6 May</span></div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr">
+					<span class="wo-log-entry-date">Tue 6 May 2025</span>
+					<span class="wo-log-entry-name">Upper strength — Week 1</span>
+				</div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Bench press</span><span class="wo-log-item-val">5×5 @ 45kg ✓</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Lat pulldown</span><span class="wo-log-item-val">4×6 @ 55kg ✓</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">DB shoulder press</span><span class="wo-log-item-val">4×6 @ 12.5kg ✓</span></div>
+				<div class="wo-log-item">
+					<span class="wo-log-item-name">Single-arm row</span>
+					<div style="text-align:right"><div class="wo-log-item-val">20kg</div><div class="wo-log-item-warn">⚠ 9/10 difficulty — dropped to 17.5kg next session</div></div>
+				</div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Ski erg</span><span class="wo-log-item-val">3×45sec — 7/10 ✓</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Farmer's carry</span><span class="wo-log-item-val">3×30m @ 24kg ✓</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr">
+					<span class="wo-log-entry-date">Wed 13 May 2025</span>
+					<span class="wo-log-entry-name">Upper strength — Week 2</span>
+					<span class="wo-log-entry-badge wo-badge-next">Next session</span>
+				</div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Bench press</span><span class="wo-log-item-val"><span class="wo-log-item-up">↑</span> 5×5 @ 47.5kg</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Lat pulldown</span><span class="wo-log-item-val">4×6 @ 55–60kg</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">DB shoulder press</span><span class="wo-log-item-val">4×6 @ 12.5kg</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Single-arm row</span><span class="wo-log-item-val">4×8 @ 17.5kg <em>strict form</em></span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Ski erg</span><span class="wo-log-item-val">3×45sec</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Farmer's carry</span><span class="wo-log-item-val">3×30m @ 24kg</span></div>
+			</div>
+		</div>
+
+		<div class="wo-section-title" style="margin-top:28px">Holiday adjustment <span class="wo-amber-badge">Wed 20 – Sun 24 May</span></div>
+		<div class="wo-holiday-adj-box">
+			<strong>Lads trip 20–24 May.</strong> Bad sleep and late nights expected. No training during this period — sessions on poor sleep with late nights don't recover properly and increase injury risk. Enjoy the trip.
+			<br><br>
+			Back on Monday 26 May: first session back is at reduced intensity — ~10% lighter on all lifts. Deadlift at 95kg instead of 105kg. Upper weights normal from Wednesday 28 May once sleep has recovered.
+		</div>`;
+}
+
+function updateLiftBar(key, cur, min, max) {
+	const pct = Math.min(Math.max(Math.round(((cur - min) / (max - min)) * 100), 0), 100);
+	document.getElementById(`wo-${key}-fill`).style.width = pct + '%';
+	document.getElementById(`wo-${key}-pct`).textContent  = pct + '%';
+	document.getElementById(`wo-${key}-val`).textContent  = cur + 'kg';
+}
+
+function woAdjLift(key, delta) {
+	if (key === 'bench') { benchKg = Math.max(60, Math.min(80, Math.round((benchKg + delta) * 10) / 10)); updateLiftBar('bench', benchKg, 60, 80); }
+	else                 { dlKg    = Math.max(150,Math.min(170,Math.round((dlKg    + delta) * 10) / 10)); updateLiftBar('dl',    dlKg,   150,170); }
+	saveStorage();
+}
+window.woAdjLift = woAdjLift;
+
+// ─── RULES TAB ────────────────────────────────────────────────────────────────
+
+function renderRules() {
+	document.getElementById('wo-rule-list').innerHTML = RULES.map((r, i) =>
+		`<div class="wo-rule-card"><div class="wo-rule-num">${i+1}</div><div class="wo-rule-text">${r}</div></div>`
+	).join('');
+}
+
+// ─── HEADER ───────────────────────────────────────────────────────────────────
+
+function updateBadge() {
+	const wk = weeksElapsed() + 1;
+	const dateStr = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+	document.getElementById('wo-week-badge').textContent = `Week ${wk} · ${dateStr}`;
+}
+
+// ─── TAB SWITCHING ────────────────────────────────────────────────────────────
+
+function switchTab(tabId) {
+	document.querySelectorAll('#wingeros-app .wo-tab-btn').forEach(btn => {
+		const a = btn.dataset.tab === tabId;
+		btn.classList.toggle('active', a);
+		btn.setAttribute('aria-selected', a);
+	});
+	document.querySelectorAll('#wingeros-app .wo-panel').forEach(p => {
+		p.classList.toggle('active', p.id === 'tab-' + tabId);
+	});
+}
+document.querySelectorAll('#wingeros-app .wo-tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+// ─── EXERCISE TOGGLE ──────────────────────────────────────────────────────────
+
+function woToggleExercise(id) {
+	const el = document.getElementById(id); if (!el) return;
+	el.classList.toggle('open');
+	el.querySelector('.wo-exercise-header').setAttribute('aria-expanded', el.classList.contains('open'));
+}
+window.woToggleExercise = woToggleExercise;
+
+document.addEventListener('keydown', function(e) {
+	if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('wo-exercise-header')) {
+		e.preventDefault();
+		const el = e.target.closest('.wo-exercise'); if (el) woToggleExercise(el.id);
+	}
+});
+
+// ─── DAY TOGGLE (week + next week) ───────────────────────────────────────────
+
+function woToggleDay(id, containerId) {
+	const el = document.getElementById(id); if (!el) return;
+	const wasOpen = el.classList.contains('open');
+	const container = document.getElementById(containerId);
+	if (container) {
+		container.querySelectorAll('.wo-day-row.open').forEach(row => {
+			row.classList.remove('open');
+			const hdr = row.querySelector('.wo-day-header');
+			if (hdr) hdr.setAttribute('aria-expanded', 'false');
+		});
+	}
+	if (!wasOpen) { el.classList.add('open'); el.querySelector('.wo-day-header').setAttribute('aria-expanded', 'true'); }
+}
+window.woToggleDay = woToggleDay;
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+loadStorage();
+updateBadge();
+renderToday();
+renderWeek();
+renderNextWeek();
+renderMonth();
+renderFood();
+renderShopList();
+renderTargets();
+renderRules();
+
+// sync selector button states after loadStorage
+document.getElementById('wo-lunch-chilli').classList.toggle('active',   currentLunch  === 'chilli');
+document.getElementById('wo-lunch-chicken').classList.toggle('active',  currentLunch  === 'chicken_bowls');
+['salmon','bolognese','chicken_thighs','cod'].forEach(d => {
+	const map = { salmon:'wo-dinner-salmon', bolognese:'wo-dinner-bolognese', chicken_thighs:'wo-dinner-chkthigh', cod:'wo-dinner-cod' };
+	if (map[d]) document.getElementById(map[d]).classList.toggle('active', currentDinner === d);
+});
+
+})();
+</script>
