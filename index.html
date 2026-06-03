@@ -68,11 +68,10 @@ html, body {
 	max-width: 800px;
 	margin: 0 auto;
 	border-radius: var(--wo-radius);
-	overflow: hidden;
 	border: 1px solid var(--wo-border);
 	box-shadow: 0 4px 24px rgba(0,0,0,.07);
-	/* Fill full screen on phones */
 	min-height: 100vh;
+	position: relative;
 }
 @media (min-width: 480px) {
 	.wingeros-app { min-height: unset; border-radius: var(--wo-radius); }
@@ -80,21 +79,78 @@ html, body {
 }
 
 /* ── Header ── */
-.wo-header { background: var(--wo-bg-card); border-bottom: 1px solid var(--wo-border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-.wo-logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; color: var(--wo-accent); }
+.wo-header { background: var(--wo-bg-card); border-bottom: 1px solid var(--wo-border); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.wo-logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; color: var(--wo-accent); }
 .wo-logo span { color: var(--wo-text); font-weight: 400; }
 .wo-badge { background: var(--wo-accent-bg); color: var(--wo-accent); font-size: .72rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--wo-accent); white-space: nowrap; }
 
-/* ── Tabs ── */
-.wo-tabs { display: flex; background: var(--wo-bg-card); border-bottom: 1px solid var(--wo-border); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.wo-tabs::-webkit-scrollbar { display: none; }
-.wo-tab-btn { flex: 0 0 auto; background: none; border: none; border-bottom: 3px solid transparent; color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .78rem; font-weight: 600; padding: 12px 14px 10px; white-space: nowrap; transition: color .15s, border-color .15s; outline: none; }
-.wo-tab-btn:hover { color: var(--wo-text); }
-.wo-tab-btn.active { color: var(--wo-tab-active); border-bottom-color: var(--wo-tab-active); }
-
 /* ── Panels ── */
-.wo-panel { display: none; padding: 20px; }
+.wo-panel { display: none; padding: 20px 20px calc(88px + env(safe-area-inset-bottom, 0px)) 20px; }
 .wo-panel.active { display: block; }
+
+/* ── Bottom tab bar ── */
+.wo-tab-bar {
+	position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+	width: min(800px, 100%); background: var(--wo-bg-card);
+	border-top: 1px solid var(--wo-border); display: flex; z-index: 200;
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.wo-bottom-tab {
+	flex: 1; background: none; border: none; cursor: pointer;
+	display: flex; flex-direction: column; align-items: center; gap: 3px;
+	padding: 9px 4px 7px; color: var(--wo-text-muted);
+	font-family: var(--wo-font); font-size: .6rem; font-weight: 700;
+	letter-spacing: .02em; text-transform: uppercase;
+	transition: color .15s; -webkit-tap-highlight-color: transparent; outline: none;
+}
+.wo-bottom-tab.active { color: var(--wo-accent); }
+.wo-bottom-tab svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── Timer pill ── */
+.wo-timer-pill {
+	position: fixed; bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+	left: 50%; transform: translateX(-50%);
+	width: calc(min(800px, 100%) - 32px);
+	background: var(--wo-bg-card); border: 1px solid var(--wo-border);
+	border-radius: var(--wo-radius); box-shadow: 0 4px 20px rgba(0,0,0,.18);
+	display: none; flex-direction: column; z-index: 150; overflow: hidden;
+}
+.wo-timer-pill.visible { display: flex; }
+.wo-timer-pill-content { display: flex; align-items: center; gap: 12px; padding: 10px 14px; }
+.wo-timer-pill svg { color: var(--wo-accent); flex-shrink: 0; }
+.wo-timer-pill-info { flex: 1; min-width: 0; }
+.wo-timer-pill-label { font-size: .7rem; color: var(--wo-text-muted); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wo-timer-pill-time { font-size: 1.05rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--wo-accent); }
+.wo-timer-pill-progress { height: 3px; background: var(--wo-border); }
+.wo-timer-pill-bar { height: 100%; background: var(--wo-accent); transition: width .5s linear; }
+
+/* ── Calendar ── */
+.wo-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.wo-cal-month-title { font-size: .95rem; font-weight: 800; }
+.wo-cal-nav-btn { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text); cursor: pointer; font-size: 1.1rem; font-weight: 700; padding: 5px 14px; transition: background .15s; -webkit-tap-highlight-color: transparent; }
+.wo-cal-nav-btn:hover { background: var(--wo-border); }
+.wo-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.wo-cal-dow { text-align: center; font-size: .62rem; font-weight: 800; text-transform: uppercase; color: var(--wo-text-muted); padding: 4px 0 8px; }
+.wo-cal-cell { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 2px 9px; min-height: 60px; transition: border-color .15s; -webkit-tap-highlight-color: transparent; }
+.wo-cal-cell:hover:not(.empty) { border-color: var(--wo-accent); }
+.wo-cal-cell.empty { background: none; border-color: transparent; cursor: default; min-height: 0; }
+.wo-cal-cell.past { opacity: .42; }
+.wo-cal-cell.today { border-color: var(--wo-accent); border-width: 2px; }
+.wo-cal-cell.holiday { border-color: var(--wo-amber); }
+.wo-cal-day-num { font-size: .78rem; font-weight: 700; }
+.wo-cal-cell.today .wo-cal-day-num { color: var(--wo-accent); font-weight: 900; }
+.wo-cal-dot { width: 8px; height: 8px; border-radius: 50%; }
+.wo-cal-dot-gym     { background: var(--wo-blue);   }
+.wo-cal-dot-run     { background: var(--wo-green);  }
+.wo-cal-dot-field   { background: var(--wo-purple); }
+.wo-cal-dot-rest    { background: var(--wo-grey);   }
+.wo-cal-dot-power   { background: var(--wo-accent); }
+.wo-cal-dot-holiday { background: var(--wo-amber);  }
+
+/* ── Goals sub-nav ── */
+.wo-goals-subnav { display: flex; gap: 6px; margin-bottom: 20px; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); padding: 4px; }
+.wo-goals-nav-btn { flex: 1; background: none; border: none; border-radius: calc(var(--wo-radius-sm) - 2px); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .78rem; font-weight: 700; padding: 9px 6px; text-align: center; transition: all .15s; -webkit-tap-highlight-color: transparent; }
+.wo-goals-nav-btn.active { background: var(--wo-accent); color: #fff; }
 
 /* ── Hero ── */
 .wo-hero { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius); padding: 20px; margin-bottom: 20px; }
@@ -393,44 +449,15 @@ html, body {
 		<div class="wo-badge" id="wo-week-badge">Week — / —</div>
 	</header>
 
-	<nav class="wo-tabs" role="tablist">
-		<button class="wo-tab-btn active" role="tab" data-tab="today"    aria-selected="true">Today</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="week"     aria-selected="false">This Week</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="nextweek" aria-selected="false">Next Week</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="month"    aria-selected="false">Month</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="food"     aria-selected="false">Food</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="shopping" aria-selected="false">Shopping</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="targets"  aria-selected="false">Targets</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="checkin"  aria-selected="false">Check-in</button>
-		<button class="wo-tab-btn"        role="tab" data-tab="rules"    aria-selected="false">Rules</button>
-	</nav>
-
 	<!-- TODAY -->
 	<section class="wo-panel active" id="tab-today" role="tabpanel">
 		<div id="wo-today-content"></div>
 	</section>
 
-	<!-- THIS WEEK -->
-	<section class="wo-panel" id="tab-week" role="tabpanel">
-		<div class="wo-week-list" id="wo-week-list"></div>
-	</section>
-
-	<!-- NEXT WEEK -->
-	<section class="wo-panel" id="tab-nextweek" role="tabpanel">
-		<div class="wo-hero">
-			<div class="wo-hero-title">Next Week</div>
-			<div class="wo-hero-desc" id="wo-nextweek-daterange">—</div>
-		</div>
-		<div class="wo-week-list" id="wo-nextweek-list"></div>
-	</section>
-
-	<!-- MONTH -->
-	<section class="wo-panel" id="tab-month" role="tabpanel">
-		<div class="wo-hero">
-			<div class="wo-hero-title">14-Week Programme</div>
-			<div class="wo-hero-desc">Full schedule from Week 1 to pre-season. Current week highlighted. Tap any week to expand the daily sessions.</div>
-		</div>
-		<div class="wo-month-list" id="wo-month-list"></div>
+	<!-- CALENDAR -->
+	<section class="wo-panel" id="tab-calendar" role="tabpanel">
+		<div id="wo-cal-main"></div>
+		<div id="wo-cal-day" style="display:none"></div>
 	</section>
 
 	<!-- FOOD -->
@@ -443,15 +470,13 @@ html, body {
 	<section class="wo-panel" id="tab-shopping" role="tabpanel">
 		<div class="wo-hero">
 			<div class="wo-hero-title">Weekly Shop</div>
-			<div class="wo-hero-desc">Choose your lunch and dinner options for the week. The list updates to show only what you need. Tap items to tick them off.</div>
+			<div class="wo-hero-desc">Choose your lunch and dinner for the week. Tap items to tick them off as you shop.</div>
 		</div>
-
 		<div class="wo-shop-section-label">Lunch this week</div>
 		<div class="wo-choice-row">
 			<button class="wo-choice-btn active" id="wo-lunch-chilli"  onclick="woSelectLunch('chilli')">Beef mince chilli + rice<small>Batch cook — 5 portions</small></button>
 			<button class="wo-choice-btn"        id="wo-lunch-chicken" onclick="woSelectLunch('chicken_bowls')">Chicken &amp; rice bowls<small>Batch cook — 5 portions</small></button>
 		</div>
-
 		<div class="wo-shop-section-label">Dinner this week</div>
 		<div class="wo-choice-grid">
 			<button class="wo-choice-btn active" id="wo-dinner-salmon"    onclick="woSelectDinner('salmon')">Salmon + sweet potato<small>Recommended</small></button>
@@ -459,7 +484,6 @@ html, body {
 			<button class="wo-choice-btn"        id="wo-dinner-chkthigh"  onclick="woSelectDinner('chicken_thighs')">Chicken thighs + wedges<small>Budget friendly</small></button>
 			<button class="wo-choice-btn"        id="wo-dinner-cod"       onclick="woSelectDinner('cod')">Cod + sweet potato<small>Lighter option</small></button>
 		</div>
-
 		<div class="wo-shop-progress-wrap">
 			<div class="wo-shop-progress-meta">
 				<span id="wo-shop-count">0 / 0 items ticked</span>
@@ -470,63 +494,103 @@ html, body {
 		<div id="wo-shop-list"></div>
 	</section>
 
-	<!-- TARGETS -->
-	<section class="wo-panel" id="tab-targets" role="tabpanel">
-		<div class="wo-hero">
-			<div class="wo-hero-title">Pre-season Targets</div>
-			<div class="wo-hero-desc">12-week programme (Foundation → Build → Sharpen). Pre-season Week 13. Bench and deadlift bars update manually below.</div>
+	<!-- GOALS: Check-in + Targets + Rules -->
+	<section class="wo-panel" id="tab-goals" role="tabpanel">
+		<div class="wo-goals-subnav">
+			<button class="wo-goals-nav-btn active" id="wo-gnav-checkin" onclick="woGoalsSection('checkin')">Check-in</button>
+			<button class="wo-goals-nav-btn"        id="wo-gnav-targets" onclick="woGoalsSection('targets')">Targets</button>
+			<button class="wo-goals-nav-btn"        id="wo-gnav-rules"   onclick="woGoalsSection('rules')">Rules</button>
 		</div>
-		<div class="wo-stat-grid">
-			<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Press Target</div><div class="wo-stat-box-value">80kg+</div><div class="wo-stat-box-sub">from 60kg start</div></div>
-			<div class="wo-stat-box"><div class="wo-stat-box-label">Trap-Bar DL Target</div><div class="wo-stat-box-value">170kg+</div><div class="wo-stat-box-sub">from 150kg start</div></div>
-			<div class="wo-stat-box"><div class="wo-stat-box-label">Protein Daily</div><div class="wo-stat-box-value">145–160g</div><div class="wo-stat-box-sub">every day inc. rest</div></div>
-			<div class="wo-stat-box"><div class="wo-stat-box-label">Bronco Target</div><div class="wo-stat-box-value">sub 5:00</div><div class="wo-stat-box-sub">sub 4:30 is excellent</div></div>
-		</div>
-		<div class="wo-progress-section">
-			<div class="wo-progress-label"><span>Weeks completed</span><span class="wo-progress-pct" id="wo-weeks-pct">0%</span></div>
-			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-weeks-fill" style="width:0%"></div></div>
-			<div class="wo-progress-range"><span>Week 0</span><span id="wo-weeks-label">— / 12 weeks</span><span>Week 12+</span></div>
-		</div>
-		<div class="wo-progress-section">
-			<div class="wo-progress-label"><span>Bench press</span><span class="wo-progress-pct" id="wo-bench-pct">0%</span></div>
-			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-bench-fill" style="width:0%"></div></div>
-			<div class="wo-progress-range"><span>60kg</span><span>target 80kg</span></div>
-			<div class="wo-lift-control">
-				<button class="wo-lift-adj" onclick="woAdjLift('bench',-2.5)">−</button>
-				<div class="wo-lift-current">Current: <strong id="wo-bench-val">60kg</strong></div>
-				<button class="wo-lift-adj" onclick="woAdjLift('bench',2.5)">+</button>
+		<!-- Check-in section -->
+		<div id="wo-goals-checkin"><div id="wo-checkin-content"></div></div>
+		<!-- Targets section -->
+		<div id="wo-goals-targets" style="display:none">
+			<div class="wo-hero">
+				<div class="wo-hero-title">Pre-season Targets</div>
+				<div class="wo-hero-desc">12-week programme — Foundation → Build → Sharpen. Bench and deadlift bars update manually below.</div>
 			</div>
-		</div>
-		<div class="wo-progress-section">
-			<div class="wo-progress-label"><span>Trap-bar deadlift</span><span class="wo-progress-pct" id="wo-dl-pct">0%</span></div>
-			<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-dl-fill" style="width:0%"></div></div>
-			<div class="wo-progress-range"><span>150kg</span><span>target 170kg</span></div>
-			<div class="wo-lift-control">
-				<button class="wo-lift-adj" onclick="woAdjLift('dl',-2.5)">−</button>
-				<div class="wo-lift-current">Current: <strong id="wo-dl-val">150kg</strong></div>
-				<button class="wo-lift-adj" onclick="woAdjLift('dl',2.5)">+</button>
+			<div class="wo-stat-grid">
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Target</div><div class="wo-stat-box-value">80kg+</div><div class="wo-stat-box-sub">from 60kg start</div></div>
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Deadlift Target</div><div class="wo-stat-box-value">170kg+</div><div class="wo-stat-box-sub">from 150kg start</div></div>
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Protein Daily</div><div class="wo-stat-box-value">145–160g</div><div class="wo-stat-box-sub">every day inc. rest</div></div>
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Bronco Target</div><div class="wo-stat-box-value">sub 5:00</div><div class="wo-stat-box-sub">sub 4:30 is excellent</div></div>
 			</div>
+			<div class="wo-progress-section">
+				<div class="wo-progress-label"><span>Weeks completed</span><span class="wo-progress-pct" id="wo-weeks-pct">0%</span></div>
+				<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-weeks-fill" style="width:0%"></div></div>
+				<div class="wo-progress-range"><span>Week 0</span><span id="wo-weeks-label">— / 12 weeks</span><span>Week 12+</span></div>
+			</div>
+			<div class="wo-progress-section">
+				<div class="wo-progress-label"><span>Bench press</span><span class="wo-progress-pct" id="wo-bench-pct">0%</span></div>
+				<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-bench-fill" style="width:0%"></div></div>
+				<div class="wo-progress-range"><span>60kg</span><span>target 80kg</span></div>
+				<div class="wo-lift-control">
+					<button class="wo-lift-adj" onclick="woAdjLift('bench',-2.5)">−</button>
+					<div class="wo-lift-current">Current: <strong id="wo-bench-val">60kg</strong></div>
+					<button class="wo-lift-adj" onclick="woAdjLift('bench',2.5)">+</button>
+				</div>
+			</div>
+			<div class="wo-progress-section">
+				<div class="wo-progress-label"><span>Trap-bar deadlift</span><span class="wo-progress-pct" id="wo-dl-pct">0%</span></div>
+				<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-dl-fill" style="width:0%"></div></div>
+				<div class="wo-progress-range"><span>150kg</span><span>target 170kg</span></div>
+				<div class="wo-lift-control">
+					<button class="wo-lift-adj" onclick="woAdjLift('dl',-2.5)">−</button>
+					<div class="wo-lift-current">Current: <strong id="wo-dl-val">150kg</strong></div>
+					<button class="wo-lift-adj" onclick="woAdjLift('dl',2.5)">+</button>
+				</div>
+			</div>
+			<div class="wo-shoulder-ladder">
+				<div class="wo-ladder-title">Shoulder Press Progression Ladder</div>
+				<div class="wo-ladder-list" id="wo-shoulder-ladder"></div>
+			</div>
+			<div id="wo-targets-extras"></div>
 		</div>
-		<div class="wo-shoulder-ladder">
-			<div class="wo-ladder-title">Shoulder Press Progression Ladder</div>
-			<div class="wo-ladder-list" id="wo-shoulder-ladder"></div>
+		<!-- Rules section -->
+		<div id="wo-goals-rules" style="display:none">
+			<div class="wo-hero">
+				<div class="wo-hero-title">Non-Negotiables</div>
+				<div class="wo-hero-desc">Seven rules, no exceptions. The programme only works if these are in place.</div>
+			</div>
+			<div class="wo-rule-list" id="wo-rule-list"></div>
 		</div>
-		<div id="wo-targets-extras"></div>
 	</section>
 
-	<!-- CHECK-IN -->
-	<section class="wo-panel" id="tab-checkin" role="tabpanel">
-		<div id="wo-checkin-content"></div>
-	</section>
-
-	<!-- RULES -->
-	<section class="wo-panel" id="tab-rules" role="tabpanel">
-		<div class="wo-hero">
-			<div class="wo-hero-title">Non-Negotiables</div>
-			<div class="wo-hero-desc">Seven rules that apply every week, no exceptions. The programme only works if these are in place. Sleep is the single highest-leverage habit.</div>
+	<!-- Persistent timer pill (floats above tab bar) -->
+	<div class="wo-timer-pill" id="wo-timer-pill">
+		<div class="wo-timer-pill-content">
+			<svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+			<div class="wo-timer-pill-info">
+				<span class="wo-timer-pill-label" id="wo-timer-pill-label">Rest timer</span>
+				<span class="wo-timer-pill-time" id="wo-timer-pill-time">1:30</span>
+			</div>
 		</div>
-		<div class="wo-rule-list" id="wo-rule-list"></div>
-	</section>
+		<div class="wo-timer-pill-progress"><div class="wo-timer-pill-bar" id="wo-timer-pill-bar" style="width:100%"></div></div>
+	</div>
+
+	<!-- Bottom tab bar -->
+	<nav class="wo-tab-bar" role="tablist" aria-label="Main navigation">
+		<button class="wo-bottom-tab active" role="tab" data-tab="today" aria-selected="true">
+			<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+			<span>Today</span>
+		</button>
+		<button class="wo-bottom-tab" role="tab" data-tab="calendar" aria-selected="false">
+			<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+			<span>Calendar</span>
+		</button>
+		<button class="wo-bottom-tab" role="tab" data-tab="food" aria-selected="false">
+			<svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+			<span>Food</span>
+		</button>
+		<button class="wo-bottom-tab" role="tab" data-tab="shopping" aria-selected="false">
+			<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+			<span>Shop</span>
+		</button>
+		<button class="wo-bottom-tab" role="tab" data-tab="goals" aria-selected="false">
+			<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+			<span>Goals</span>
+		</button>
+	</nav>
 
 </div>
 
@@ -998,8 +1062,8 @@ let benchKg         = 60;
 let dlKg            = 150;
 let checkinHistory  = {}; // keyed by week number string
 
-// Timer state (one timer at a time across the whole app)
-const timerState = { exId: null, total: 90, remaining: 90, running: false, _iv: null };
+// Timer state — uses absolute finishAt timestamp so it survives tab switches + backgrounding
+const timerState = { exId: null, total: 90, finishAt: 0, pausedRem: 0, running: false, _iv: null };
 
 function loadStorage() {
 	try {
@@ -1045,70 +1109,88 @@ function renderTags(tags) { return tags.map(t => `<span class="wo-tag wo-tag-${t
 // ─── REST TIMER ───────────────────────────────────────────────────────────────
 
 function parseRestSeconds(setsStr) {
-	const m = setsStr.match(/(\d+)\s*min\s*rest/i);
-	if (m) return parseInt(m[1]) * 60;
-	const s = setsStr.match(/(\d+)\s*sec\s*rest/i);
-	if (s) return parseInt(s[1]);
+	const m = setsStr.match(/(\d+)\s*min\s*rest/i); if (m) return parseInt(m[1]) * 60;
+	const s = setsStr.match(/(\d+)\s*sec\s*rest/i); if (s) return parseInt(s[1]);
 	return 90;
 }
-function fmtTimer(s) { return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; }
+function fmtTimer(s) { s = Math.max(0, Math.round(s)); return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
 
-function _timerTick(exId, total) {
-	timerState.remaining--;
-	const pct = Math.round((timerState.remaining / total) * 100);
-	const disp = document.getElementById('wo-td-' + exId);
-	const bar  = document.getElementById('wo-tb-' + exId);
-	const btn  = document.getElementById('wo-tbt-' + exId);
-	if (disp) { disp.textContent = fmtTimer(timerState.remaining); disp.classList.toggle('urgent', timerState.remaining <= 10); }
-	if (bar)  { bar.style.width = pct + '%'; }
-	if (timerState.remaining <= 0) {
-		clearInterval(timerState._iv); timerState._iv = null; timerState.running = false;
-		if (bar)  { bar.style.width = '0%'; bar.classList.add('done'); }
-		if (btn)  { btn.textContent = 'Rest done ✓  start next set'; btn.className = 'wo-timer-btn done'; }
-		try { navigator.vibrate([150, 80, 150]); } catch(e) {}
+function _timerRemS() {
+	if (!timerState.running || !timerState.finishAt) return timerState.pausedRem || timerState.total;
+	return Math.max(0, (timerState.finishAt - Date.now()) / 1000);
+}
+function _updatePill(remS, pct) {
+	const pill = document.getElementById('wo-timer-pill'); if (!pill) return;
+	if (!timerState.running || remS <= 0) { pill.classList.remove('visible'); return; }
+	const barEl = document.getElementById('wo-tb-' + timerState.exId);
+	if (barEl) { const r = barEl.getBoundingClientRect(); if (r.height > 0 && r.top >= 0 && r.bottom <= window.innerHeight) { pill.classList.remove('visible'); return; } }
+	pill.classList.add('visible');
+	const t = document.getElementById('wo-timer-pill-time'), b = document.getElementById('wo-timer-pill-bar');
+	if (t) t.textContent = fmtTimer(remS); if (b) b.style.width = pct + '%';
+}
+function _timerTick() {
+	const remS = _timerRemS(), pct = timerState.total > 0 ? (remS / timerState.total) * 100 : 0;
+	const exId = timerState.exId;
+	const disp = document.getElementById('wo-td-' + exId), bar = document.getElementById('wo-tb-' + exId), btn = document.getElementById('wo-tbt-' + exId);
+	if (disp) { disp.textContent = fmtTimer(remS); disp.classList.toggle('urgent', remS <= 10 && remS > 0); }
+	if (bar)  bar.style.width = pct + '%';
+	_updatePill(remS, pct);
+	if (remS <= 0) {
+		clearInterval(timerState._iv); timerState._iv = null; timerState.running = false; timerState.finishAt = 0;
+		localStorage.removeItem('wo_timer');
+		if (bar) { bar.style.width = '0%'; bar.classList.add('done'); }
+		if (btn) { btn.textContent = 'Rest done ✓  start next set'; btn.className = 'wo-timer-btn done'; }
+		_updatePill(0, 0); try { navigator.vibrate([150,80,150]); } catch(e) {}
 	}
 }
-
+function _saveTimerStorage() {
+	if (timerState.running && timerState.finishAt > Date.now())
+		localStorage.setItem('wo_timer', JSON.stringify({ exId: timerState.exId, total: timerState.total, finishAt: timerState.finishAt }));
+	else localStorage.removeItem('wo_timer');
+}
+function loadTimerStorage() {
+	try {
+		const sv = JSON.parse(localStorage.getItem('wo_timer') || 'null');
+		if (sv && sv.finishAt > Date.now()) {
+			Object.assign(timerState, { exId: sv.exId, total: sv.total, finishAt: sv.finishAt, running: true });
+			timerState._iv = setInterval(_timerTick, 500);
+			setTimeout(() => _updatePill(_timerRemS(), timerState.total > 0 ? (_timerRemS()/timerState.total)*100 : 0), 150);
+		}
+	} catch(e) {}
+}
 function woStartTimer(exId, total) {
-	// If a different timer was running, reset it visually
 	if (timerState.exId && timerState.exId !== exId) {
-		const oldBtn = document.getElementById('wo-tbt-' + timerState.exId);
-		const oldBar = document.getElementById('wo-tb-'  + timerState.exId);
-		const oldDis = document.getElementById('wo-td-'  + timerState.exId);
-		if (oldBtn) { oldBtn.textContent = 'Start rest timer'; oldBtn.className = 'wo-timer-btn'; }
-		if (oldBar) { oldBar.style.width = '100%'; oldBar.classList.remove('done'); }
-		if (oldDis) oldDis.textContent = fmtTimer(total);
+		const o = timerState.exId;
+		const ob = document.getElementById('wo-tbt-'+o), obar = document.getElementById('wo-tb-'+o), od = document.getElementById('wo-td-'+o);
+		if (ob) { ob.textContent = 'Start rest timer'; ob.className = 'wo-timer-btn'; }
+		if (obar) { obar.style.width = '100%'; obar.classList.remove('done'); }
+		if (od) od.textContent = fmtTimer(timerState.total);
 	}
 	if (timerState._iv) { clearInterval(timerState._iv); timerState._iv = null; }
-
 	const btn = document.getElementById('wo-tbt-' + exId);
-	// Pause if currently running same timer
 	if (timerState.exId === exId && timerState.running) {
-		timerState.running = false;
+		timerState.pausedRem = _timerRemS(); timerState.running = false; timerState.finishAt = 0;
+		localStorage.removeItem('wo_timer');
 		if (btn) { btn.textContent = 'Resume'; btn.className = 'wo-timer-btn'; }
-		return;
+		_updatePill(0, 0); return;
 	}
-	// Fresh start or resume
-	if (timerState.exId !== exId || timerState.remaining <= 0) {
-		timerState.exId = exId; timerState.total = total; timerState.remaining = total;
-	}
-	timerState.running = true;
+	const startFrom = (timerState.exId === exId && timerState.pausedRem > 0) ? timerState.pausedRem : total;
+	timerState.exId = exId; timerState.total = total; timerState.finishAt = Date.now() + startFrom*1000; timerState.pausedRem = 0; timerState.running = true;
+	_saveTimerStorage();
 	if (btn) { btn.textContent = 'Pause'; btn.className = 'wo-timer-btn running'; }
-	timerState._iv = setInterval(() => _timerTick(exId, total), 1000);
+	timerState._iv = setInterval(_timerTick, 500); _timerTick();
 }
 window.woStartTimer = woStartTimer;
-
 function woResetTimer(exId, total) {
-	if (timerState._iv) { clearInterval(timerState._iv); timerState._iv = null; }
-	timerState.exId = exId; timerState.remaining = total; timerState.running = false;
-	const disp = document.getElementById('wo-td-' + exId);
-	const bar  = document.getElementById('wo-tb-' + exId);
-	const btn  = document.getElementById('wo-tbt-' + exId);
-	if (disp) { disp.textContent = fmtTimer(total); disp.classList.remove('urgent'); }
-	if (bar)  { bar.style.width = '100%'; bar.classList.remove('done'); }
-	if (btn)  { btn.textContent = 'Start rest timer'; btn.className = 'wo-timer-btn'; }
+	if (timerState.exId === exId) { if (timerState._iv) { clearInterval(timerState._iv); timerState._iv = null; } timerState.running = false; timerState.finishAt = 0; timerState.pausedRem = 0; localStorage.removeItem('wo_timer'); }
+	const d = document.getElementById('wo-td-'+exId), b = document.getElementById('wo-tb-'+exId), bt = document.getElementById('wo-tbt-'+exId);
+	if (d) { d.textContent = fmtTimer(total); d.classList.remove('urgent'); }
+	if (b) { b.style.width = '100%'; b.classList.remove('done'); }
+	if (bt) { bt.textContent = 'Start rest timer'; bt.className = 'wo-timer-btn'; }
+	_updatePill(0, 0);
 }
 window.woResetTimer = woResetTimer;
+document.addEventListener('visibilitychange', () => { if (!document.hidden && timerState.running) _timerTick(); });
 
 function renderExercises(exercises, prefix) {
 	return exercises.map((ex, i) => {
@@ -1190,6 +1272,117 @@ function getStatusBannerHtml() {
 	}
 	return '';
 }
+
+// ─── CALENDAR TAB ─────────────────────────────────────────────────────────────
+
+let calViewDate = new Date(); calViewDate.setDate(1);
+
+function renderCalendar() {
+	const yr = calViewDate.getFullYear(), mo = calViewDate.getMonth();
+	const firstDow = new Date(yr, mo, 1).getDay(); // 0=Sun
+	const daysInMo = new Date(yr, mo + 1, 0).getDate();
+	const today = new Date(); today.setHours(0,0,0,0);
+	const monthTitle = calViewDate.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+	// Mon-start: offset = firstDow === 0 ? 6 : firstDow - 1
+	const offset = firstDow === 0 ? 6 : firstDow - 1;
+	let cells = Array(offset).fill(null);
+	for (let d = 1; d <= daysInMo; d++) cells.push(d);
+	while (cells.length % 7) cells.push(null);
+
+	let html = `<div class="wo-cal-nav">
+		<button class="wo-cal-nav-btn" onclick="woCalPrev()">‹</button>
+		<span class="wo-cal-month-title">${monthTitle}</span>
+		<button class="wo-cal-nav-btn" onclick="woCalNext()">›</button>
+	</div>
+	<div class="wo-cal-grid">
+		<div class="wo-cal-dow">M</div><div class="wo-cal-dow">T</div><div class="wo-cal-dow">W</div><div class="wo-cal-dow">T</div><div class="wo-cal-dow">F</div><div class="wo-cal-dow">S</div><div class="wo-cal-dow">S</div>`;
+
+	cells.forEach(d => {
+		if (!d) { html += '<div class="wo-cal-cell empty"></div>'; return; }
+		const date = new Date(yr, mo, d); date.setHours(0,0,0,0);
+		const isToday   = date.getTime() === today.getTime();
+		const isPast    = date < today;
+		const isHol     = isHolidayDate(date);
+		const isPostHol = isPostHolidayDate(date);
+		const key = DAY_KEYS[date.getDay()];
+		const tag = isHol ? 'holiday' : WORKOUTS[key].tags[0];
+		let cls = 'wo-cal-cell';
+		if (isToday) cls += ' today';
+		if (isPast)  cls += ' past';
+		if (isHol)   cls += ' holiday';
+		html += `<div class="${cls}" onclick="woCalOpenDay(${yr},${mo},${d})">
+			<span class="wo-cal-day-num">${d}</span>
+			<div class="wo-cal-dot wo-cal-dot-${tag}"></div>
+		</div>`;
+	});
+	html += '</div>';
+	document.getElementById('wo-cal-main').innerHTML = html;
+}
+
+function woCalPrev() { calViewDate.setMonth(calViewDate.getMonth() - 1); renderCalendar(); }
+function woCalNext() { calViewDate.setMonth(calViewDate.getMonth() + 1); renderCalendar(); }
+window.woCalPrev = woCalPrev; window.woCalNext = woCalNext;
+
+function woCalOpenDay(yr, mo, d) {
+	const date = new Date(yr, mo, d); date.setHours(0,0,0,0);
+	const today = new Date(); today.setHours(0,0,0,0);
+	const dateStr = date.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+	const prefix = `cal-${yr}-${mo}-${d}`;
+	let html = `<button class="wo-recipe-back" onclick="woCalBack()" style="margin-bottom:16px">← Back to calendar</button>`;
+
+	if (isHolidayDate(date)) {
+		html += `<div class="wo-hero" style="border-color:var(--wo-amber)">
+			<div class="wo-hero-title">Lads trip — rest day</div>
+			<div class="wo-hero-desc">${dateStr}</div>
+			<div class="wo-tags"><span class="wo-tag wo-tag-holiday">holiday</span></div>
+		</div>
+		<div class="wo-warning-box"><strong>No training 20–24 May</strong>Walk when you can, eat protein where possible, drink water. Back to training Monday 26th at reduced intensity.</div>`;
+	} else {
+		const key = DAY_KEYS[date.getDay()];
+		let sessionName = WORKOUTS[key].name, exercises = WORKOUTS[key].exercises, tags = WORKOUTS[key].tags, preHtml = '';
+		if (isPostHolidayDate(date)) {
+			sessionName = 'Lower strength — reduced intensity';
+			exercises = REDUCED_MONDAY_EXERCISES;
+			preHtml = `<div class="wo-warning-box" style="margin-bottom:14px"><strong>First session back</strong>Weights reduced ~10%. Body still recovering from disrupted sleep.</div>`;
+		} else if (isPreHolidayDate(date)) {
+			preHtml = `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
+		}
+		const isToday = date.getTime() === today.getTime();
+		html += `<div class="wo-hero"${isToday ? ' style="border-color:var(--wo-accent)"' : ''}>
+			<div class="wo-hero-title">${sessionName}</div>
+			<div class="wo-hero-desc">${dateStr}</div>
+			<div class="wo-tags">${renderTags(tags)}</div>
+		</div>
+		${preHtml}
+		<div class="wo-section-title">Exercises</div>
+		<div class="wo-exercise-list">${renderExercises(exercises, prefix)}</div>`;
+	}
+
+	document.getElementById('wo-cal-day').innerHTML = html;
+	document.getElementById('wo-cal-main').style.display = 'none';
+	document.getElementById('wo-cal-day').style.display  = 'block';
+	document.getElementById('tab-calendar').scrollTop = 0;
+}
+window.woCalOpenDay = woCalOpenDay;
+
+function woCalBack() {
+	document.getElementById('wo-cal-main').style.display = 'block';
+	document.getElementById('wo-cal-day').style.display  = 'none';
+}
+window.woCalBack = woCalBack;
+
+// ─── GOALS SECTION SWITCHER ───────────────────────────────────────────────────
+
+function woGoalsSection(section) {
+	['checkin','targets','rules'].forEach(s => {
+		const el  = document.getElementById('wo-goals-' + s);
+		const btn = document.getElementById('wo-gnav-' + s);
+		if (el)  el.style.display  = s === section ? 'block' : 'none';
+		if (btn) btn.classList.toggle('active', s === section);
+	});
+}
+window.woGoalsSection = woGoalsSection;
 
 // ─── TODAY TAB ────────────────────────────────────────────────────────────────
 
@@ -1785,16 +1978,24 @@ function updateBadge() {
 // ─── TAB SWITCHING ────────────────────────────────────────────────────────────
 
 function switchTab(tabId) {
-	document.querySelectorAll('#wingeros-app .wo-tab-btn').forEach(btn => {
+	document.querySelectorAll('.wo-bottom-tab').forEach(btn => {
 		const a = btn.dataset.tab === tabId;
 		btn.classList.toggle('active', a);
-		btn.setAttribute('aria-selected', a);
+		btn.setAttribute('aria-selected', String(a));
 	});
 	document.querySelectorAll('#wingeros-app .wo-panel').forEach(p => {
 		p.classList.toggle('active', p.id === 'tab-' + tabId);
 	});
+	// Lazy-render calendar on first open
+	if (tabId === 'calendar') {
+		const main = document.getElementById('wo-cal-main');
+		if (main && !main.dataset.rendered) { renderCalendar(); main.dataset.rendered = '1'; }
+	}
+	// Scroll to top of new panel
+	const panel = document.getElementById('tab-' + tabId);
+	if (panel) panel.scrollTop = 0;
 }
-document.querySelectorAll('#wingeros-app .wo-tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+document.querySelectorAll('.wo-bottom-tab').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
 
 // ─── EXERCISE TOGGLE ──────────────────────────────────────────────────────────
 
@@ -1832,17 +2033,16 @@ window.woToggleDay = woToggleDay;
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 
 loadStorage();
+loadTimerStorage();
 updateBadge();
 renderToday();
-renderWeek();
-renderNextWeek();
-renderMonth();
+// Calendar rendered lazily on first tab open (see switchTab)
 renderFood();
 renderShopList();
 renderTargets();
 renderRules();
-
 renderCheckin();
+woGoalsSection('checkin'); // default Goals sub-tab
 
 // sync selector button states after loadStorage
 document.getElementById('wo-lunch-chilli').classList.toggle('active',   currentLunch  === 'chilli');
