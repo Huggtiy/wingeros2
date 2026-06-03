@@ -608,7 +608,7 @@ const WORKOUTS = {
 		name: 'Lower strength + speed', tags: ['gym'],
 		desc: 'Compound leg work, posterior chain, and single-leg stability. The foundation of your speed on the pitch.',
 		exercises: [
-			{ name: 'Trap-bar deadlift', sets: '4 sets × 5 reps — 2–3 min rest', weight: '~105kg (70% of max)',
+			{ name: 'Trap-bar deadlift', sets: '4 sets × 5 reps — 2–3 min rest', weight: '100kg',
 			  howTo: `Stand inside the trap bar with your feet hip-width apart. Hinge down, grip the handles firmly. Take a big breath in and brace your core like you're about to take a punch. Drive your feet into the floor as if you're trying to push the earth away from you — the bar follows. Keep your back flat the entire time. Hinge back down under control.`,
 			  note: `Leave 1–2 reps in reserve on every set (RPE 8). Never go to failure. Bar speed should look the same on rep 1 and rep 5 — if rep 5 is grinding, the weight is too heavy. If all reps are clean with reps in reserve, add 2.5kg next session.` },
 			{ name: 'Bulgarian split squat', sets: '3 sets × 8 reps each leg', weight: 'bodyweight or light dumbbells',
@@ -650,10 +650,10 @@ const WORKOUTS = {
 		name: 'Upper strength + contact', tags: ['gym'],
 		desc: 'Horizontal push and pull, shoulder stability, grip endurance, and contact technique. Build the upper body strength to hold off defenders. Tackling drills and hand-offs follow the gym session.',
 		exercises: [
-			{ name: 'Bench press', sets: '5 sets × 5 reps — 3 min rest', weight: '47.5kg',
+			{ name: 'Bench press', sets: '5 sets × 5 reps — 3 min rest', weight: '45kg',
 			  howTo: `Lie on the bench with your feet flat on the floor. Squeeze your shoulder blades together and hold them there the entire set. Unrack the bar and lower it to your mid-chest over 2 seconds. Pause for a full second — the bar touching your chest, no bouncing. Press straight up to lockout. That pause is the most important part of this programme's bench work.`,
 			  note: `3 minutes rest is intentional — at 47.5kg you will notice the difference between 90 seconds and 3 minutes on sets 4 and 5. Leave 1–2 reps in reserve every set. All reps clean + reps in reserve = add 2.5kg next session. Form breaks or missed reps = repeat same weight.` },
-			{ name: 'Lat pulldown', sets: '4 sets × 6 reps — 90 sec rest', weight: '55–60kg',
+			{ name: 'Lat pulldown', sets: '4 sets × 6 reps — 90 sec rest', weight: '60kg',
 			  howTo: `Sit at the machine, knees under the pad, wide overhand grip (hands facing away). Lean back slightly — 10 to 15 degrees only. Pull the bar down to your upper chest. Think about pulling your shoulder blades together and down — like putting them in your back pockets. Hold 1 second at the bottom. Let the bar rise back up slowly — 3 seconds on the way up.`,
 			  note: `Do not swing your torso to help the bar down. Body stays still, only arms and shoulder blades move. If you are rocking back and forth, the weight is too heavy.` },
 			{ name: 'Dumbbell shoulder press', sets: '4 sets × 6 reps — 90 sec rest', weight: '12.5kg dumbbells',
@@ -1007,6 +1007,68 @@ const SHOULDER_LADDER = [
 	{ week: 'Milestone', weight: '80kg', note: 'Bodyweight on the stack. Once this is consistent, begin transitioning to weighted pull-ups.' }
 ];
 
+// ─── WEEKLY WEIGHT PROGRESSION ───────────────────────────────────────────────
+// Index 0 = Week 1. Each entry overrides the exercise's weight and/or sets for that week.
+const WEEKLY_WEIGHTS = {
+	'Bench press': [
+		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk1
+		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk2
+		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk3
+		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk4
+		{ sets: '4 sets × 5 reps — 3 min rest', weight: '50kg ✓' },                        // Wk5
+		{ sets: '4 sets × 5 reps — 3 min rest', weight: '52.5kg' },                        // Wk6
+		{ sets: '4 sets × 4 reps — 3 min rest', weight: '57.5kg' },                        // Wk7
+		{ sets: '3 sets × 3 reps — 3 min rest', weight: '65kg — then 75kg test (spotter required)' }, // Wk8
+		{ sets: '3 sets × 3 reps — 3 min rest', weight: '65kg' },                          // Wk9
+		{ sets: '3 sets × 3 reps — 3 min rest', weight: 'slight increase if everything sharp' }, // Wk10
+		{ sets: '3 sets × 3 reps — 3 min rest', weight: '70kg' },                          // Wk11
+		{ sets: '2 sets × 3 reps — 3 min rest', weight: '~32.5kg (deload — 50%)' },        // Wk12
+	],
+	'Trap-bar deadlift': [
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '100kg' },                       // Wk1
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '102.5kg — add 2.5kg if all reps clean' }, // Wk2
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '~107.5kg (target ~110kg by Wk3)' }, // Wk3
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '110kg' },                       // Wk4
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '115kg' },                       // Wk5
+		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '70–75% of max — do not chase PR' }, // Wk6
+		{ sets: '4 sets × 4 reps — 2–3 min rest', weight: '125kg' },                       // Wk7
+		{ sets: '4 sets × 4 reps — 2–3 min rest', weight: '125kg' },                       // Wk8
+		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '130kg' },                       // Wk9
+		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '135kg' },                       // Wk10
+		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '140kg' },                       // Wk11
+		{ sets: '2 sets × 3 reps — 2–3 min rest', weight: '~65kg (deload — 50%)' },        // Wk12
+	],
+	'Lat pulldown': [
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '60kg' },                         // Wk1
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '65kg (+5kg if Wk1 was clean)' }, // Wk2
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '70kg' },                         // Wk3
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '75kg' },                         // Wk4
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg — target reached' },        // Wk5
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg — maintain / begin pull-up transition' }, // Wk6
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk7
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk8
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk9
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk10
+		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk11
+		{ sets: '2 sets × 6 reps — 90 sec rest', weight: '~40kg (deload — 50%)' },         // Wk12
+	],
+};
+
+function weekNumForDate(d) {
+	const msPerWeek = 7 * 24 * 3600 * 1000;
+	const diff = new Date(d).setHours(0,0,0,0) - PROG_MON_START.getTime();
+	return Math.min(Math.max(Math.floor(diff / msPerWeek) + 1, 1), 12);
+}
+
+function applyWeeklyWeights(exercises, weekNum) {
+	return exercises.map(ex => {
+		const override = WEEKLY_WEIGHTS[ex.name];
+		if (!override) return ex;
+		const w = override[Math.min(weekNum - 1, 11)];
+		return w ? Object.assign({}, ex, w) : ex;
+	});
+}
+
 // ─── DATE OVERRIDE HELPERS ────────────────────────────────────────────────────
 
 function isHolidayDate(d) {
@@ -1240,8 +1302,9 @@ function buildWeekDayRows(mondayRef, prefix, containerSuffix, todayJS) {
 			sessionName = 'Lower strength — reduced intensity';
 			bodyInner   = `<div style="margin-top:14px"><div class="wo-warning-box" style="margin-bottom:14px"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div><div class="wo-exercise-list">${renderExercises(REDUCED_MONDAY_EXERCISES, `${prefix}-${key}`)}</div></div>`;
 		} else {
+			const wkNum   = weekNumForDate(d);
 			const preNote = isPreHol ? `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>` : '';
-			bodyInner = `<div style="margin-top:14px">${preNote}<div class="wo-exercise-list">${renderExercises(w.exercises, `${prefix}-${key}`)}</div></div>`;
+			bodyInner = `<div style="margin-top:14px">${preNote}<div class="wo-exercise-list">${renderExercises(applyWeeklyWeights(w.exercises, wkNum), `${prefix}-${key}`)}</div></div>`;
 		}
 
 		return `<div class="wo-day-row${isToday ? ' today' : ''}${extraClass}" id="${id}">
@@ -1340,12 +1403,15 @@ function woCalOpenDay(yr, mo, d) {
 	} else {
 		const key = DAY_KEYS[date.getDay()];
 		let sessionName = WORKOUTS[key].name, exercises = WORKOUTS[key].exercises, tags = WORKOUTS[key].tags, preHtml = '';
+		const wkNum = weekNumForDate(date);
 		if (isPostHolidayDate(date)) {
 			sessionName = 'Lower strength — reduced intensity';
 			exercises = REDUCED_MONDAY_EXERCISES;
 			preHtml = `<div class="wo-warning-box" style="margin-bottom:14px"><strong>First session back</strong>Weights reduced ~10%. Body still recovering from disrupted sleep.</div>`;
 		} else if (isPreHolidayDate(date)) {
 			preHtml = `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
+		} else {
+			exercises = applyWeeklyWeights(exercises, wkNum);
 		}
 		const isToday = date.getTime() === today.getTime();
 		html += `<div class="wo-hero"${isToday ? ' style="border-color:var(--wo-accent)"' : ''}>
@@ -1404,6 +1470,7 @@ function renderToday() {
 	let sessionName   = w.name;
 	let exercises     = w.exercises;
 	let preHtml       = '';
+	const wkNum       = weekNumForDate(today);
 
 	if (isPostHolidayDate(today)) {
 		sessionName = 'Lower strength — reduced intensity';
@@ -1411,6 +1478,9 @@ function renderToday() {
 		preHtml     = `<div class="wo-warning-box"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div>`;
 	} else if (isPreHolidayDate(today)) {
 		preHtml = `<div class="wo-warning-box"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
+		exercises = applyWeeklyWeights(exercises, wkNum);
+	} else {
+		exercises = applyWeeklyWeights(exercises, wkNum);
 	}
 
 	document.getElementById('wo-today-content').innerHTML = `
