@@ -510,8 +510,8 @@ html, body {
 				<div class="wo-hero-desc">12-week programme — Foundation → Build → Sharpen. Bench and deadlift bars update manually below.</div>
 			</div>
 			<div class="wo-stat-grid">
-				<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Target</div><div class="wo-stat-box-value">80kg+</div><div class="wo-stat-box-sub">from 60kg start</div></div>
-				<div class="wo-stat-box"><div class="wo-stat-box-label">Deadlift Target</div><div class="wo-stat-box-value">170kg+</div><div class="wo-stat-box-sub">from 150kg start</div></div>
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Target</div><div class="wo-stat-box-value">80kg+</div><div class="wo-stat-box-sub">from 45kg start</div></div>
+				<div class="wo-stat-box"><div class="wo-stat-box-label">Deadlift Target</div><div class="wo-stat-box-value">170kg+</div><div class="wo-stat-box-sub">from 100kg start</div></div>
 				<div class="wo-stat-box"><div class="wo-stat-box-label">Protein Daily</div><div class="wo-stat-box-value">145–160g</div><div class="wo-stat-box-sub">every day inc. rest</div></div>
 				<div class="wo-stat-box"><div class="wo-stat-box-label">Bronco Target</div><div class="wo-stat-box-value">sub 5:00</div><div class="wo-stat-box-sub">sub 4:30 is excellent</div></div>
 			</div>
@@ -523,25 +523,25 @@ html, body {
 			<div class="wo-progress-section">
 				<div class="wo-progress-label"><span>Bench press</span><span class="wo-progress-pct" id="wo-bench-pct">0%</span></div>
 				<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-bench-fill" style="width:0%"></div></div>
-				<div class="wo-progress-range"><span>60kg</span><span>target 80kg</span></div>
+				<div class="wo-progress-range"><span>45kg</span><span>target 80kg</span></div>
 				<div class="wo-lift-control">
 					<button class="wo-lift-adj" onclick="woAdjLift('bench',-2.5)">−</button>
-					<div class="wo-lift-current">Current: <strong id="wo-bench-val">60kg</strong></div>
+					<div class="wo-lift-current">Current: <strong id="wo-bench-val">45kg</strong></div>
 					<button class="wo-lift-adj" onclick="woAdjLift('bench',2.5)">+</button>
 				</div>
 			</div>
 			<div class="wo-progress-section">
 				<div class="wo-progress-label"><span>Trap-bar deadlift</span><span class="wo-progress-pct" id="wo-dl-pct">0%</span></div>
 				<div class="wo-progress-track-2"><div class="wo-progress-fill-2" id="wo-dl-fill" style="width:0%"></div></div>
-				<div class="wo-progress-range"><span>150kg</span><span>target 170kg</span></div>
+				<div class="wo-progress-range"><span>100kg</span><span>target 170kg</span></div>
 				<div class="wo-lift-control">
 					<button class="wo-lift-adj" onclick="woAdjLift('dl',-2.5)">−</button>
-					<div class="wo-lift-current">Current: <strong id="wo-dl-val">150kg</strong></div>
+					<div class="wo-lift-current">Current: <strong id="wo-dl-val">100kg</strong></div>
 					<button class="wo-lift-adj" onclick="woAdjLift('dl',2.5)">+</button>
 				</div>
 			</div>
 			<div class="wo-shoulder-ladder">
-				<div class="wo-ladder-title">Shoulder Press Progression Ladder</div>
+				<div class="wo-ladder-title">Lat Pulldown Progression</div>
 				<div class="wo-ladder-list" id="wo-shoulder-ladder"></div>
 			</div>
 			<div id="wo-targets-extras"></div>
@@ -1002,10 +1002,9 @@ const RULES = [
 ];
 
 const SHOULDER_LADDER = [
-	{ week: 'Week 1', weight: '12.5kg', note: 'Current weight, slightly above planned 12kg.', updated: true },
-	{ week: 'Week 3', weight: '14kg', note: 'Move up when all sets feel controlled with reps in reserve.' },
-	{ week: 'Week 5', weight: '16kg', note: 'Spend 2–3 weeks at each weight before progressing.' },
-	{ week: 'Week 8', weight: '18kg', note: 'Pre-season target.' }
+	{ week: 'Week 1', weight: '60kg', note: 'Starting weight. 4×6. Focus on form — controlled pull, full stretch at bottom, no swinging.', updated: true },
+	{ week: 'Week 2+', weight: '+5kg/session', note: 'Add 5kg when all 4×6 reps are clean with 1–2 reps in reserve. If form breaks or reps missed — repeat same weight.' },
+	{ week: 'Milestone', weight: '80kg', note: 'Bodyweight on the stack. Once this is consistent, begin transitioning to weighted pull-ups.' }
 ];
 
 // ─── DATE OVERRIDE HELPERS ────────────────────────────────────────────────────
@@ -1052,14 +1051,14 @@ const REDUCED_MONDAY_EXERCISES = [
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 
-const START_DATE      = new Date('2025-04-30');
-const PROG_MON_START  = new Date('2025-04-28'); // Monday of week 1
+const START_DATE      = new Date('2026-04-28');
+const PROG_MON_START  = new Date('2026-04-28'); // Monday of week 1
 const TOTAL_WEEKS     = 14;
 let currentLunch    = 'chilli';
 let currentDinner   = 'salmon';
 let shopTicked      = {};
-let benchKg         = 60;
-let dlKg            = 150;
+let benchKg         = 45;
+let dlKg            = 100;
 let checkinHistory  = {}; // keyed by week number string
 
 // Timer state — uses absolute finishAt timestamp so it survives tab switches + backgrounding
@@ -1643,8 +1642,8 @@ function renderTargets() {
 	document.getElementById('wo-weeks-fill').style.width  = pct + '%';
 	document.getElementById('wo-weeks-pct').textContent   = pct + '%';
 	document.getElementById('wo-weeks-label').textContent = `${elapsed} / ${TOTAL_WEEKS} weeks`;
-	updateLiftBar('bench', benchKg, 60, 80);
-	updateLiftBar('dl',    dlKg,   150, 170);
+	updateLiftBar('bench', benchKg, 45, 80);
+	updateLiftBar('dl',    dlKg,   100, 170);
 	const wk = elapsed + 1;
 	let a = 0; if (wk >= 8) a = 3; else if (wk >= 5) a = 2; else if (wk >= 3) a = 1;
 	document.getElementById('wo-shoulder-ladder').innerHTML = SHOULDER_LADDER.map((item, i) =>
@@ -1656,44 +1655,113 @@ function renderTargets() {
 
 	document.getElementById('wo-targets-extras').innerHTML = `
 		<div class="wo-session-log">
-			<div class="wo-ladder-title" style="margin-top:24px">Session log <span class="wo-amber-badge">Updated 6 May</span></div>
+			<div class="wo-ladder-title" style="margin-top:24px">Bench Press Progression</div>
 
 			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr">
-					<span class="wo-log-entry-date">Tue 6 May 2025</span>
-					<span class="wo-log-entry-name">Upper strength — Week 1</span>
-				</div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Bench press</span><span class="wo-log-item-val">5×5 @ 45kg ✓</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Lat pulldown</span><span class="wo-log-item-val">4×6 @ 55kg ✓</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">DB shoulder press</span><span class="wo-log-item-val">4×6 @ 12.5kg ✓</span></div>
-				<div class="wo-log-item">
-					<span class="wo-log-item-name">Single-arm row</span>
-					<div style="text-align:right"><div class="wo-log-item-val">20kg</div><div class="wo-log-item-warn">⚠ 9/10 difficulty — dropped to 17.5kg next session</div></div>
-				</div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Ski erg</span><span class="wo-log-item-val">3×45sec — 7/10 ✓</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Farmer's carry</span><span class="wo-log-item-val">3×30m @ 24kg ✓</span></div>
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Foundation — Weeks 1–4 (28 Apr)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">5 × 5</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">45kg</span></div>
 			</div>
 
 			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr">
-					<span class="wo-log-entry-date">Wed 13 May 2025</span>
-					<span class="wo-log-entry-name">Upper strength — Week 2</span>
-					<span class="wo-log-entry-badge wo-badge-next">Next session</span>
-				</div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Bench press</span><span class="wo-log-item-val"><span class="wo-log-item-up">↑</span> 5×5 @ 47.5kg</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Lat pulldown</span><span class="wo-log-item-val">4×6 @ 55–60kg</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">DB shoulder press</span><span class="wo-log-item-val">4×6 @ 12.5kg</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Single-arm row</span><span class="wo-log-item-val">4×8 @ 17.5kg <em>strict form</em></span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Ski erg</span><span class="wo-log-item-val">3×45sec</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Farmer's carry</span><span class="wo-log-item-val">3×30m @ 24kg</span></div>
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 5 (26 May)</span><span class="wo-log-entry-badge wo-badge-next">✓ Done 27 May</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">50kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 6 (2 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">52.5kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 7 (9 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 4</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">57.5kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 8 (16 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">65kg — then attempt 75kg test (spotter required)</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 9 (23 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">65kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 10 (30 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">Slight increase if everything is sharp</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 11 (7 Jul)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">70kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 12 — Deload (14 Jul)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Load</span><span class="wo-log-item-val">50% of normal weight, half the sets</span></div>
 			</div>
 		</div>
 
-		<div class="wo-section-title" style="margin-top:28px">Holiday adjustment <span class="wo-amber-badge">Wed 20 – Sun 24 May</span></div>
+		<div class="wo-session-log">
+			<div class="wo-ladder-title" style="margin-top:24px">Trap-Bar Deadlift Progression</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 1 (28 Apr)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 100kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Weeks 2–4 (5–19 May)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 — add 2.5kg/session when all reps clean</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Target</span><span class="wo-log-item-val">~110kg by Week 3</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 5 (26 May)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 115kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Weeks 6–7 (2–9 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 70–75% of max — do not chase a new PR</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 7 (9 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 4 @ 125kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 9 (23 Jun)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3 @ 130kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 11 (7 Jul)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3 @ 140kg</span></div>
+			</div>
+
+			<div class="wo-log-entry">
+				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 12 — Deload (14 Jul)</span></div>
+				<div class="wo-log-item"><span class="wo-log-item-name">Load</span><span class="wo-log-item-val">50% of normal weight, half the sets</span></div>
+			</div>
+		</div>
+
+		<div class="wo-section-title" style="margin-top:28px">Progression Rules <span class="wo-amber-badge">All lifts</span></div>
 		<div class="wo-holiday-adj-box">
-			<strong>Lads trip 20–24 May.</strong> Bad sleep and late nights expected. No training during this period — sessions on poor sleep with late nights don't recover properly and increase injury risk. Enjoy the trip.
-			<br><br>
-			Back on Monday 26 May: first session back is at reduced intensity — ~10% lighter on all lifts. Deadlift at 95kg instead of 105kg. Upper weights normal from Wednesday 28 May once sleep has recovered.
+			<strong>Clean reps with 1–2 in reserve</strong> → add 2.5kg next session (bench/deadlift) or 5kg (lat pulldown).<br><br>
+			<strong>Form breaks or reps missed</strong> → repeat same weight next session.<br><br>
+			<strong>Reps missed two sessions in a row</strong> → drop 5% and rebuild.<br><br>
+			<strong>Bar speed test:</strong> last rep must match bar speed on the first rep. If it's a grind, the weight is too heavy.
 		</div>`;
 }
 
@@ -1705,8 +1773,8 @@ function updateLiftBar(key, cur, min, max) {
 }
 
 function woAdjLift(key, delta) {
-	if (key === 'bench') { benchKg = Math.max(60, Math.min(80, Math.round((benchKg + delta) * 10) / 10)); updateLiftBar('bench', benchKg, 60, 80); }
-	else                 { dlKg    = Math.max(150,Math.min(170,Math.round((dlKg    + delta) * 10) / 10)); updateLiftBar('dl',    dlKg,   150,170); }
+	if (key === 'bench') { benchKg = Math.max(45, Math.min(80, Math.round((benchKg + delta) * 10) / 10)); updateLiftBar('bench', benchKg, 45, 80); }
+	else                 { dlKg    = Math.max(100,Math.min(170,Math.round((dlKg    + delta) * 10) / 10)); updateLiftBar('dl',    dlKg,   100,170); }
 	saveStorage();
 }
 window.woAdjLift = woAdjLift;
