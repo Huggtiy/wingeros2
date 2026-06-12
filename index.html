@@ -180,41 +180,25 @@ html, body {
 .wo-beginner-note { background: var(--wo-amber-bg); border-left: 3px solid var(--wo-amber); border-radius: 0 var(--wo-radius-sm) var(--wo-radius-sm) 0; padding: 10px 14px; margin-top: 12px; font-size: .82rem; line-height: 1.5; color: var(--wo-text); }
 .wo-beginner-note strong { color: var(--wo-amber); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
 
-/* ── Week / Next Week list ── */
-.wo-week-list { display: flex; flex-direction: column; gap: 8px; }
-.wo-day-row { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); overflow: hidden; }
-.wo-day-row.today { border-color: var(--wo-accent); box-shadow: 0 0 0 1px var(--wo-accent); }
-.wo-day-header { display: flex; align-items: center; gap: 8px; padding: 13px 16px; cursor: pointer; user-select: none; flex-wrap: wrap; min-height: 54px; -webkit-tap-highlight-color: transparent; }
-.wo-day-label { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; min-width: 26px; color: var(--wo-text-muted); }
-.wo-day-row.today .wo-day-label { color: var(--wo-accent); }
-.wo-day-date { font-size: .72rem; color: var(--wo-text-muted); white-space: nowrap; }
-.wo-day-session { flex: 1; font-size: .87rem; font-weight: 600; min-width: 120px; }
-.wo-day-header .wo-tags { flex-basis: 100%; margin-top: 2px; }
-.wo-day-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--wo-border); }
-.wo-day-row.open .wo-day-body { display: block; }
-.wo-day-row.open .wo-chevron { transform: rotate(180deg); }
-
-/* ── Month view ── */
-.wo-month-list { display: flex; flex-direction: column; gap: 8px; }
-.wo-month-card { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); overflow: hidden; }
-.wo-month-card.current { border-color: var(--wo-accent); box-shadow: 0 0 0 1px var(--wo-accent); }
-.wo-month-card.past { opacity: .55; }
-.wo-month-hdr { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; user-select: none; }
-.wo-month-wk-num { font-size: .85rem; font-weight: 800; margin-right: 10px; }
-.wo-month-card.current .wo-month-wk-num { color: var(--wo-accent); }
-.wo-month-daterange { font-size: .72rem; color: var(--wo-text-muted); }
-.wo-month-body { display: none; border-top: 1px solid var(--wo-border); }
-.wo-month-card.open .wo-month-body { display: block; }
-.wo-month-card.open .wo-chevron { transform: rotate(180deg); }
-.wo-month-day { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--wo-border); }
-.wo-month-day:last-child { border-bottom: none; }
-.wo-mday-name { font-size: .7rem; font-weight: 800; text-transform: uppercase; min-width: 26px; color: var(--wo-text-muted); }
-.wo-mday-num { font-size: .7rem; color: var(--wo-text-muted); min-width: 22px; }
-.wo-mday-session { flex: 1; font-size: .8rem; font-weight: 600; }
-.wo-today-row .wo-mday-name,
-.wo-today-row .wo-mday-num,
-.wo-today-row .wo-mday-session { color: var(--wo-accent); }
-.wo-now-pill { background: var(--wo-accent); color: #fff; font-size: .65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+/* ── Set tracker ── */
+.wo-set-row { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.wo-set-label { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--wo-text-muted); }
+.wo-set-tick { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--wo-border); background: var(--wo-bg-card); color: var(--wo-text-muted); font-family: var(--wo-font); font-size: .82rem; font-weight: 800; cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent; }
+.wo-set-tick.done { background: var(--wo-green); border-color: var(--wo-green); color: #fff; }
+.wo-result-row { display: none; gap: 6px; margin-top: 10px; }
+.wo-result-row.visible { display: flex; }
+.wo-result-btn { flex: 1; background: var(--wo-bg-card); border: 2px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .74rem; font-weight: 700; padding: 8px 6px; text-align: center; transition: all .15s; -webkit-tap-highlight-color: transparent; }
+.wo-result-btn:hover { border-color: var(--wo-accent); color: var(--wo-accent); }
+.wo-result-note { display: none; margin-top: 10px; background: var(--wo-green-bg); border-left: 3px solid var(--wo-green); border-radius: 0 var(--wo-radius-sm) var(--wo-radius-sm) 0; padding: 8px 12px; font-size: .8rem; line-height: 1.5; color: var(--wo-text); }
+.wo-result-note.visible { display: block; }
+.wo-session-done-btn { width: 100%; background: var(--wo-bg-card); border: 2px dashed var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .9rem; font-weight: 800; padding: 14px; margin-top: 18px; transition: all .15s; -webkit-tap-highlight-color: transparent; }
+.wo-session-done-btn.done { background: var(--wo-green-bg); border: 2px solid var(--wo-green); color: var(--wo-green); }
+.wo-cal-cell.done { border-color: var(--wo-green); }
+.wo-cal-check { font-size: .6rem; font-weight: 900; color: var(--wo-green); line-height: 1; }
+.wo-backup-row { display: flex; gap: 8px; }
+.wo-backup-btn { flex: 1; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text); cursor: pointer; font-family: var(--wo-font); font-size: .82rem; font-weight: 700; padding: 12px; transition: border-color .15s, color .15s; -webkit-tap-highlight-color: transparent; }
+.wo-backup-btn:hover { border-color: var(--wo-accent); color: var(--wo-accent); }
+.wo-checkin-cta-btn { background: var(--wo-accent); color: #fff; border: none; border-radius: var(--wo-radius-sm); cursor: pointer; font-family: var(--wo-font); font-size: .8rem; font-weight: 700; padding: 8px 14px; margin-top: 8px; -webkit-tap-highlight-color: transparent; }
 
 /* ── Food tab ── */
 .wo-meal-group { margin-bottom: 22px; }
@@ -342,8 +326,6 @@ html, body {
 	.wo-exercise-meta { max-width: 100px; font-size: .74rem; }
 	.wo-ingredient-list li { flex-direction: column; align-items: flex-start; gap: 1px; }
 	.wo-ingredient-list li span { font-size: .76rem; color: var(--wo-text-muted); }
-	.wo-month-day { flex-wrap: wrap; gap: 4px; }
-	.wo-mday-session { font-size: .78rem; flex-basis: 100%; }
 }
 
 /* ── Rest timer ── */
@@ -411,8 +393,6 @@ html, body {
 
 /* ── Holiday styling ── */
 .wo-tag-holiday { color: var(--wo-amber); background: var(--wo-amber-bg); }
-.wo-day-row.holiday { border-color: var(--wo-amber); }
-.wo-day-row.holiday .wo-day-label { color: var(--wo-amber); }
 
 /* ── Warning box ── */
 .wo-warning-box { background: var(--wo-amber-bg); border-left: 3px solid var(--wo-amber); border-radius: 0 var(--wo-radius-sm) var(--wo-radius-sm) 0; padding: 10px 14px; font-size: .84rem; line-height: 1.55; color: var(--wo-text); }
@@ -507,7 +487,7 @@ html, body {
 		<div id="wo-goals-targets" style="display:none">
 			<div class="wo-hero">
 				<div class="wo-hero-title">Pre-season Targets</div>
-				<div class="wo-hero-desc">12-week programme — Foundation → Build → Sharpen. Bench and deadlift bars update manually below.</div>
+				<div class="wo-hero-desc">12-week programme — Foundation → Build → Sharpen. Weights progress automatically from your session logs and weekly check-ins; adjust below if needed.</div>
 			</div>
 			<div class="wo-stat-grid">
 				<div class="wo-stat-box"><div class="wo-stat-box-label">Bench Target</div><div class="wo-stat-box-value">80kg+</div><div class="wo-stat-box-sub">from 45kg start</div></div>
@@ -1007,91 +987,112 @@ const SHOULDER_LADDER = [
 	{ week: 'Milestone', weight: '80kg', note: 'Bodyweight on the stack. Once this is consistent, begin transitioning to weighted pull-ups.' }
 ];
 
-// ─── WEEKLY WEIGHT PROGRESSION ───────────────────────────────────────────────
-// Index 0 = Week 1. Each entry overrides the exercise's weight and/or sets for that week.
-const WEEKLY_WEIGHTS = {
+// ─── WEIGHT PROGRESSION ENGINE ───────────────────────────────────────────────
+// Every loaded lift has a current working weight that progresses by the
+// programme's own rules: clean reps with 1–2 in reserve → +inc next session;
+// form breaks or missed reps → repeat the same weight; missed two sessions
+// in a row → drop 5% and rebuild. Week 12 is a deload at 50%.
+
+const LIFTS = {
+	'Bench press':              { start: 45,   inc: 2.5, unit: 'kg' },
+	'Trap-bar deadlift':        { start: 100,  inc: 2.5, unit: 'kg' },
+	'Lat pulldown':             { start: 60,   inc: 5,   unit: 'kg', cap: 80 },
+	'Dumbbell shoulder press':  { start: 12.5, inc: 2.5, unit: 'kg dumbbells' },
+	'Single-arm dumbbell row':  { start: 17.5, inc: 2.5, unit: 'kg dumbbell' },
+	"Farmer's carry":           { start: 24,   inc: 2,   unit: 'kg each hand' },
+};
+
+// Per-week sets/reps periodisation (index 0 = Week 1). Lifts not listed keep
+// their default sets all programme.
+const LIFT_SCHEMES = {
 	'Bench press': [
-		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk1
-		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk2
-		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk3
-		{ sets: '5 sets × 5 reps — 3 min rest', weight: '45kg' },                          // Wk4
-		{ sets: '4 sets × 5 reps — 3 min rest', weight: '50kg ✓' },                        // Wk5
-		{ sets: '4 sets × 5 reps — 3 min rest', weight: '52.5kg' },                        // Wk6
-		{ sets: '4 sets × 4 reps — 3 min rest', weight: '57.5kg' },                        // Wk7
-		{ sets: '3 sets × 3 reps — 3 min rest', weight: '65kg — then 75kg test (spotter required)' }, // Wk8
-		{ sets: '3 sets × 3 reps — 3 min rest', weight: '65kg' },                          // Wk9
-		{ sets: '3 sets × 3 reps — 3 min rest', weight: 'slight increase if everything sharp' }, // Wk10
-		{ sets: '3 sets × 3 reps — 3 min rest', weight: '70kg' },                          // Wk11
-		{ sets: '2 sets × 3 reps — 3 min rest', weight: '~32.5kg (deload — 50%)' },        // Wk12
+		'5 sets × 5 reps — 3 min rest', '5 sets × 5 reps — 3 min rest', '5 sets × 5 reps — 3 min rest', '5 sets × 5 reps — 3 min rest',
+		'4 sets × 5 reps — 3 min rest', '4 sets × 5 reps — 3 min rest', '4 sets × 4 reps — 3 min rest',
+		'3 sets × 3 reps — 3 min rest', '3 sets × 3 reps — 3 min rest', '3 sets × 3 reps — 3 min rest', '3 sets × 3 reps — 3 min rest',
+		'2 sets × 3 reps — 3 min rest',
 	],
 	'Trap-bar deadlift': [
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '100kg' },                       // Wk1
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '102.5kg — add 2.5kg if all reps clean' }, // Wk2
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '~107.5kg (target ~110kg by Wk3)' }, // Wk3
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '110kg' },                       // Wk4
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '115kg' },                       // Wk5
-		{ sets: '4 sets × 5 reps — 2–3 min rest', weight: '70–75% of max — do not chase PR' }, // Wk6
-		{ sets: '4 sets × 4 reps — 2–3 min rest', weight: '125kg' },                       // Wk7
-		{ sets: '4 sets × 4 reps — 2–3 min rest', weight: '125kg' },                       // Wk8
-		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '130kg' },                       // Wk9
-		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '135kg' },                       // Wk10
-		{ sets: '3 sets × 3 reps — 2–3 min rest', weight: '140kg' },                       // Wk11
-		{ sets: '2 sets × 3 reps — 2–3 min rest', weight: '~65kg (deload — 50%)' },        // Wk12
+		'4 sets × 5 reps — 2–3 min rest', '4 sets × 5 reps — 2–3 min rest', '4 sets × 5 reps — 2–3 min rest', '4 sets × 5 reps — 2–3 min rest',
+		'4 sets × 5 reps — 2–3 min rest', '4 sets × 5 reps — 2–3 min rest',
+		'4 sets × 4 reps — 2–3 min rest', '4 sets × 4 reps — 2–3 min rest',
+		'3 sets × 3 reps — 2–3 min rest', '3 sets × 3 reps — 2–3 min rest', '3 sets × 3 reps — 2–3 min rest',
+		'2 sets × 3 reps — 2–3 min rest',
 	],
 	'Lat pulldown': [
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '60kg' },                         // Wk1
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '65kg (+5kg if Wk1 was clean)' }, // Wk2
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '70kg' },                         // Wk3
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '75kg' },                         // Wk4
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg — target reached' },        // Wk5
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg — maintain / begin pull-up transition' }, // Wk6
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk7
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk8
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk9
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk10
-		{ sets: '4 sets × 6 reps — 90 sec rest', weight: '80kg' },                         // Wk11
-		{ sets: '2 sets × 6 reps — 90 sec rest', weight: '~40kg (deload — 50%)' },         // Wk12
+		'4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest',
+		'4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest',
+		'4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest', '4 sets × 6 reps — 90 sec rest',
+		'2 sets × 6 reps — 90 sec rest',
 	],
 };
+
+const DELOAD_WEEK = 12;
+
+function round25(kg) { return Math.round(kg / 2.5) * 2.5; }
+
+function liftKg(name) {
+	const st = liftState[name];
+	return st ? st.kg : (LIFTS[name] ? LIFTS[name].start : 0);
+}
+
+function setLiftKg(name, kg) {
+	if (!liftState[name]) liftState[name] = { kg: LIFTS[name].start, miss: 0 };
+	liftState[name].kg = Math.max(LIFTS[name].inc, Math.round(kg * 10) / 10);
+	if (LIFTS[name].cap) liftState[name].kg = Math.min(liftState[name].kg, LIFTS[name].cap);
+}
 
 function weekNumForDate(d) {
 	const msPerWeek = 7 * 24 * 3600 * 1000;
 	const diff = new Date(d).setHours(0,0,0,0) - PROG_MON_START.getTime();
-	return Math.min(Math.max(Math.floor(diff / msPerWeek) + 1, 1), 12);
+	return Math.min(Math.max(Math.floor(diff / msPerWeek) + 1, 1), TOTAL_WEEKS);
 }
 
-function applyWeeklyWeights(exercises, weekNum) {
+function halveSets(setsStr) {
+	return setsStr.replace(/^(\d+)/, n => Math.max(1, Math.round(parseInt(n) / 2)));
+}
+
+function applyWeekPlan(exercises, weekNum) {
 	return exercises.map(ex => {
-		const override = WEEKLY_WEIGHTS[ex.name];
-		if (!override) return ex;
-		const w = override[Math.min(weekNum - 1, 11)];
-		return w ? Object.assign({}, ex, w) : ex;
+		const cfg    = LIFTS[ex.name];
+		const scheme = (LIFT_SCHEMES[ex.name] || [])[weekNum - 1];
+		if (!cfg && !scheme) return ex;
+		const out = Object.assign({}, ex);
+		if (scheme) out.sets = scheme;
+		if (cfg) {
+			if (weekNum >= DELOAD_WEEK) {
+				out.weight = round25(liftKg(ex.name) * 0.5) + cfg.unit + ' (deload — 50%)';
+				if (!scheme) out.sets = halveSets(out.sets);
+			} else {
+				out.weight = liftKg(ex.name) + cfg.unit;
+			}
+		}
+		return out;
 	});
 }
 
 // ─── DATE OVERRIDE HELPERS ────────────────────────────────────────────────────
 
 function isHolidayDate(d) {
-	// Inclusive: Wed 20 May – Sun 24 May 2025
-	const start = new Date(2025, 4, 20); // month is 0-indexed
-	const end   = new Date(2025, 4, 24);
+	// Inclusive: Wed 20 May – Sun 24 May 2026
+	const start = new Date(2026, 4, 20); // month is 0-indexed
+	const end   = new Date(2026, 4, 24);
 	const check = new Date(d); check.setHours(0, 0, 0, 0);
 	return check >= start && check <= end;
 }
 function isPreHolidayDate(d) {
-	// Mon 19 May 2025 only
-	const target = new Date(2025, 4, 19);
+	// Mon 18 May 2026 only (last gym session before the trip)
+	const target = new Date(2026, 4, 18);
 	const check  = new Date(d); check.setHours(0, 0, 0, 0);
 	return check.getTime() === target.getTime();
 }
 function isPostHolidayDate(d) {
-	// Mon 26 May 2025 only
-	const target = new Date(2025, 4, 26);
+	// Mon 25 May 2026 only (first session back, reduced intensity)
+	const target = new Date(2026, 4, 25);
 	const check  = new Date(d); check.setHours(0, 0, 0, 0);
 	return check.getTime() === target.getTime();
 }
 
-// ─── REDUCED INTENSITY SESSION (26 MAY ONLY) ─────────────────────────────────
+// ─── REDUCED INTENSITY SESSION (25 MAY ONLY) ─────────────────────────────────
 
 const REDUCED_MONDAY_EXERCISES = [
 	{ name: 'Trap-bar deadlift', sets: '4 sets × 5 reps', weight: '95kg',
@@ -1113,15 +1114,18 @@ const REDUCED_MONDAY_EXERCISES = [
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 
-const START_DATE      = new Date('2026-04-28');
-const PROG_MON_START  = new Date('2026-04-28'); // Monday of week 1
-const TOTAL_WEEKS     = 14;
+const START_DATE      = new Date('2026-04-27'); // Monday of week 1
+const PROG_MON_START  = new Date('2026-04-27');
+const TOTAL_WEEKS     = 12;
+const SEASON_START    = (() => { const d = new Date(PROG_MON_START); d.setDate(d.getDate() + TOTAL_WEEKS * 7); return d; })();
 let currentLunch    = 'chilli';
 let currentDinner   = 'salmon';
 let shopTicked      = {};
-let benchKg         = 45;
-let dlKg            = 100;
 let checkinHistory  = {}; // keyed by week number string
+let liftState       = {}; // { exName: { kg, miss } } — current working weight per lift
+let setLog          = {}; // { 'YYYY-MM-DD': { exName: { ticks: [bool], result, msg } } }
+let doneLog         = {}; // { 'YYYY-MM-DD': true } — sessions marked complete
+let liftHist        = {}; // { exName: [ { date, kg, result } ] }
 
 // Timer state — uses absolute finishAt timestamp so it survives tab switches + backgrounding
 const timerState = { exId: null, total: 90, finishAt: 0, pausedRem: 0, running: false, _iv: null };
@@ -1131,19 +1135,31 @@ function loadStorage() {
 		const l = localStorage.getItem('wo_lunch');    if (l) currentLunch  = l;
 		const d = localStorage.getItem('wo_dinner');   if (d) currentDinner = d;
 		const t = localStorage.getItem('wo_ticked');   if (t) shopTicked = JSON.parse(t);
-		const b = parseFloat(localStorage.getItem('wo_bench')); if (!isNaN(b)) benchKg = b;
-		const k = parseFloat(localStorage.getItem('wo_dl'));    if (!isNaN(k)) dlKg = k;
 		const c = localStorage.getItem('wo_checkins'); if (c) checkinHistory = JSON.parse(c);
+		const s = localStorage.getItem('wo_setlog');   if (s) setLog   = JSON.parse(s);
+		const o = localStorage.getItem('wo_done');     if (o) doneLog  = JSON.parse(o);
+		const h = localStorage.getItem('wo_lifthist'); if (h) liftHist = JSON.parse(h);
+		const w = localStorage.getItem('wo_lifts');    if (w) liftState = JSON.parse(w);
 	} catch(e){}
+	// Seed any lift missing from storage. Bench/deadlift migrate from the old
+	// wo_bench / wo_dl keys; everything else starts at its programme weight.
+	const legacy = { 'Bench press': parseFloat(localStorage.getItem('wo_bench')), 'Trap-bar deadlift': parseFloat(localStorage.getItem('wo_dl')) };
+	Object.keys(LIFTS).forEach(name => {
+		if (liftState[name] && typeof liftState[name].kg === 'number') return;
+		const kg = !isNaN(legacy[name]) ? legacy[name] : LIFTS[name].start;
+		liftState[name] = { kg, miss: 0 };
+	});
 }
 function saveStorage() {
 	try {
 		localStorage.setItem('wo_lunch',    currentLunch);
 		localStorage.setItem('wo_dinner',   currentDinner);
 		localStorage.setItem('wo_ticked',   JSON.stringify(shopTicked));
-		localStorage.setItem('wo_bench',    benchKg);
-		localStorage.setItem('wo_dl',       dlKg);
 		localStorage.setItem('wo_checkins', JSON.stringify(checkinHistory));
+		localStorage.setItem('wo_setlog',   JSON.stringify(setLog));
+		localStorage.setItem('wo_done',     JSON.stringify(doneLog));
+		localStorage.setItem('wo_lifthist', JSON.stringify(liftHist));
+		localStorage.setItem('wo_lifts',    JSON.stringify(liftState));
 	} catch(e){}
 }
 
@@ -1166,6 +1182,11 @@ function dateForWeekday(jsDay, mondayRef) {
 }
 function fmtDate(d) { return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' }); }
 function renderTags(tags) { return tags.map(t => `<span class="wo-tag wo-tag-${t}">${t}</span>`).join(''); }
+function localISO(d) {
+	d = d || new Date();
+	const p = n => String(n).padStart(2, '0');
+	return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
 
 // ─── REST TIMER ───────────────────────────────────────────────────────────────
 
@@ -1253,7 +1274,14 @@ function woResetTimer(exId, total) {
 window.woResetTimer = woResetTimer;
 document.addEventListener('visibilitychange', () => { if (!document.hidden && timerState.running) _timerTick(); });
 
-function renderExercises(exercises, prefix) {
+function parseSetCount(setsStr) {
+	const m = setsStr.match(/^(\d+)\s*(?:sets?\b|×)/);
+	return m ? parseInt(m[1]) : 0;
+}
+
+function renderExercises(exercises, prefix, logging) {
+	const iso = localISO();
+	const dayLog = setLog[iso] || {};
 	return exercises.map((ex, i) => {
 		const id = `${prefix}-ex-${i}`;
 		const restSec = parseRestSeconds(ex.sets);
@@ -1265,6 +1293,25 @@ function renderExercises(exercises, prefix) {
 				<button class="wo-timer-reset" onclick="woResetTimer('${id}',${restSec})" title="Reset">↺</button>
 			</div>
 		</div>`;
+		let setHtml = '';
+		const setCount = parseSetCount(ex.sets);
+		if (logging && setCount >= 2) {
+			const exLog = dayLog[ex.name] || { ticks: [] };
+			const ticks = Array.from({ length: setCount }, (_, si) =>
+				`<button type="button" class="wo-set-tick${exLog.ticks[si] ? ' done' : ''}" data-ex="${ex.name}" data-idx="${si}" data-id="${id}" data-rest="${restSec}">${si + 1}</button>`
+			).join('');
+			let resHtml = '';
+			if (LIFTS[ex.name]) {
+				const allDone = Array.from({ length: setCount }).every((_, si) => exLog.ticks[si]);
+				resHtml = `<div class="wo-result-row${allDone && !exLog.result ? ' visible' : ''}" id="wo-res-${id}">
+					<button type="button" class="wo-result-btn" data-ex="${ex.name}" data-res="clean"  data-id="${id}">All clean, reps in reserve</button>
+					<button type="button" class="wo-result-btn" data-ex="${ex.name}" data-res="hard"   data-id="${id}">Hard / form slipped</button>
+					<button type="button" class="wo-result-btn" data-ex="${ex.name}" data-res="missed" data-id="${id}">Missed reps</button>
+				</div>
+				<div class="wo-result-note${exLog.result ? ' visible' : ''}" id="wo-resnote-${id}">${exLog.msg || ''}</div>`;
+			}
+			setHtml = `<div class="wo-set-row"><span class="wo-set-label">Sets</span>${ticks}</div>${resHtml}`;
+		}
 		return `<div class="wo-exercise" id="${id}">
 			<div class="wo-exercise-header" tabindex="0" role="button" aria-expanded="false" onclick="woToggleExercise('${id}')">
 				<div><div class="wo-exercise-name">${ex.name}</div><div class="wo-exercise-meta">${ex.sets}${ex.weight ? ' · ' + ex.weight : ''}</div></div>
@@ -1273,51 +1320,82 @@ function renderExercises(exercises, prefix) {
 			<div class="wo-exercise-body">
 				<div class="wo-exercise-howto">${ex.howTo}</div>
 				<div class="wo-beginner-note"><strong>Beginner note</strong>${ex.note}</div>
+				${setHtml}
 				${timerHtml}
 			</div>
 		</div>`;
 	}).join('');
 }
 
-function buildWeekDayRows(mondayRef, prefix, containerSuffix, todayJS) {
-	return [1,2,3,4,5,6,0].map(jsDay => {
-		const key = DAY_KEYS[jsDay], w = WORKOUTS[key], d = dateForWeekday(jsDay, mondayRef);
-		const id = `${prefix}-${key}`;
-		const isToday   = todayJS !== null && jsDay === todayJS;
-		const isHol     = isHolidayDate(d);
-		const isPreHol  = isPreHolidayDate(d);
-		const isPostHol = isPostHolidayDate(d);
+// ─── SET LOGGING + PER-SESSION PROGRESSION ───────────────────────────────────
 
-		let sessionName  = w.name;
-		let tags         = w.tags;
-		let extraClass   = '';
-		let bodyInner    = '';
+function _dayExLog(exName) {
+	const iso = localISO();
+	if (!setLog[iso]) setLog[iso] = {};
+	if (!setLog[iso][exName]) setLog[iso][exName] = { ticks: [] };
+	return setLog[iso][exName];
+}
 
-		if (isHol) {
-			sessionName = 'Lads trip — no training';
-			tags        = ['holiday'];
-			extraClass  = ' holiday';
-			bodyInner   = `<div class="wo-warning-box" style="margin-top:14px"><strong>Holiday — no sessions</strong>No sessions 20–24 May. Training on poor sleep with late nights doesn't recover properly and increases injury risk. Enjoy the trip. Back to training Monday 26th at reduced intensity.</div>`;
-		} else if (isPostHol) {
-			sessionName = 'Lower strength — reduced intensity';
-			bodyInner   = `<div style="margin-top:14px"><div class="wo-warning-box" style="margin-bottom:14px"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div><div class="wo-exercise-list">${renderExercises(REDUCED_MONDAY_EXERCISES, `${prefix}-${key}`)}</div></div>`;
-		} else {
-			const wkNum   = weekNumForDate(d);
-			const preNote = isPreHol ? `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>` : '';
-			bodyInner = `<div style="margin-top:14px">${preNote}<div class="wo-exercise-list">${renderExercises(applyWeeklyWeights(w.exercises, wkNum), `${prefix}-${key}`)}</div></div>`;
-		}
+function woTickSet(btn) {
+	const exName = btn.dataset.ex, idx = parseInt(btn.dataset.idx);
+	const l = _dayExLog(exName);
+	l.ticks[idx] = !l.ticks[idx];
+	btn.classList.toggle('done', !!l.ticks[idx]);
+	saveStorage();
+	if (l.ticks[idx]) { // ticking a set starts the rest clock
+		woResetTimer(btn.dataset.id, parseInt(btn.dataset.rest));
+		woStartTimer(btn.dataset.id, parseInt(btn.dataset.rest));
+	}
+	const total = btn.parentElement.querySelectorAll('.wo-set-tick').length;
+	const allDone = Array.from({ length: total }).every((_, i) => l.ticks[i]);
+	const res = document.getElementById('wo-res-' + btn.dataset.id);
+	if (res && !l.result) res.classList.toggle('visible', allDone);
+}
 
-		return `<div class="wo-day-row${isToday ? ' today' : ''}${extraClass}" id="${id}">
-			<div class="wo-day-header" tabindex="0" role="button" aria-expanded="false" onclick="woToggleDay('${id}','wo-${containerSuffix}-list')">
-				<span class="wo-day-label">${DAY_NAMES[jsDay]}</span>
-				<span class="wo-day-date">${fmtDate(d)}</span>
-				<span class="wo-day-session">${sessionName}</span>
-				<div class="wo-tags" style="margin:0">${renderTags(tags)}</div>
-				${CHEVRON}
-			</div>
-			<div class="wo-day-body">${bodyInner}</div>
-		</div>`;
-	}).join('');
+function woLogResult(btn) {
+	const exName = btn.dataset.ex, result = btn.dataset.res, id = btn.dataset.id;
+	const l = _dayExLog(exName);
+	if (l.result) return;
+	const cfg = LIFTS[exName], st = liftState[exName];
+	const wkNum = weekNumForDate(new Date());
+	const lifted = wkNum >= DELOAD_WEEK ? round25(st.kg * 0.5) : st.kg;
+	let msg;
+	if (wkNum >= DELOAD_WEEK) {
+		msg = 'Deload week logged — no progression. Arrive at day one fresh.';
+	} else if (result === 'clean') {
+		setLiftKg(exName, st.kg + cfg.inc); st.miss = 0;
+		msg = st.kg === cfg.cap && lifted >= cfg.cap
+			? `Target weight held — time to transition (see Goals → Targets).`
+			: `Clean — next session goes up to ${st.kg}${cfg.unit}.`;
+	} else if (result === 'hard') {
+		st.miss = 0;
+		msg = 'Hold — repeat this weight next session until all reps are clean with reps in reserve.';
+	} else {
+		st.miss = (st.miss || 0) + 1;
+		if (st.miss >= 2) { setLiftKg(exName, st.kg * 0.95); st.miss = 0; msg = `Missed two sessions in a row — dropping 5% to ${st.kg}${cfg.unit} to rebuild.`; }
+		else msg = 'Repeat this weight next session. Missed twice in a row = drop 5% and rebuild.';
+	}
+	l.result = result; l.msg = msg;
+	if (!liftHist[exName]) liftHist[exName] = [];
+	liftHist[exName].push({ date: localISO(), kg: lifted, result });
+	saveStorage();
+	const row = document.getElementById('wo-res-' + id);
+	if (row) row.classList.remove('visible');
+	const note = document.getElementById('wo-resnote-' + id);
+	if (note) { note.textContent = msg; note.classList.add('visible'); }
+	renderTargets();
+}
+
+document.addEventListener('click', e => {
+	const tick = e.target.closest('.wo-set-tick');
+	if (tick) { woTickSet(tick); return; }
+	const res = e.target.closest('.wo-result-btn');
+	if (res) woLogResult(res);
+});
+
+function liftLoggedThisWeek(exName) {
+	const mon = getMondayOfCurrentWeek();
+	return (liftHist[exName] || []).some(h => new Date(h.date + 'T12:00:00') >= mon);
 }
 
 // ─── STATUS BANNER HELPER ────────────────────────────────────────────────────
@@ -1366,16 +1444,18 @@ function renderCalendar() {
 		const isToday   = date.getTime() === today.getTime();
 		const isPast    = date < today;
 		const isHol     = isHolidayDate(date);
-		const isPostHol = isPostHolidayDate(date);
+		const isDone    = !!doneLog[localISO(date)];
 		const key = DAY_KEYS[date.getDay()];
 		const tag = isHol ? 'holiday' : WORKOUTS[key].tags[0];
 		let cls = 'wo-cal-cell';
 		if (isToday) cls += ' today';
 		if (isPast)  cls += ' past';
 		if (isHol)   cls += ' holiday';
+		if (isDone)  cls += ' done';
 		html += `<div class="${cls}" onclick="woCalOpenDay(${yr},${mo},${d})">
 			<span class="wo-cal-day-num">${d}</span>
 			<div class="wo-cal-dot wo-cal-dot-${tag}"></div>
+			${isDone ? '<span class="wo-cal-check">✓</span>' : ''}
 		</div>`;
 	});
 	html += '</div>';
@@ -1399,7 +1479,7 @@ function woCalOpenDay(yr, mo, d) {
 			<div class="wo-hero-desc">${dateStr}</div>
 			<div class="wo-tags"><span class="wo-tag wo-tag-holiday">holiday</span></div>
 		</div>
-		<div class="wo-warning-box"><strong>No training 20–24 May</strong>Walk when you can, eat protein where possible, drink water. Back to training Monday 26th at reduced intensity.</div>`;
+		<div class="wo-warning-box"><strong>No training 20–24 May</strong>Walk when you can, eat protein where possible, drink water. Back to training Monday 25th at reduced intensity.</div>`;
 	} else {
 		const key = DAY_KEYS[date.getDay()];
 		let sessionName = WORKOUTS[key].name, exercises = WORKOUTS[key].exercises, tags = WORKOUTS[key].tags, preHtml = '';
@@ -1411,7 +1491,7 @@ function woCalOpenDay(yr, mo, d) {
 		} else if (isPreHolidayDate(date)) {
 			preHtml = `<div class="wo-warning-box" style="margin-bottom:14px"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
 		} else {
-			exercises = applyWeeklyWeights(exercises, wkNum);
+			exercises = applyWeekPlan(exercises, wkNum);
 		}
 		const isToday = date.getTime() === today.getTime();
 		html += `<div class="wo-hero"${isToday ? ' style="border-color:var(--wo-accent)"' : ''}>
@@ -1462,7 +1542,7 @@ function renderToday() {
 				<div class="wo-hero-desc">${dateStr}</div>
 				<div class="wo-tags"><span class="wo-tag wo-tag-holiday">holiday</span></div>
 			</div>
-			<div class="wo-warning-box"><strong>No training 20–24 May</strong>No sessions during the lads trip. Training on poor sleep with late nights doesn't recover properly and increases injury risk. Walk when you can, eat protein where possible, drink water. Back to training Monday 26th at reduced intensity.</div>`;
+			<div class="wo-warning-box"><strong>No training 20–24 May</strong>No sessions during the lads trip. Training on poor sleep with late nights doesn't recover properly and increases injury risk. Walk when you can, eat protein where possible, drink water. Back to training Monday 25th at reduced intensity.</div>`;
 		return;
 	}
 
@@ -1471,103 +1551,54 @@ function renderToday() {
 	let exercises     = w.exercises;
 	let preHtml       = '';
 	const wkNum       = weekNumForDate(today);
+	const iso         = localISO();
 
 	if (isPostHolidayDate(today)) {
 		sessionName = 'Lower strength — reduced intensity';
 		exercises   = REDUCED_MONDAY_EXERCISES;
-		preHtml     = `<div class="wo-warning-box"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 28th is back to full intensity.</div>`;
+		preHtml     = `<div class="wo-warning-box"><strong>First session back</strong>Weights reduced by ~10% today. Your body is still recovering from 5 days of disrupted sleep. Wednesday 27th is back to full intensity.</div>`;
 	} else if (isPreHolidayDate(today)) {
 		preHtml = `<div class="wo-warning-box"><strong>Pre-holiday reminder</strong>Last session before the lads trip. Make it count.</div>`;
-		exercises = applyWeeklyWeights(exercises, wkNum);
+		exercises = applyWeekPlan(exercises, wkNum);
 	} else {
-		exercises = applyWeeklyWeights(exercises, wkNum);
+		exercises = applyWeekPlan(exercises, wkNum);
 	}
 
+	// Sunday: prompt the weekly check-in if it hasn't been done yet
+	let checkinPrompt = '';
+	const wk = Math.min(weeksElapsed() + 1, TOTAL_WEEKS);
+	if (today.getDay() === 0 && !checkinHistory[String(wk)]) {
+		checkinPrompt = `<div class="wo-status-banner amber"><strong>Weekly check-in due</strong>It's Sunday — log how the week went and the app sets next week's weights.<br><button class="wo-checkin-cta-btn" onclick="woGoCheckin()">Do the check-in →</button></div>`;
+	}
+
+	const done = !!doneLog[iso];
 	document.getElementById('wo-today-content').innerHTML = `
 		${getStatusBannerHtml()}
+		${checkinPrompt}
 		<div class="wo-hero"><div class="wo-hero-title">${sessionName}</div><div class="wo-hero-desc">${dateStr}</div><div class="wo-tags">${renderTags(w.tags)}</div></div>
 		${preHtml}
 		<div class="wo-section-title">Exercises</div>
-		<div class="wo-exercise-list">${renderExercises(exercises, 'today')}</div>`;
+		<div class="wo-exercise-list">${renderExercises(exercises, 'today', true)}</div>
+		<button class="wo-session-done-btn${done ? ' done' : ''}" id="wo-session-done" onclick="woToggleSessionDone()">${done ? '✓ Session complete' : "Mark today's session done"}</button>`;
 }
 
-// ─── THIS WEEK TAB ────────────────────────────────────────────────────────────
-
-function renderWeek() {
-	const mon = getMondayOfCurrentWeek();
-	const banner = getStatusBannerHtml();
-	if (banner) {
-		const panel = document.getElementById('tab-week');
-		if (panel && !panel.querySelector('.wo-status-banner')) panel.insertAdjacentHTML('afterbegin', banner);
+function woToggleSessionDone() {
+	const iso = localISO();
+	if (doneLog[iso]) delete doneLog[iso]; else doneLog[iso] = true;
+	saveStorage();
+	const btn = document.getElementById('wo-session-done');
+	if (btn) {
+		const d = !!doneLog[iso];
+		btn.classList.toggle('done', d);
+		btn.textContent = d ? '✓ Session complete' : "Mark today's session done";
 	}
-	document.getElementById('wo-week-list').innerHTML = buildWeekDayRows(mon, 'week-day', 'week', new Date().getDay());
+	const cal = document.getElementById('wo-cal-main');
+	if (cal && cal.dataset.rendered) renderCalendar();
 }
+window.woToggleSessionDone = woToggleSessionDone;
 
-// ─── NEXT WEEK TAB ────────────────────────────────────────────────────────────
-
-function renderNextWeek() {
-	const mon = getMondayOfCurrentWeek();
-	const nextMon = new Date(mon); nextMon.setDate(mon.getDate() + 7);
-	const nextSun = new Date(nextMon); nextSun.setDate(nextMon.getDate() + 6);
-	document.getElementById('wo-nextweek-daterange').textContent = `${fmtDate(nextMon)} – ${fmtDate(nextSun)}`;
-	document.getElementById('wo-nextweek-list').innerHTML = buildWeekDayRows(nextMon, 'nw-day', 'nextweek', null);
-}
-
-// ─── MONTH TAB ────────────────────────────────────────────────────────────────
-
-function renderMonth() {
-	const now = new Date(); now.setHours(0,0,0,0);
-	const todayStr = now.toDateString();
-	let html = '';
-
-	for (let wk = 1; wk <= TOTAL_WEEKS; wk++) {
-		const wkStart = new Date(PROG_MON_START);
-		wkStart.setDate(PROG_MON_START.getDate() + (wk - 1) * 7);
-		const wkEnd = new Date(wkStart); wkEnd.setDate(wkStart.getDate() + 6);
-
-		const isCurrent = now >= wkStart && now <= wkEnd;
-		const isPast    = now > wkEnd;
-		const id = `month-wk-${wk}`;
-
-		const startStr = wkStart.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
-		const endStr   = wkEnd.toLocaleDateString('en-GB',   { day:'numeric', month:'short' });
-
-		const daysHtml = [1,2,3,4,5,6,0].map(jsDay => {
-			const dayD = new Date(wkStart);
-			dayD.setDate(wkStart.getDate() + (jsDay === 0 ? 6 : jsDay - 1));
-			const isToday = dayD.toDateString() === todayStr;
-			const key = DAY_KEYS[jsDay]; const w = WORKOUTS[key];
-			return `<div class="wo-month-day${isToday ? ' wo-today-row' : ''}">
-				<span class="wo-mday-name">${DAY_NAMES[jsDay]}</span>
-				<span class="wo-mday-num">${dayD.getDate()}</span>
-				<span class="wo-mday-session">${w.name}</span>
-				<div class="wo-tags" style="margin:0;gap:3px">${renderTags(w.tags)}</div>
-			</div>`;
-		}).join('');
-
-		let cls = 'wo-month-card';
-		if (isCurrent) cls += ' current';
-		if (isPast)    cls += ' past';
-
-		html += `<div class="${cls}" id="${id}">
-			<div class="wo-month-hdr" onclick="woToggleMonth('${id}')">
-				<div><span class="wo-month-wk-num">Week ${wk}</span><span class="wo-month-daterange">${startStr} – ${endStr}</span></div>
-				<div style="display:flex;align-items:center;gap:8px">${isCurrent ? '<span class="wo-now-pill">Now</span>' : ''}${CHEVRON}</div>
-			</div>
-			<div class="wo-month-body">${daysHtml}</div>
-		</div>`;
-	}
-
-	document.getElementById('wo-month-list').innerHTML = html;
-	// Open current week by default
-	const cur = document.querySelector('.wo-month-card.current');
-	if (cur) cur.classList.add('open');
-}
-
-function woToggleMonth(id) {
-	const el = document.getElementById(id); if (el) el.classList.toggle('open');
-}
-window.woToggleMonth = woToggleMonth;
+function woGoCheckin() { switchTab('goals'); woGoalsSection('checkin'); }
+window.woGoCheckin = woGoCheckin;
 
 // ─── FOOD TAB ─────────────────────────────────────────────────────────────────
 
@@ -1706,14 +1737,44 @@ function renderShopList() {
 
 // ─── TARGETS TAB ──────────────────────────────────────────────────────────────
 
+function liftPlanTable(name) {
+	const cfg   = LIFTS[name];
+	const curWk = Math.min(weeksElapsed() + 1, TOTAL_WEEKS);
+	let defaultSets = '';
+	for (const k in WORKOUTS) {
+		const e = WORKOUTS[k].exercises.find(x => x.name === name);
+		if (e) { defaultSets = e.sets; break; }
+	}
+	let rows = '', projected = liftKg(name);
+	for (let wkN = 1; wkN <= TOTAL_WEEKS; wkN++) {
+		const sets = (LIFT_SCHEMES[name] || [])[wkN - 1] || defaultSets;
+		const setsShort = sets.replace(/\s*—.*$/, '');
+		let weightTxt;
+		if (wkN < curWk) {
+			const h = (liftHist[name] || []).filter(x => weekNumForDate(new Date(x.date + 'T12:00:00')) === wkN).pop();
+			weightTxt = h ? `${h.kg}kg — ${h.result}` : '—';
+		} else if (wkN === curWk) {
+			weightTxt = wkN >= DELOAD_WEEK ? `${round25(liftKg(name) * 0.5)}kg (deload — 50%)` : `${liftKg(name)}${cfg.unit} ← current`;
+		} else {
+			if (wkN < DELOAD_WEEK) projected = cfg.cap ? Math.min(cfg.cap, projected + cfg.inc) : projected + cfg.inc;
+			weightTxt = wkN >= DELOAD_WEEK ? `~${round25(projected * 0.5)}kg (deload — 50%)` : `~${round25(projected)}kg projected`;
+		}
+		rows += `<div class="wo-log-item"><span class="wo-log-item-name">Week ${wkN}${wkN === curWk ? ' <span class="wo-log-entry-badge wo-badge-next">Now</span>' : ''}</span><span class="wo-log-item-val">${setsShort} @ ${weightTxt}</span></div>`;
+	}
+	return `<div class="wo-session-log">
+		<div class="wo-ladder-title" style="margin-top:24px">${name} — 12-Week Plan</div>
+		<div class="wo-log-entry">${rows}</div>
+	</div>`;
+}
+
 function renderTargets() {
 	const elapsed = weeksElapsed();
 	const pct = Math.round((elapsed / TOTAL_WEEKS) * 100);
 	document.getElementById('wo-weeks-fill').style.width  = pct + '%';
 	document.getElementById('wo-weeks-pct').textContent   = pct + '%';
 	document.getElementById('wo-weeks-label').textContent = `${elapsed} / ${TOTAL_WEEKS} weeks`;
-	updateLiftBar('bench', benchKg, 45, 80);
-	updateLiftBar('dl',    dlKg,   100, 170);
+	updateLiftBar('bench', liftKg('Bench press'), 45, 80);
+	updateLiftBar('dl',    liftKg('Trap-bar deadlift'), 100, 170);
 	const wk = elapsed + 1;
 	let a = 0; if (wk >= 8) a = 3; else if (wk >= 5) a = 2; else if (wk >= 3) a = 1;
 	document.getElementById('wo-shoulder-ladder').innerHTML = SHOULDER_LADDER.map((item, i) =>
@@ -1724,116 +1785,59 @@ function renderTargets() {
 		</div>`).join('');
 
 	document.getElementById('wo-targets-extras').innerHTML = `
-		<div class="wo-session-log">
-			<div class="wo-ladder-title" style="margin-top:24px">Bench Press Progression</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Foundation — Weeks 1–4 (28 Apr)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">5 × 5</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">45kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 5 (26 May)</span><span class="wo-log-entry-badge wo-badge-next">✓ Done 27 May</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">50kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 6 (2 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">52.5kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 7 (9 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 4</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">57.5kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Build — Week 8 (16 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">65kg — then attempt 75kg test (spotter required)</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 9 (23 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">65kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 10 (30 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">Slight increase if everything is sharp</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Sharpen — Week 11 (7 Jul)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Weight</span><span class="wo-log-item-val">70kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 12 — Deload (14 Jul)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Load</span><span class="wo-log-item-val">50% of normal weight, half the sets</span></div>
-			</div>
-		</div>
-
-		<div class="wo-session-log">
-			<div class="wo-ladder-title" style="margin-top:24px">Trap-Bar Deadlift Progression</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 1 (28 Apr)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 100kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Weeks 2–4 (5–19 May)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 — add 2.5kg/session when all reps clean</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Target</span><span class="wo-log-item-val">~110kg by Week 3</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 5 (26 May)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 115kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Weeks 6–7 (2–9 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 5 @ 70–75% of max — do not chase a new PR</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 7 (9 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">4 × 4 @ 125kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 9 (23 Jun)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3 @ 130kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 11 (7 Jul)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Sets / reps</span><span class="wo-log-item-val">3 × 3 @ 140kg</span></div>
-			</div>
-
-			<div class="wo-log-entry">
-				<div class="wo-log-entry-hdr"><span class="wo-log-entry-name">Week 12 — Deload (14 Jul)</span></div>
-				<div class="wo-log-item"><span class="wo-log-item-name">Load</span><span class="wo-log-item-val">50% of normal weight, half the sets</span></div>
-			</div>
-		</div>
+		${['Bench press', 'Trap-bar deadlift', 'Lat pulldown'].map(liftPlanTable).join('')}
 
 		<div class="wo-section-title" style="margin-top:28px">Progression Rules <span class="wo-amber-badge">All lifts</span></div>
 		<div class="wo-holiday-adj-box">
 			<strong>Clean reps with 1–2 in reserve</strong> → add 2.5kg next session (bench/deadlift) or 5kg (lat pulldown).<br><br>
 			<strong>Form breaks or reps missed</strong> → repeat same weight next session.<br><br>
 			<strong>Reps missed two sessions in a row</strong> → drop 5% and rebuild.<br><br>
-			<strong>Bar speed test:</strong> last rep must match bar speed on the first rep. If it's a grind, the weight is too heavy.
-		</div>`;
+			<strong>Bar speed test:</strong> last rep must match bar speed on the first rep. If it's a grind, the weight is too heavy.<br><br>
+			Tick off sets on the Today tab and the app applies these rules for you — every loaded lift progresses automatically.
+		</div>
+
+		<div class="wo-section-title" style="margin-top:28px">Backup</div>
+		<div class="wo-hero-desc" style="margin-bottom:10px">All progress is stored on this device only. Export a backup before clearing browser data or switching phones.</div>
+		<div class="wo-backup-row">
+			<button class="wo-backup-btn" onclick="woExportData()">Export data</button>
+			<button class="wo-backup-btn" onclick="woImportData()">Import data</button>
+		</div>
+		<input type="file" id="wo-import-file" accept=".json,application/json" style="display:none">`;
 }
+
+function woExportData() {
+	const data = {};
+	for (let i = 0; i < localStorage.length; i++) {
+		const k = localStorage.key(i);
+		if (k && k.indexOf('wo_') === 0 && k !== 'wo_timer') data[k] = localStorage.getItem(k);
+	}
+	const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+	const a = document.createElement('a');
+	a.href = URL.createObjectURL(blob);
+	a.download = `wingeros-backup-${localISO()}.json`;
+	document.body.appendChild(a); a.click(); a.remove();
+	setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+window.woExportData = woExportData;
+
+function woImportData() {
+	const inp = document.getElementById('wo-import-file');
+	if (inp) inp.click();
+}
+window.woImportData = woImportData;
+
+document.addEventListener('change', e => {
+	if (e.target.id !== 'wo-import-file' || !e.target.files || !e.target.files.length) return;
+	const reader = new FileReader();
+	reader.onload = () => {
+		try {
+			const data = JSON.parse(reader.result);
+			Object.keys(data).forEach(k => { if (k.indexOf('wo_') === 0) localStorage.setItem(k, data[k]); });
+			location.reload();
+		} catch (err) { alert('Could not read that backup file.'); }
+	};
+	reader.readAsText(e.target.files[0]);
+});
 
 function updateLiftBar(key, cur, min, max) {
 	const pct = Math.min(Math.max(Math.round(((cur - min) / (max - min)) * 100), 0), 100);
@@ -1843,8 +1847,10 @@ function updateLiftBar(key, cur, min, max) {
 }
 
 function woAdjLift(key, delta) {
-	if (key === 'bench') { benchKg = Math.max(45, Math.min(80, Math.round((benchKg + delta) * 10) / 10)); updateLiftBar('bench', benchKg, 45, 80); }
-	else                 { dlKg    = Math.max(100,Math.min(170,Math.round((dlKg    + delta) * 10) / 10)); updateLiftBar('dl',    dlKg,   100,170); }
+	const name = key === 'bench' ? 'Bench press' : 'Trap-bar deadlift';
+	setLiftKg(name, liftKg(name) + delta);
+	if (key === 'bench') updateLiftBar('bench', liftKg(name), 45, 80);
+	else                 updateLiftBar('dl',    liftKg(name), 100, 170);
 	saveStorage();
 }
 window.woAdjLift = woAdjLift;
@@ -1935,8 +1941,8 @@ function submitCheckin() {
 	_ci.energy    = _ci.energy    || 7;
 	_ci.mood      = _ci.mood      || 7;
 	_ci.sleep     = parseFloat(document.getElementById('ci-sleep')?.value) || 7.5;
-	_ci.benchKg   = parseFloat(document.getElementById('ci-bench-kg')?.value) || benchKg;
-	_ci.dlKg      = parseFloat(document.getElementById('ci-dl-kg')?.value)    || dlKg;
+	_ci.benchKg   = parseFloat(document.getElementById('ci-bench-kg')?.value) || liftKg('Bench press');
+	_ci.dlKg      = parseFloat(document.getElementById('ci-dl-kg')?.value)    || liftKg('Trap-bar deadlift');
 	_ci.pullups   = parseInt(document.getElementById('ci-pullups')?.value)     || 0;
 	_ci.bw        = parseFloat(document.getElementById('ci-bw')?.value)        || 0;
 	_ci.tueFeel   = parseInt(document.getElementById('ci-tue-feel')?.value)    || 7;
@@ -1946,12 +1952,34 @@ function submitCheckin() {
 	_ci.week      = wk;
 	_ci.status    = calcStatus(_ci);
 
+	applyCheckinProgress('Bench press',       _ci.benchKg, _ci.benchFeel);
+	applyCheckinProgress('Trap-bar deadlift', _ci.dlKg,    _ci.dlFeel);
+
 	checkinHistory[String(wk)] = _ci;
 	saveStorage();
 	_ci = {};
 	renderCheckin();
+	renderTargets();
+	renderToday();
 }
 window.submitCheckin = submitCheckin;
+
+// Apply the weekly check-in to the progression engine. Skipped when the lift
+// already progressed via per-session logging this week, so it never doubles up.
+function applyCheckinProgress(exName, usedKg, feel) {
+	const cfg = LIFTS[exName], st = liftState[exName];
+	if (usedKg > 0) setLiftKg(exName, usedKg);
+	if (liftLoggedThisWeek(exName)) return;
+	if (weeksElapsed() + 1 >= DELOAD_WEEK) return;
+	if (feel === 'easy' || feel === 'solid') {
+		setLiftKg(exName, liftKg(exName) + cfg.inc); st.miss = 0;
+	} else if (feel === 'failed') {
+		st.miss = (st.miss || 0) + 1;
+		if (st.miss >= 2) { setLiftKg(exName, liftKg(exName) * 0.95); st.miss = 0; }
+	} else {
+		st.miss = 0;
+	}
+}
 
 function renderCheckin() {
 	const wk      = weeksElapsed() + 1;
@@ -1961,7 +1989,7 @@ function renderCheckin() {
 
 	let html = `<div class="wo-hero">
 		<div class="wo-hero-title">Weekly Check-in</div>
-		<div class="wo-hero-desc">Week ${wk} · Every Sunday evening. This is the feedback loop — answer honestly and the app tells you how to approach next week.</div>
+		<div class="wo-hero-desc">Week ${wk} · Every Sunday evening. This is the feedback loop — answer honestly and the app sets next week's weights and tells you how to approach the week.</div>
 	</div>`;
 
 	if (existing) {
@@ -2001,7 +2029,7 @@ function renderCheckin() {
 		<div class="wo-ci-section">
 			<div class="wo-ci-section-title">Bench press</div>
 			<div class="wo-ci-lift-row">
-				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Weight used (kg)</label><input class="wo-ci-input" type="number" step="0.5" placeholder="${benchKg}" id="ci-bench-kg"></div>
+				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Weight used (kg)</label><input class="wo-ci-input" type="number" step="0.5" placeholder="${liftKg('Bench press')}" id="ci-bench-kg"></div>
 				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Pull-ups this week</label><input class="wo-ci-input" type="number" placeholder="0" id="ci-pullups"></div>
 			</div>
 			<div class="wo-ci-label" style="margin-bottom:6px">How did it feel?</div>
@@ -2013,7 +2041,7 @@ function renderCheckin() {
 		<div class="wo-ci-section">
 			<div class="wo-ci-section-title">Trap-bar deadlift</div>
 			<div class="wo-ci-lift-row">
-				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Weight used (kg)</label><input class="wo-ci-input" type="number" step="0.5" placeholder="${dlKg}" id="ci-dl-kg"></div>
+				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Weight used (kg)</label><input class="wo-ci-input" type="number" step="0.5" placeholder="${liftKg('Trap-bar deadlift')}" id="ci-dl-kg"></div>
 				<div class="wo-ci-input-wrap"><label class="wo-ci-label">Bodyweight (kg)</label><input class="wo-ci-input" type="number" step="0.1" placeholder="80" id="ci-bw"></div>
 			</div>
 			<div class="wo-ci-label" style="margin-bottom:6px">How did it feel?</div>
@@ -2108,9 +2136,10 @@ function renderRules() {
 // ─── HEADER ───────────────────────────────────────────────────────────────────
 
 function updateBadge() {
-	const wk = weeksElapsed() + 1;
-	const dateStr = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short' });
-	document.getElementById('wo-week-badge').textContent = `Week ${wk} · ${dateStr}`;
+	const wk = Math.min(weeksElapsed() + 1, TOTAL_WEEKS);
+	const weeksLeft = Math.ceil((SEASON_START - new Date()) / (7 * 24 * 3600 * 1000));
+	document.getElementById('wo-week-badge').textContent =
+		weeksLeft > 0 ? `Week ${wk}/${TOTAL_WEEKS} · ${weeksLeft} wk${weeksLeft === 1 ? '' : 's'} to season` : 'Season is here';
 }
 
 // ─── TAB SWITCHING ────────────────────────────────────────────────────────────
@@ -2150,23 +2179,6 @@ document.addEventListener('keydown', function(e) {
 		const el = e.target.closest('.wo-exercise'); if (el) woToggleExercise(el.id);
 	}
 });
-
-// ─── DAY TOGGLE (week + next week) ───────────────────────────────────────────
-
-function woToggleDay(id, containerId) {
-	const el = document.getElementById(id); if (!el) return;
-	const wasOpen = el.classList.contains('open');
-	const container = document.getElementById(containerId);
-	if (container) {
-		container.querySelectorAll('.wo-day-row.open').forEach(row => {
-			row.classList.remove('open');
-			const hdr = row.querySelector('.wo-day-header');
-			if (hdr) hdr.setAttribute('aria-expanded', 'false');
-		});
-	}
-	if (!wasOpen) { el.classList.add('open'); el.querySelector('.wo-day-header').setAttribute('aria-expanded', 'true'); }
-}
-window.woToggleDay = woToggleDay;
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 
