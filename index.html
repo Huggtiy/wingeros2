@@ -203,13 +203,43 @@ html, body {
 /* ── Food tab ── */
 .wo-meal-group { margin-bottom: 22px; }
 .wo-meal-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.wo-meal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.wo-meal-group-name { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.wo-meal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; transition: background .2s; }
+.wo-meal-group-name { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; transition: color .2s; }
 .wo-meal-protein { font-size: .72rem; color: var(--wo-text-muted); font-weight: 600; white-space: nowrap; }
 .wo-meal-divider-line { flex: 1; height: 1px; background: var(--wo-border); }
 .wo-meal-card { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); padding: 13px 16px; margin-bottom: 7px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .wo-meal-card.clickable { cursor: pointer; transition: box-shadow .15s, border-color .15s; }
 .wo-meal-card.clickable:hover { box-shadow: var(--wo-shadow); border-color: var(--wo-accent); }
+
+/* ── Protein tracker ── */
+.wo-protein-wrap { background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius); padding: 16px 18px; margin-bottom: 20px; }
+.wo-protein-hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.wo-protein-title { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--wo-text-muted); }
+.wo-protein-val { font-size: 1.25rem; font-weight: 800; color: var(--wo-accent); transition: color .3s; }
+.wo-protein-val.near { color: var(--wo-amber); }
+.wo-protein-val.met  { color: var(--wo-green); }
+.wo-protein-track { background: var(--wo-border); border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: 8px; }
+.wo-protein-fill { height: 100%; border-radius: 999px; background: var(--wo-accent); transition: width .35s, background .3s; }
+.wo-protein-fill.near { background: var(--wo-amber); }
+.wo-protein-fill.met  { background: var(--wo-green); }
+.wo-protein-note { font-size: .72rem; color: var(--wo-text-muted); }
+.wo-meal-eaten-btn { background: none; border: 2px solid var(--wo-border); border-radius: 999px; color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .65rem; font-weight: 800; letter-spacing: .02em; padding: 3px 10px; transition: all .15s; -webkit-tap-highlight-color: transparent; white-space: nowrap; flex-shrink: 0; }
+.wo-meal-eaten-btn.eaten { background: var(--wo-green-bg); border-color: var(--wo-green); color: var(--wo-green); }
+.wo-meal-group.eaten .wo-meal-dot { background: var(--wo-green) !important; }
+.wo-meal-group.eaten .wo-meal-group-name { color: var(--wo-green); }
+
+/* ── Shopping: reset banner + custom items ── */
+.wo-reset-banner { background: var(--wo-blue-bg); border: 1px solid var(--wo-blue); border-radius: var(--wo-radius-sm); padding: 12px 16px; margin-bottom: 16px; font-size: .84rem; line-height: 1.5; color: var(--wo-text); }
+.wo-reset-banner strong { color: var(--wo-blue); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 3px; }
+.wo-reset-btns { display: flex; gap: 8px; margin-top: 10px; }
+.wo-reset-yes { background: var(--wo-blue); color: #fff; border: none; border-radius: var(--wo-radius-sm); cursor: pointer; font-family: var(--wo-font); font-size: .8rem; font-weight: 700; padding: 7px 14px; -webkit-tap-highlight-color: transparent; }
+.wo-reset-no  { background: none; border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text-muted); cursor: pointer; font-family: var(--wo-font); font-size: .8rem; font-weight: 700; padding: 7px 14px; -webkit-tap-highlight-color: transparent; }
+.wo-custom-add { display: flex; gap: 8px; margin: 14px 0 4px; }
+.wo-custom-input { flex: 1; background: var(--wo-bg-card); border: 1px solid var(--wo-border); border-radius: var(--wo-radius-sm); color: var(--wo-text); font-family: var(--wo-font); font-size: .86rem; padding: 10px 12px; outline: none; transition: border-color .15s; }
+.wo-custom-input:focus { border-color: var(--wo-accent); }
+.wo-custom-add-btn { background: var(--wo-accent); color: #fff; border: none; border-radius: var(--wo-radius-sm); cursor: pointer; font-family: var(--wo-font); font-size: .82rem; font-weight: 700; padding: 10px 16px; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
+.wo-shop-item-remove { background: none; border: none; color: var(--wo-text-muted); cursor: pointer; font-size: 1rem; line-height: 1; padding: 0 2px 0 4px; -webkit-tap-highlight-color: transparent; flex-shrink: 0; align-self: center; }
+.wo-shop-item-remove:hover { color: var(--wo-accent); }
 .wo-meal-name { font-size: .87rem; font-weight: 600; }
 .wo-meal-arrow { color: var(--wo-text-muted); font-size: 1rem; flex-shrink: 0; }
 
@@ -858,28 +888,28 @@ const RECIPES = {
 // ─── FOOD GROUPS ──────────────────────────────────────────────────────────────
 
 const FOOD_GROUPS = [
-	{ label: 'Breakfast',    color: 'var(--wo-amber)',  protein: '~40g protein',
+	{ label: 'Breakfast',    color: 'var(--wo-amber)',  protein: '~40g protein',  grams: 40,
 	  items: [{ name: 'Overnight oat & yogurt tupperware', recipe: 'overnight_oats' }] },
-	{ label: 'Mid-Morning',  color: 'var(--wo-blue)',   protein: '~20g protein',
+	{ label: 'Mid-Morning',  color: 'var(--wo-blue)',   protein: '~20g protein',  grams: 20,
 	  items: [{ name: 'Second half of the same tupperware', recipe: null }] },
-	{ label: 'Lunch',        color: 'var(--wo-green)',  protein: '~38–40g protein each',
+	{ label: 'Lunch',        color: 'var(--wo-green)',  protein: '~38–40g protein each', grams: 39,
 	  items: [
 		{ name: 'Option 1 — Beef mince chilli + white rice', recipe: 'beef_chilli' },
 		{ name: 'Option 2 — Chicken breast & rice bowls', recipe: 'chicken_bowls' }
 	  ] },
-	{ label: 'Training Fuel', color: 'var(--wo-purple)', protein: '~33g combined',
+	{ label: 'Training Fuel', color: 'var(--wo-purple)', protein: '~33g combined', grams: 33,
 	  items: [
 		{ name: 'Pre-training: banana + rice cakes with honey', recipe: null },
 		{ name: 'Post-training: whey shake + banana', recipe: null }
 	  ] },
-	{ label: 'Dinner',       color: 'var(--wo-red)',    protein: '~44–46g protein each',
+	{ label: 'Dinner',       color: 'var(--wo-red)',    protein: '~44–46g protein each', grams: 45,
 	  items: [
 		{ name: 'Option 1 — Pan-fried salmon + sweet potato + roasted veg', recipe: 'salmon' },
 		{ name: 'Option 2 — Lean beef mince bolognese + pasta', recipe: 'bolognese' },
 		{ name: 'Option 3 — Baked chicken thighs + potato wedges + broccoli', recipe: 'chicken_thighs' },
 		{ name: 'Option 4 — Baked cod + sweet potato wedges + tenderstem broccoli', recipe: 'cod' }
 	  ] },
-	{ label: 'Before Bed',   color: 'var(--wo-grey)',   protein: '~20g protein',
+	{ label: 'Before Bed',   color: 'var(--wo-grey)',   protein: '~20g protein',  grams: 20,
 	  items: [{ name: 'Cottage cheese or Greek yogurt', recipe: null }] }
 ];
 
@@ -1121,6 +1151,9 @@ const SEASON_START    = (() => { const d = new Date(PROG_MON_START); d.setDate(d
 let currentLunch    = 'chilli';
 let currentDinner   = 'salmon';
 let shopTicked      = {};
+let shopWeek        = 0;   // programme week number when list was last populated
+let customItems     = [];  // [{ id, name }] — user-added extras
+let proteinLog      = {};  // { 'YYYY-MM-DD': { mealLabel: true } }
 let checkinHistory  = {}; // keyed by week number string
 let liftState       = {}; // { exName: { kg, miss } } — current working weight per lift
 let setLog          = {}; // { 'YYYY-MM-DD': { exName: { ticks: [bool], result, msg } } }
@@ -1135,6 +1168,9 @@ function loadStorage() {
 		const l = localStorage.getItem('wo_lunch');    if (l) currentLunch  = l;
 		const d = localStorage.getItem('wo_dinner');   if (d) currentDinner = d;
 		const t = localStorage.getItem('wo_ticked');   if (t) shopTicked = JSON.parse(t);
+		const sw = localStorage.getItem('wo_shopwk');  if (sw) shopWeek = parseInt(sw) || 0;
+		const ci = localStorage.getItem('wo_custom');  if (ci) customItems = JSON.parse(ci);
+		const pl = localStorage.getItem('wo_protein'); if (pl) proteinLog = JSON.parse(pl);
 		const c = localStorage.getItem('wo_checkins'); if (c) checkinHistory = JSON.parse(c);
 		const s = localStorage.getItem('wo_setlog');   if (s) setLog   = JSON.parse(s);
 		const o = localStorage.getItem('wo_done');     if (o) doneLog  = JSON.parse(o);
@@ -1155,6 +1191,9 @@ function saveStorage() {
 		localStorage.setItem('wo_lunch',    currentLunch);
 		localStorage.setItem('wo_dinner',   currentDinner);
 		localStorage.setItem('wo_ticked',   JSON.stringify(shopTicked));
+		localStorage.setItem('wo_shopwk',   shopWeek);
+		localStorage.setItem('wo_custom',   JSON.stringify(customItems));
+		localStorage.setItem('wo_protein',  JSON.stringify(proteinLog));
 		localStorage.setItem('wo_checkins', JSON.stringify(checkinHistory));
 		localStorage.setItem('wo_setlog',   JSON.stringify(setLog));
 		localStorage.setItem('wo_done',     JSON.stringify(doneLog));
@@ -1602,22 +1641,84 @@ window.woGoCheckin = woGoCheckin;
 
 // ─── FOOD TAB ─────────────────────────────────────────────────────────────────
 
-function renderFood() {
-	document.getElementById('wo-food-main').innerHTML = `
-		<div class="wo-hero"><div class="wo-hero-title">Daily Nutrition Plan</div>
-		<div class="wo-hero-desc">145&ndash;160g protein daily. Training days 2,800&ndash;3,200 kcal, rest days 2,400&ndash;2,600 kcal. Tap any meal with an arrow to see the full recipe.</div></div>
-		${FOOD_GROUPS.map(g => `<div class="wo-meal-group">
-			<div class="wo-meal-divider">
-				<div class="wo-meal-dot" style="background:${g.color}"></div>
-				<span class="wo-meal-group-name" style="color:${g.color}">${g.label}</span>
-				<div class="wo-meal-divider-line"></div>
-				<span class="wo-meal-protein">${g.protein}</span>
-			</div>
-			${g.items.map(item => `<div class="wo-meal-card${item.recipe ? ' clickable' : ''}" ${item.recipe ? `onclick="woOpenRecipe('${item.recipe}')" tabindex="0" role="button"` : ''}>
-				<span class="wo-meal-name">${item.name}</span>${item.recipe ? '<span class="wo-meal-arrow">→</span>' : ''}
-			</div>`).join('')}
-		</div>`).join('')}`;
+const PROTEIN_TARGET = 145;
+
+function todayProteinG() {
+	const eaten = proteinLog[localISO()] || {};
+	return FOOD_GROUPS.reduce((sum, g) => sum + (eaten[g.label] ? g.grams : 0), 0);
 }
+
+function proteinBarHtml() {
+	const total = todayProteinG();
+	const pct   = Math.min(Math.round((total / PROTEIN_TARGET) * 100), 100);
+	const cls   = total >= PROTEIN_TARGET ? 'met' : total >= 100 ? 'near' : '';
+	const note  = total >= PROTEIN_TARGET
+		? `Target hit — great work.`
+		: `${PROTEIN_TARGET - total}g to go. Tap a meal below once eaten.`;
+	return `<div class="wo-protein-wrap">
+		<div class="wo-protein-hdr">
+			<span class="wo-protein-title">Protein today</span>
+			<span class="wo-protein-val${cls ? ' ' + cls : ''}" id="wo-protein-val">${total}g <span style="font-size:.8rem;font-weight:600;color:var(--wo-text-muted)">/ ${PROTEIN_TARGET}g</span></span>
+		</div>
+		<div class="wo-protein-track"><div class="wo-protein-fill${cls ? ' ' + cls : ''}" id="wo-protein-fill" style="width:${pct}%"></div></div>
+		<div class="wo-protein-note" id="wo-protein-note">${note}</div>
+	</div>`;
+}
+
+function renderFood() {
+	const eaten = proteinLog[localISO()] || {};
+	document.getElementById('wo-food-main').innerHTML = `
+		${proteinBarHtml()}
+		<div class="wo-hero-desc" style="margin-bottom:20px;font-size:.84rem;color:var(--wo-text-muted)">Training days 2,800–3,200 kcal &nbsp;·&nbsp; Rest days 2,400–2,600 kcal. Tap a meal header once you've eaten it.</div>
+		${FOOD_GROUPS.map(g => {
+			const isEaten = !!eaten[g.label];
+			return `<div class="wo-meal-group${isEaten ? ' eaten' : ''}" id="wo-mg-${g.label.replace(/\s/g,'-')}">
+				<div class="wo-meal-divider">
+					<div class="wo-meal-dot" style="background:${isEaten ? 'var(--wo-green)' : g.color}"></div>
+					<span class="wo-meal-group-name" style="color:${isEaten ? 'var(--wo-green)' : g.color}">${g.label}</span>
+					<div class="wo-meal-divider-line"></div>
+					<span class="wo-meal-protein">${g.protein}</span>
+					<button type="button" class="wo-meal-eaten-btn${isEaten ? ' eaten' : ''}" onclick="woToggleMealEaten('${g.label}')">${isEaten ? '✓ Eaten' : 'Log'}</button>
+				</div>
+				${g.items.map(item => `<div class="wo-meal-card${item.recipe ? ' clickable' : ''}" ${item.recipe ? `onclick="woOpenRecipe('${item.recipe}')" tabindex="0" role="button"` : ''}>
+					<span class="wo-meal-name">${item.name}</span>${item.recipe ? '<span class="wo-meal-arrow">→</span>' : ''}
+				</div>`).join('')}
+			</div>`;
+		}).join('')}`;
+}
+
+function woToggleMealEaten(label) {
+	const iso = localISO();
+	if (!proteinLog[iso]) proteinLog[iso] = {};
+	proteinLog[iso][label] = !proteinLog[iso][label];
+	saveStorage();
+
+	const eaten = !!proteinLog[iso][label];
+	const g = FOOD_GROUPS.find(x => x.label === label);
+	const id = label.replace(/\s/g, '-');
+	const group = document.getElementById('wo-mg-' + id);
+	if (group) {
+		group.classList.toggle('eaten', eaten);
+		const dot  = group.querySelector('.wo-meal-dot');
+		const name = group.querySelector('.wo-meal-group-name');
+		const btn  = group.querySelector('.wo-meal-eaten-btn');
+		if (dot)  dot.style.background  = eaten ? 'var(--wo-green)' : g.color;
+		if (name) name.style.color      = eaten ? 'var(--wo-green)' : g.color;
+		if (btn)  { btn.classList.toggle('eaten', eaten); btn.textContent = eaten ? '✓ Eaten' : 'Log'; }
+	}
+
+	const total = todayProteinG();
+	const pct   = Math.min(Math.round((total / PROTEIN_TARGET) * 100), 100);
+	const cls   = total >= PROTEIN_TARGET ? 'met' : total >= 100 ? 'near' : '';
+	const note  = total >= PROTEIN_TARGET ? 'Target hit — great work.' : `${PROTEIN_TARGET - total}g to go.`;
+	const valEl  = document.getElementById('wo-protein-val');
+	const fillEl = document.getElementById('wo-protein-fill');
+	const noteEl = document.getElementById('wo-protein-note');
+	if (valEl)  { valEl.className = 'wo-protein-val' + (cls ? ' ' + cls : ''); valEl.innerHTML = `${total}g <span style="font-size:.8rem;font-weight:600;color:var(--wo-text-muted)">/ ${PROTEIN_TARGET}g</span>`; }
+	if (fillEl) { fillEl.className = 'wo-protein-fill' + (cls ? ' ' + cls : ''); fillEl.style.width = pct + '%'; }
+	if (noteEl) noteEl.textContent = note;
+}
+window.woToggleMealEaten = woToggleMealEaten;
 
 function woOpenRecipe(id) {
 	const r = RECIPES[id];
@@ -1652,6 +1753,8 @@ window.woCloseRecipe = woCloseRecipe;
 
 // ─── SHOPPING TAB ─────────────────────────────────────────────────────────────
 
+let _shopResetDismissed = false; // cleared on tab switch
+
 function getShopItems() {
 	const allSections = [
 		...SHOP_BASE,
@@ -1669,7 +1772,12 @@ function getShopItems() {
 	return result;
 }
 
-function getAllCurrentItems() { return getShopItems().flatMap(a => a.items); }
+function getAllCustomItems() {
+	return customItems.map(ci => ({ id: ci.id, name: ci.name, qty: '—', tags: [] }));
+}
+function getAllCurrentItems() {
+	return [...getShopItems().flatMap(a => a.items), ...getAllCustomItems()];
+}
 
 function woSelectLunch(choice) {
 	currentLunch = choice;
@@ -1698,6 +1806,31 @@ function woClearShop() {
 }
 window.woClearShop = woClearShop;
 
+function woResetShop(clear) {
+	if (clear) { getAllCurrentItems().forEach(i => { shopTicked[i.id] = false; }); }
+	shopWeek = Math.min(weeksElapsed() + 1, TOTAL_WEEKS);
+	_shopResetDismissed = true;
+	saveStorage(); renderShopList();
+}
+window.woResetShop = woResetShop;
+
+function woAddCustomItem() {
+	const inp = document.getElementById('wo-custom-input');
+	const val = inp ? inp.value.trim() : '';
+	if (!val) return;
+	customItems.push({ id: 'c_' + Date.now(), name: val });
+	inp.value = '';
+	saveStorage(); renderShopList();
+	document.getElementById('wo-custom-input')?.focus();
+}
+window.woAddCustomItem = woAddCustomItem;
+
+function woRemoveCustomItem(id) {
+	customItems = customItems.filter(c => c.id !== id);
+	saveStorage(); renderShopList();
+}
+window.woRemoveCustomItem = woRemoveCustomItem;
+
 function woTickItem(id) {
 	shopTicked[id] = !shopTicked[id];
 	saveStorage();
@@ -1716,7 +1849,23 @@ function updateShopProgress() {
 }
 
 function renderShopList() {
+	const curWk   = Math.min(weeksElapsed() + 1, TOTAL_WEEKS);
+	const needsReset = shopWeek > 0 && shopWeek < curWk && !_shopResetDismissed;
+	if (shopWeek === 0) { shopWeek = curWk; saveStorage(); }
+
 	let html = '';
+
+	if (needsReset) {
+		html += `<div class="wo-reset-banner">
+			<strong>New week</strong>
+			Week ${curWk} has started — clear last week's ticks for a fresh list?
+			<div class="wo-reset-btns">
+				<button class="wo-reset-yes" onclick="woResetShop(true)">Yes, reset</button>
+				<button class="wo-reset-no"  onclick="woResetShop(false)">Keep ticks</button>
+			</div>
+		</div>`;
+	}
+
 	getShopItems().forEach(({ aisle, items }) => {
 		html += `<div class="wo-aisle-title">${aisle}</div>`;
 		items.forEach(item => {
@@ -1731,9 +1880,30 @@ function renderShopList() {
 			</div>`;
 		});
 	});
+
+	if (customItems.length) {
+		html += `<div class="wo-aisle-title">Your extras</div>`;
+		customItems.forEach(ci => {
+			html += `<div class="wo-shop-item${shopTicked[ci.id] ? ' ticked' : ''}" id="shop-item-${ci.id}" onclick="woTickItem('${ci.id}')">
+				<div class="wo-shop-check">${CHECK}</div>
+				<div class="wo-shop-item-content" style="flex:1">
+					<div class="wo-shop-item-name">${ci.name}</div>
+				</div>
+				<button class="wo-shop-item-remove" onclick="event.stopPropagation();woRemoveCustomItem('${ci.id}')" title="Remove">✕</button>
+			</div>`;
+		});
+	}
+
+	html += `<div class="wo-custom-add">
+		<input class="wo-custom-input" id="wo-custom-input" type="text" placeholder="Add an item…" maxlength="60"
+			onkeydown="if(event.key==='Enter')woAddCustomItem()">
+		<button class="wo-custom-add-btn" onclick="woAddCustomItem()">Add</button>
+	</div>`;
+
 	document.getElementById('wo-shop-list').innerHTML = html;
 	updateShopProgress();
 }
+window.renderShopList = renderShopList;
 
 // ─── TARGETS TAB ──────────────────────────────────────────────────────────────
 
@@ -2153,6 +2323,9 @@ function switchTab(tabId) {
 	document.querySelectorAll('#wingeros-app .wo-panel').forEach(p => {
 		p.classList.toggle('active', p.id === 'tab-' + tabId);
 	});
+	// Clear the "already dismissed this session" flag so the banner
+	// reappears if the user leaves and returns to the shop tab
+	if (tabId === 'shopping') _shopResetDismissed = false;
 	// Lazy-render calendar on first open
 	if (tabId === 'calendar') {
 		const main = document.getElementById('wo-cal-main');
